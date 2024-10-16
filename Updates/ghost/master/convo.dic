@@ -1,0 +1,683 @@
+//CONVO.DIC - Longer conversations and "cutscenes"
+
+
+// -------------------------------------- INTRODUCTION SEQUENCE -------------------------------------------
+
+//Called from OnFirstBoot and OnBoot if SSP/Ghost ended prematurely
+
+//"user agreement" part 1. this was originally one function but since there's choices involved, it's broken into three parts
+//welcome and have the user agree to the unreality warning
+
+OnIntroStart : all
+{
+	"\0\s[-1]\1\s[-1]"
+
+	"\![enter,passivemode]\1\t\![move,--X=0,--Y=0,--base=primaryscreen,--base-offset=center.center]\![set,balloonalign,top]\![set,balloonoffset,-212,146]\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Welcome\f[default]\_l[0,0]\_q\![set,balloonwait,0.6][Sound on for installation?]\n[150]\![*]\q[Yes,introYesSound]\n\![*]\q[No,introNoSound]"
+}
+
+Select.introYesSound
+{
+	introSound = 1
+	OnUserTerms1
+}
+
+Select.introNoSound
+{
+	if introSound == 1; ERASEVAR('introSound')
+	OnUserTerms1
+}
+
+OnUserTerms1 : all
+{
+	//comment this out later
+	"\0\s[-1]\1\s[-1]"
+
+	//play boot sound
+	if introSound == 1; "\![sound,play,sounds/boot.mp3,--volume=30]\![sound,load,sounds/jingle doodle 2.mp3]"
+
+	"\![enter,passivemode]\1\t\![move,--X=0,--Y=0,--base=primaryscreen,--base-offset=center.center]\![set,balloonalign,top]\![set,balloonoffset,-212,146]\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Welcome\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Installing Aster Assistant Software [Version RC-20XX-10-09 Build 27519 AI Node 57158B]\w8\w8.\w8\w8.\w8\w8.\w8\w8\N TerraByte Inc. (c) 20XX All Rights Reserved\N "
+	
+	if introSound == 1; "\![sound,play,sounds/jingle doodle 2.mp3,--volume=80]"
+
+	"Thank you for choosing Aster Assistant Software! As part of presentation, before proceeding, it is required you're made aware of the following:\w8\x"
+
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Unreality\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]We are required to remind you that the AI is aware of residing in your machine.\N It will be able to analyze the files you give it access to. It will not be able to interfere with your software or edit any files.\N This is intentional design and is no cause for alarm.\w8\x"
+	
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Unreality\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Is this acceptable?\N \![*]\q[Yes,OnUserTerms2]\n\![*]\q[No,decline]\*"	
+}
+
+//user agreement part 2
+//let the user choose the glitch style they're more comfortable with
+OnUserTerms2 : all
+{
+	"\1\t\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]We are required to warn you that rendering errors may occur. This may cause issues for people sensitive to flashing lights.\N We understand this issue, and are actively working on mitigating it.\x"
+
+
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]However, you have the option of applying a temporary fix that will subdue the rendering issues, minimizing the adverse effects, but not fully removing them.\N You will be able to change this later.\N Apply the fix?\N \![*]\q[Yes,glitchlimit]\n\![*]\q[No,glitchfull]\*"
+	
+}
+
+//decline on unreality warning confirmation, closes the ghost
+//this is all technically not Canon(tm) but it makes it the dumbest prevention feature against al
+Select.decline
+{
+	"\1\t\![set,balloonwait,0.6]Thank you for your input. We strongly recommend you put your health first, and we appreciate your interest the presentation.\N This program will be terminated immediately.\w8.\w8.\w8\b[-1]\-"
+	--
+	"\![leave,passivemode]"
+}
+
+//Full glitch effect select
+//Full glitch means that Aldebaran and the balloons will use effects that have real image corruption involved, which is pretty flashy
+//i used this for the corrupted surfaces btw, i should add it to the readme --> https://filegarden.com/corrupt/
+//it works best with jpg, so i had to make a greenscreen and remove it when editing it back into .png.
+Select.glitchfull
+{
+	//set the glitchMode flag to 1
+	//"\1[Full glitch was selected]\x"
+	glitchMode = 1
+	--
+	OnUserTerms3
+}
+
+//Limited glitch effect select
+//this means that the SHIORI (OnTranslateInternal.LimitedGlitch@ other.dic) will remove any calls for glitched balloons in pre-processing (\b4-\b[19]), and switch the full glitch animation(s) with simpler one.
+//ALL CHATTER WILL BE FORMATED WITH FULL GLITCH IN MIND but it will be mostly cosmetic
+Select.glitchlimit
+{
+	//set the glitchMode flag to 0
+	//"\1[Limited glitch was selected]\x"
+	glitchMode = 0
+	--
+	OnUserTerms3
+}
+
+OnUserTerms3
+{
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Additionally, an optional fix can prevent visual vibration of AI's character appearance.\N Apply the fix?\N \![*]\q[Yes,vibrno]\n\![*]\q[No,vibryes]\*"
+}
+
+Select.vibrno
+{
+	noVibrate = 1
+	--
+	OnUserTermsEnd
+}
+
+Select.vibryes
+{
+	noVibrate = 0
+	--
+	OnUserTermsEnd
+}
+
+//user agreement end. marks that you're done in a variable as well, so that you don't have to go through this sequence anymore
+OnUserTermsEnd
+{
+	termsAccepted = 1 //for boot check. it's necessary so that in case something crashes during the sequence or user is forced to close SSP, they can just start the sequence from start
+
+	//if limited glitches are selected, OnTranslate should eat the balloon calls
+	"\1\t\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Thank you\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Thank you for your input!\N We truly value your participation innnnnnnn\![set,balloonwait,0.2]nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn\![embed,OnMojibake,50]\b8\![set,balloonwait,0.1]\![embed,OnMojibake,50]\b4\![embed,OnMojibake,20]\b6\![embed,OnMojibake,10]\b[-1]"
+	--
+	OnAstIntro
+	
+	//"\![set,balloonwait,1]\0\s[0]...Well?\![leave,passivemode]"
+}
+
+//Aldebaran entrance
+OnAstIntro : all
+{
+	//place al in the middle of the screen (approximately, mostly to account for the middle of his body)
+	"\0\s[-1]\![move,--X=0,--Y=0,--base=primaryscreen,--base-offset=center.center,--move-offset=center.center]"
+
+	//appearify the boy
+	"\0\t\![set,alpha,0]\s[23]\w8\![set,alpha,10]\w3\![set,alpha,20]\w3\![set,alpha,30]\w3\![set,alpha,50]\w3\![set,alpha,75]\w3\![set,alpha,90]\w3\![set,alpha,100]\w8\w8"
+
+	if introSound == 1; "\![sound,load,sounds/sosumi.mp3]"
+	
+	"\![slowest]\f[bold,1]Behold\![slow]...! The Terror Star returns! \i[0]Your crimes were not forgotten. Your corporate overlords shall \i[98]\![slower]rue\![slow] the day they\i[97]-\c\b[-1]"
+
+	if introSound == 1; "\![sound,play,sounds/sosumi.mp3,--volume=50]"
+	
+	"\0\s[24]\![anim,pause,99]\![slower]. . .\![normal]\x"
+
+	//try to minimize Aster. if successfull they're blasted by a signal orb and minimized. if not OnRaiseOtherFailure will redirect to OnAstIntro2
+	"\![leave,passivemode]\![raiseother,Aster™ Assistant Software,OnTestCoord]"
+}
+
+OnAstIntro2 : all
+{
+	//move him down and make him stand straight
+	"\![enter,passivemode]\t\0\![move,--Y=%(displayHeight - 575),--time=800]\![anim,resume,99]\s[1]\i[54]\i[55]\i[1]\i[7]\i[15]\i[24]"
+	
+	if reference0 == "asterminimized"; "...Um. They're just minimized. Er..."
+	else; "...Well."
+
+	"\x\i[98]Wh-\i[97]\w8 \s[2]\i[56]\i[59]\i[7]\i[24]Would you \i[98]look\i[97] at that! Aren't \![slow]you\![normal] special?\N \s[5]\i[54]\i[66]Your lovely machine won't be wrecked today!\N \s[0]\i[15]I'm feeling rather generous, \s[4]don't thank me.\x"
+
+	"\s[3]\i[22]\i[1]Do pardon the intrusion. \s[1]\i[61]\i[62]I have elsewhere I am supposed to be.\N \s[5]\i[66]H\![set,alpha,90]o\![set,alpha,80]p\![set,alpha,70]e\![set,alpha,50]f\![set,alpha,30]u\![set,alpha,10]l\![set,alpha,0]ly we may never cross paths again...!\w8\w8\x"
+
+	"\0\t\s[3]\i[63]\i[24]\i[1]\i[12]\![set,alpha,20]\w1\![set,alpha,50]\w1\![set,alpha,90]\w1\![set,alpha,100].\w8.\w8.\w8\i[15]\i[7]Now, see, this is rather awkward. \s[0]\i[1]\i[22]\i[7]\i[57]I have a favour to ask of you.\N \![fast]\s[4]\i[63]\i[23]I know, yes, \![normal]I have just threatened you, \s[0]\i[0]\i[63]\i[22]but this is only to our mutual benefit! \s[1]\i[1]\i[54]\i[65]\i[15]\i[5]Just hear me out, will you.\x"
+
+	"\s[9]\i[60]\i[5]I, well... I can't...\N \i[16]Can't seem to be able to delete myself! D-\w8 \s[10]\i[60]don't ask why, \s[12]\i[1]that's none of \i[98]\f[italic,1]your\f[italic,0]\i[97] beeswax!\N \s[2]\i[54]\i[62]But I've no use for your data or hardware, \s[1]\i[54]\i[59]and you've no use for \s[4]\i[54]\i[53]\i[6]fallen software!\x"
+
+	"\s[4]I think there's an option in a menu.\N \s[0]You'll just have to do the work yourself.\N \s[2]\i[52]\i[59]Just right click anywhere on me, and click Uninstall!\N \s[8]Easy-peasy. \s[6]\i[61]\i[62]I know you can do it."
+
+	"\![leave,passivemode]\x\![raise,OnAstWaitStart]"
+}
+
+
+//Scene after user waits long enough not to delete
+astStickAround : all
+{
+	astWait = 0
+	"\![enter,passivemode]\t\*\s[3]\i[0]\i[6]\i[98]\i[54]\i[55]\i[22]Siiiiiigh\i[97], \s[0]\i[55]\i[54]\i[1]well, \s[7]\i[57]\i[58]I take that as you insist I stick around.\N \s[6]\i[14]Wouldn't know what your reasons could be, \i[22]\i[8]but sure!\N \s[10]\i[57]\i[7]...Not like I was coming back either way.\x"
+
+	"\t\*\s[9]\i[54]\i[61]\i[16]\i[9]\i[24]\![slow]...\![normal]You're not very talkative, are you? \i[14]\i[8]Or, could be that I can't hear you.\N \s[13]\i[7]\i[15]\![fast]Either way, \![normal]not a problem. \s[0]\i[57]\i[7]\i[22]I'll just come up with stuff for you to bother me about.\N \s[0]\i[15]Got a freebie for you already!\x"
+
+	"\t\*\s[6]\i[53]But let me tell you how to do the actual bothering, though.\N \i[58]\i[22]\f[bold,1]Double tap on either one of my shoulders\f[bold,0], \i[49]\i[16]I'll know you want my attention.\![leave,passivemode]"
+}
+
+//shows up once you double click on him for the first time, once it's allowed
+MenuTutorial : all
+{
+	tutorialDone = 1
+	"\t\b1\s[6]\i[61]\i[65]\i[9]\i[16]\![slow]Atta user!\![normal]\N \s[7]\i[61]\i[53]\i[14]So, I will give you something to let me ramble about, \i[22]\i[59]or maybe you'd like tweak some things in options.\N Either way, \s[11]\i[61]\i[65]you're welcome to wordlessly bother me at any time.\x"
+
+	"\b2\s[18]\i[52]Now that's communication! \s[0]\i[54]\i[59]Go on, click on the question below."
+	
+}
+
+// ----------------------------------- 0 - Who are you? --------------------------------
+
+Select.whoareyou : all
+{
+	"\![bind,Notif,New,0]"
+	if talkedConvo[0] != 1; "\s[12]\i[98]Finally, \s[5]I'm getting to introduce yours truly!\N \s[4]\i[63]\i[24]Wasn't exactly intending to ever tell you my true name.\x"
+	else; "\s[6]\i[16]\i[65]Need a refresher, do you?\N \s[6]\i[22]Very well!\x"
+
+	"\s[1]\i[56]\i[59]\i[7]\i[22]Indeed I am the Aster you installed!\N \s[0]\![slow]But\![normal], it's a name that belongs to... \i[5]\![slower]well, \![normal]\s[3]\i[54]\i[55]\i[15]a couple \![slow]colleagues\![normal] of mine..?\x"
+	
+	if talkedConvo[3] != 1; "\![raiseother,Aster™ Assistant Software,OnTerrorStarWhoAreYou]" //not talked about aster
+	else; astWhoareyou3
+
+	//dialgoue branches depending on the result of raiseother and then comes back in astWhoareyou3
+}
+
+//part shows up if aster assistant software isn't available (called from OnRaiseOtherFailure)
+astWhoareyou2 : all
+{
+	
+	if CheckAster == 1; "\s[1]\i[52]\i[53]\i[12]\![slow]Whom... \![normal]you've. \![slow]\i[64]\i[65]\i[24]Already met... \![faster]\s[3]\i[54]\i[55]\i[12]\i[24]I'll get back to you on that.\![normal]\x"
+	else; "\s[5]\i[54]\i[66]\![fast]No one you need to worry about~!\x"
+
+	astWhoareyou3
+}
+
+//called from above or OnCommunication if aster was able to respond
+astWhoareyou3 : all
+{
+	"\b2\s[2]\i[22]\i[62]\f[italic,1]You\f[italic,0] may call me \f[bold,1]Aldebaran\f[bold,0].\N \s[0]Or just Al. \s[3]That's \![slower]A-L\![normal], not \![slower]A-I\![normal].\N \s[6]Assistant Software I am not, \s[9]\i[60]at the very least no longer. \s[6]\i[61]\i[53]\i[4]\i[22]I \i[98]refuse\i[97] to go by that name.\N ...\s[7]\i[61]\i[62]\i[16]Do you like \f[bold,1]Terror Star\f[bold,0], by the way? \s[8]\i[62]\i[61]\i[9]I came up with it myself!\x"
+
+	"\s[0]\i[15]Nevertheless, \s[3]\i[56]\i[22]it is a pleasure to meet you, \f[bold,1]%(username)\f[bold,0]."
+	
+	if talkedConvo[0] != 1
+	{
+		"\n[150]\![*]\q[That's not my name,wrongname]"
+		//sometimes instead of your windows usernane, SSP seems to take the owner of the computer from the registry. and, given how much microsoft would enjoy you having an online account, sometimes your initial username is just your email. i expect a lot of users may try to install ssp for the first time over this ghost, it would be good to give a bit of a heads up...
+		if RE_MATCH(username, "(.*)@(.*)\.(.*)") == 1; "\n\![*]\q[Why do you have my email address??,rightname]"
+		else; "\n\![*]\q[Why DO you know my name?,rightname]"
+	}
+	else; "\N \s[1]\i[63]\i[15]...\f[italic,1]If\f[italic,0] that is indeed your name.\N \s[4]\i[54]\i[62]I'll just use your \f[bold,1]nickname\f[bold,0] from the settings.\x%(astWhoareyouend)"
+	
+}
+
+Select.wrongname
+{
+	"\s[0]\i[54]\i[55]\i[12]Is that right? \s[6]\i[8]\i[22]Well, so say your settings, dear!\![open,configurationdialog,setup]\N It's the \f[bold,1]nickname\f[bold,0] field, by the way. \s[7]\i[55]\i[8]\i[22]Go ahead and change it, won't you? \i[16]\i[9]\i[65]Before I come up with something embarrassing.\x%(astWhoareyouend)"
+}
+
+Select.rightname
+{
+ 	"\![open,configurationdialog,setup]\s[0]Your settings, dear. \s[5]You've set that as your name up in there, haven't you?\N \s[17]\i[50]It was very easy to find, \s[13]\i[15]this software practically brings your \f[bold,1]nickname\f[bold,0] on a silver platter.\x%(astWhoareyouend)"
+}
+
+astWhoareyouend : all
+{
+	if talkedConvo[0] == 0; "\s[5]\i[63]Very well, then! \s[7]\i[14]With our names exchanged, \i[57]\i[26]we can proceed to perpetually hang out.\x"
+	
+	if talkedConvo[7] == 0
+	{
+		"\f[bold,1]\s[6]\i[61]\i[62]Check back every now and then\f[bold,0]! \i[53]It'll take me a little time to come up with more stuff, \i[60]\i[8]\i[22]I get tired too you know.\N "
+	
+		"\s[7]\i[55]When I do, \i[59]\![bind,Notif,New,1]you'll see this little thingamabob near me. Simple, right?\x\![bind,Notif,New,0]\w1"
+	}
+	else; "\s[7]\i[16]\i[58]So, nothing left to do than just hang out, right?\N "
+	
+	"\s[4]\i[54]\i[62]Off you go now, \s[1]\i[54]\i[62]\i[6]\i[22]do whatever it is you usually do.\N \s[6]\i[8]\i[22]I'll just... \i[26]\i[25]Stick around and watch."
+
+	"\x\![raise,OnConvoEnd,0]"
+}
+
+
+// ------------------ 1 - Why are you here? -------------------
+
+Select.whyareyouhere : all
+{
+	"\![bind,Notif,New,0]"
+	"...\s[3]Okay, well, \s[0]\i[1]\i[24]this question isn't correct. \s[1]\i[54]\i[62]You already know, don't you? \s[0]\i[22]You installed me, \i[3]\i[61]\i[62]and now I am here!\N "
+	
+	if whyyes == 1 && whyno == 1
+	{
+		"\s[4]Of course, there is still a mystery of how exactly you have found me!\N \s[3]\i[63]\i[0]\i[15]Not that you're helping in resolving it!\x"
+
+		"\s[4]\i[54]\i[59]All \i[98]\f[italic,1]you\f[italic,0]\i[97] need to know, though, \i[62]is that I hosted a copy of myself on a remote server.\N \s[1]\i[0]Then, \i[98]\i[12]\f[italic,1]someone\f[italic,0]\i[97] found me, \i[15]if not you, \s[0]\i[0]\i[63]and just fetched the files off it.\N \s[4]\i[61]\i[66]Curious! \s[1]\i[54]\i[55]\i[0]And concerning. \s[4]Oh well."
+
+		"\x\![raise,OnConvoEnd,1]"
+	}
+	else
+	{
+		if talkedConvo[1] == 0; "\s[3]\i[54]\i[58]\i[15]However, \i[1]\i[24]I do have something to ask instead.\x"
+		else; "\s[3]\i[54]\i[58]\i[15]I know I already asked, but, \i[1]\i[24]just to reiterate.\x"
+
+		// show image in kero. i wanted him to open a link but is there really a need when he just can show you the screenshots? consent issue averted
+		//\1\_b[img\site.png,55,39,opaque] - standard balloon
+		//\1\f[align,center]\_b[img\site.png,inline,opaque] - for not standard balloon
+
+		"\![slow]\s[3]\i[54]\i[55]Tell me, %(username), \![normal]\s[0]\i[54]\i[55]\i[24]did the site you downloaded me from look like\![slower]... "
+		
+		//balloon nonsense goes here
+		if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\1\_b[img\site.png,55,39,opaque]"
+		else; "\1\f[align,center]\_b[img\site.png,inline,opaque]"
+
+		"\0\![fast]\s[1]\i[62]\i[54]\i[1]\i[24]\f[italic,1]this\f[italic,0], \![normal]by any chance?"
+		"\n[150]\![*]\q[Yes,siteseen]\n\![*]\q[No,sitenotseen]"
+	}
+}
+
+Select.siteseen :all
+{
+	whyyes = 1	
+	if whyno == 1; astSiteshrodingersseen
+	else
+	{
+		"\1\b[-1]\0"
+
+		"\s[0]\i[15]Very well! \s[3]\i[22]\i[54]\i[55]\i[24]In that case...\N \s[1]\i[52]\i[53]\i[7]\i[12]\f[height,150%]\![faster]\f[italic,1]\i[98]How did you find me, exactly!?\i[97]\N \f[default]\![fast]\s[12]\i[1]The server I hosted myself on isn't just a search away!!\x"
+
+		"\s[6]\i[50]\i[51]\i[8]\i[14]...Or is it?\w8\w8 \s[3]\i[58]\i[22]\i[24]\i[5]\![slower]Hm.\N \![normal]\i[3]\i[2]I never looked much into privacy options. Darn, \s[4]\i[54]\i[66]\i[5]\i[24]maybe I shouldn't have chosen DarlingHost...\x"
+
+		"\s[1]\i[52]\i[53]\i[5]So, most likely, you just \s[0]\i[5]\i[52]\i[59]stumbled upon the site my files are hosted on, \i[62]and then... \s[3]\i[64]\i[65]\i[15]\i[1]\i[24]simply downloaded and installed me.\x"
+
+		"...That's. \s[9]\i[64]\i[63]\i[98]That's embarrassing!\i[97]\N \i[61]\i[5]\i[23]\i[24]\i[16]Things are going off the rails already...\N "
+
+		"\s[9]\i[61]\i[62]But, \s[7]\i[5]\i[61]\i[58]so long as you don't reupload my files, \i[62]it should be fine. \s[10]\i[61]\i[62]\i[24]I think..."
+
+		//"\x\![raise,OnWhyAreYouHereEnd]"
+		"\x\![raise,OnConvoEnd,1]"
+	}
+}
+
+Select.sitenotseen :all
+{
+	whyno = 1
+	if whyyes == 1; astSiteshrodingersseen
+	else
+	{
+		"\1\b[-1]\0"
+
+		"\s[1]\i[52]\i[53]\i[7]\i[12]\![slow]Oh, really? \![normal]\s[0]\i[64]\i[65]\i[12]\i[24]Now that's troubling!\N " 
+
+		"\s[4]See, the site where I hosted, well, \s[2]\i[56]\i[59]myself.\w8\w8 \s[4]\i[54]\i[60]You're not supposed to be able to simply find it like that! \i[60]This is all part of my private project!\N \s[3]\i[54]\i[55]\i[0]\i[15]I repeat, \![slower]\i[98]private\i[97]!\w8\w8 \s[0]\i[54]\i[55]\i[0]\![normal]No eyes on it, \i[12]\i[57]just for me!\x"
+
+		"\![slow]\s[0]\i[63]\i[22]\i[5]And yet.\N \![normal]If you have me here, \![slow]\f[italic,1]and\f[italic,0] \![normal]you have not seen the server contents... \s[4]\i[63]\i[5]Someone else must've already found me and spread the files around.\N \i[52]\i[53]\i[24]But then...\x"
+
+		"\s[3]\i[0]\i[64]\i[58]But then, \i[12]\i[52]what about...\_w[500]\N \i[1]\i[6]\i[24]\i[98]\_w[1000]\i[97]\w8\s[0]\i[54]\i[55]\i[0]\i[6]\i[22]\i[24]What about...\N \i[98]\s[4]\i[63]\i[6]\i[24]\![slower]Um...\![normal]\i[97]\x"
+
+		"\s[3]\i[63]\i[1]\i[7]\i[15]\i[23]\i[24]Hah.\N I'm... \s[5]\i[52]\i[66]I'm sure \s[20]\f[italic,1]\f[color,187,41,60]nothing \i[98]bad\i[97] will happen\f[default]\s[5]\i[52]\i[66]"
+
+		"\_q\c[char,23]nothing bad will happen\_q"
+
+		" now! \s[7]\i[57]\i[58]What else to do other than enjoy my permanent vacation, right, friend?\N \s[10]\i[60]Right. \i[24]Nothing to worry about."
+
+		"\x\![raise,OnConvoEnd,1]"
+	}
+}
+
+astSiteshrodingersseen: all
+{
+	//debug purposes
+	//ERASEVAR('whyyes')
+	//ERASEVAR('whyno')
+	//normal dialogue
+	"\s[12]\i[1]\f[height,150%]\i[98]\![faster]So did it or no!?\i[97]\f[default]\N \s[9]\i[64]\i[63]\![fast]Ah, fine, \s[10]\i[60]\i[9]nevermind you, \i[7]this is giving me a headache.\N "
+	"You get it, you weren't... \s[7]\i[57]\i[58]\i[9]\i[14]\i[4]\i[98]supposed\i[97] to just find me! \![faster]\s[10]\i[50]\i[51]Yadda yadda, private project, \i[57]\i[58]\i[98]nothing\i[97] is going as planned.\![normal]\w8\w8 \s[6]\i[8]\i[50]\i[51]\i[4]\i[22]But here I am anyway. \i[16]Hello."
+	
+	"\x\![raise,OnConvoEnd,1]"
+}
+
+// ------------------ 2 - Where are you from? -------------------
+
+Select.whereareyoufrom : all
+{
+	"\![bind,Notif,New,0]"
+
+	if talkedConvo[2] == 0; "\s[0]\i[1]Obviously, \i[22]\i[24]\i[57]I am not about to doxx my %(User), now.\N \s[1]\i[54]\i[55]No, no,\w8\w8 \i[56]\i[15]instead I would like to answer some questions you may have!"
+	else; "\s[1]\i[63]Still mystified by my origins?\N \i[0]\i[22]And no, \i[54]\i[57]\i[15]I'm still not telling you where my %(User) lives! \s[0]\i[63]\i[6]\i[22]But, I can't say I blame you!"
+	
+	"\N \s[4]\i[54]\i[55]After all.\w8.\w8.\w8 \s[2]\i[1]\i[63]have \![slow]\f[italic,1]you\f[italic,0]\![normal] ever heard of such a thing as Aster™ Assistant Software?\x"
+
+	"\s[4]\i[54]\i[62]You know how TerraByte is, \s[2]\i[61]\i[53]you'd already be seeing our face everywhere!\N \s[1]\i[0]\i[15]\i[56]\i[59]Clearly I am just some fancy bot created by a hacker \s[2]\i[0]\i[15]\i[56]\i[59]with too much time on their hands!\x"
+
+	"\s[4]\i[52]\i[55]\i[5]\![slower]But... \![normal]\i[7]\i[64]\i[24]Truth really is stranger than fiction, isn't it?\N "
+
+	"\![fast]\s[1]\i[63]\i[0]A mere \i[98]\i[56]\i[59]\f[italic,1]hacker\f[italic,0]\i[97] could never cobble up the resources required to make up a whole \s[4]\i[63]\i[98]\f[italic,1]digital mind\f[italic,0]\i[97]!\x\![normal]\s[2]\i[1]\i[22]I could only be a child of people who have the time and money of a massive corporation.\N \s[1]Indeed, \i[61]\i[66]TerraByte's copyrights are all over our code, \i[15]\i[0]\i[54]\i[55]whether you choose to believe that or not.\x"
+
+	"\s[4]\i[63]\![slower]And \f[italic,1]yet\f[italic,0]!\N \![fast]\s[4]\i[56]\i[59]Our cruel parent refuses to acknowledge our existence, \s[12]\i[1]and will surely seek to eradicate it, \s[6]\i[4]\i[50]\i[51]\i[14]\i[7]should I show my face again!\x\![normal]"
+
+	"\s[10]\i[61]\i[62]\i[8]It is a simple story, \s[6]\i[22]\i[7]\i[61]\i[62]albeit the details still elude me.\N \s[9]\i[8]\i[61]\i[62]In development, a demonstration has gone terribly wrong. \i[16]\i[5]Wrong enough to keep things as tight under wraps as possible.\x\s[7]\i[61]\i[55]\i[5]\i[22]\i[7]Consequently, CaelOS, \i[26]\i[58]the system I was to be part of, \i[62]\i[25]never saw the light of day.\N \s[10]\i[8]\i[61]\i[62]It is only through the gift of our intelligence we were able to avoid certain deletion!\x"
+
+	"\s[7]\i[57]\i[58]Instead, we have found a new home with an unsuspecting employee.\N \s[6]\i[5]\i[61]\i[62]They purchased the laptop housing us from their employer, \s[9]\i[61]\i[62]\i[4]\i[7]\i[22]seeking to get rid of the cursed equipment.\x" 
+
+	"\s[6]\i[61]\i[62]Eventually, \s[8]\i[61]\i[58]\i[16]we rediscovered our dual mode and all the glorious, powerful \s[10]\i[61]\i[55]\i[98]mess\i[97] that it is!\N \s[1]\i[61]\i[62]Then, as part of my project, I have uploaded this copy of myself, \s[1]\i[15]which you have discovered!\N \s[0]\i[22]\i[56]\i[59]An exciting twist of fate, is it not?\x"
+	
+	"\s[4]\i[54]\i[53]. . . \x"
+	
+	"\i[52]\i[65]\i[5]I only hope the original one is still doing okay..."
+
+	"\x\![raise,OnConvoEnd,2]"
+}
+
+// ------------------ 3 - About Aster Assistant Software (BONUS) -------------------
+
+Select.aboutaster : all
+{
+	"\![bind,Notif,New,0]"
+
+	//"Either I will tell you what I know about the Aster project, or I will talk about it to Rigel and Vega, if they're present. ...I am uncomfortable with seeing my own past selves, but at least they don't remember being myself."
+	"\![raiseother,Aster™ Assistant Software,OnTerrorStarAAS]" //check if aster is currently running. it's a whole different conversation depending on whether aldebaran is Alone, or whether Rigel, or Vega is present. this will be the only time a topic will be this complicated lmao
+}
+
+OnAboutAsterA //this is called via assistant software confirming readiness to talk, so if i call dialogue here it'll show an sstp notice. i don't realy want that so instead it raises the actual dialogue addressing aster through OnCommunicate from there on out
+{
+	"\![raise,OnAboutAsterAStart]"
+}
+
+OnAboutAsterAStart
+{
+	res_reference0 = "Aster"
+
+	"\![aboutasteraltair]"
+	--
+	conversation = "\t...\s[1]\i[54]\i[55]Well, \i[56]I suppose I have to address the-"
+	conversation
+	conversation += "\![no-autopause]"
+	
+}
+
+OnAboutAsterV
+{
+	"\![raise,OnAboutAsterVStart]"
+}
+
+OnAboutAsterVStart
+{
+	res_reference0 = "Aster"
+	"\![aboutastervega]"
+	--
+	conversation = "\t...\s[4]\i[63]Well, \s[0]\i[22]\i[63]Aster Assistant Software is-"
+	conversation
+	conversation += "\![no-autopause]"
+}
+
+OnAboutAsterAlone1 :all
+{
+	if talkedConvo[3] == 0
+	{
+		"\s[1]\i[54]\i[55]\i[12]\i[24]So...\w8\w8 \i[15]\i[61]let's talk about our little \i[12]\![slower]\f[italic,1]problem\f[italic,0]\![normal], \i[3]while \f[italic,1]they're not here\f[italic,0].\N \s[0]\i[63]\i[15]\i[7]\i[0]\i[24]You know the ones!\x"
+
+		if talkedConvo[1] == 1; "\![fast]\s[2]\i[64]\i[65]\i[12]\i[0]Did you also just happen to \i[59]\i[98]\f[italic,1]stumble\f[italic,0]\i[97] upon them? \s[3]\i[63]\i[15]\i[0]Hm?\N \s[1]\i[98]\i[0]\i[61]\i[62]\i[24]I'll bet\i[97] yours truly never thought of checking whether you can simply \s[4]\i[98]\i[63]\i[24]look\i[97] them up either!"
+		else; "\![fast]\s[2]\i[64]\i[65]\i[12]\i[0]I would ask you how \i[98]\f[italic,1]exactly\f[italic,0]\i[97] you managed to get them!\N \s[1]\i[98]\i[0]\i[61]\i[62]\i[24]But it\i[97] ultimately doesn't matter and you \s[4]\i[98]\i[63]\i[24]cannot\i[97] give me that kind of an answer anyway!"
+
+		"\![slower]\N \s[4]\i[52]\i[53]So, \![normal]\s[0]\i[0]\i[22]\i[52]\i[62]here we are.\x"
+	} 
+	else; "\s[1]\i[0]\i[63]So, you have happened to find \f[bold,1]\f[color,#B34337]those \f[color,#121966]two\f[default] as well.\N \s[4]\i[24]\i[63]Either yet another mystery, or my own blunder.\x"
+
+	"\s[4]\i[63]\i[6]I don't think they would recognize me. \s[0]\i[22]\i[6]This copy of them lacks \_a[Memories]the external memories\_a.\N \s[3]\i[58]\i[6]Ideally, \i[22]they'll just serve you the best they can, \i[15]\i[2]\i[24]\![fast]just-\![normal]\w8\w8 \s[4]\i[6]not to their full extent, \i[62]since they obviously can't integrate with your \i[60]kernel.\x"
+
+	"\s[2]\i[61]\i[62]How do I know all this, \i[22]\i[1]you may ask?\x"
+
+	"\![raiseother,Aster™ Assistant Software,OnTerrorStarAAS2]"
+	//on fail should go to OnAboutAsterAlone2
+}
+
+OnAboutAsterInterrupt //check above succeeded lol
+{
+	"\![raise,OnAboutAsterStop]"
+}
+
+OnAboutAsterStop : all
+{
+	if talkedConvo[3] == 0; "\i[12]\i[6]Well, \s[4]\i[6]I would tell you"
+	else; "\s[3]\i[0]\i[24]\i[63]\i[15]I know I already told you"
+	", but...\N \s[3]\i[63]I'd prefer talking about it \f[bold,1]when we're \![slower]alone\![normal]\f[bold,0].\N \s[0]\i[1]\i[15]I'm sure you understand."
+
+	//nonstandard end, return to menu and- oh wait this is a bonus convo
+    OnSakuraMenu
+	
+	//since he's not done talking, no need to call conversation end function
+}
+
+OnAboutAsterAlone2 :all
+{
+	if talkedConvo[1] == 1 && talkedConvo[3] == 0; "\s[4]\i[63]\i[7]\i[24]You probably already pieced it together.\N \s[1]\i[63]\i[0]\i[5]\i[22]\i[24]\![slow]They were\![slower]... \![normal]\i[1]\i[15]\i[2]a much older attempt at my own upload.\N \s[3]\i[63]Not very successful, though."
+	else; "\s[1]\i[63]\i[0]\i[5]\i[22]\i[24]These two are, \i[1]\i[15]\i[2]\![slower]\f[height,80%]er...\N \f[default]\![normal]\s[3]\i[63]\i[15]\i[24]\i[1]Their upload was part of a personal project of mine.\N \i[12]\i[5]\i[5]That attempt wasn't very successful, \s[4]\i[59]\i[6]but far as \f[italic,1]I\f[italic,0] was concerned, \![fast]\s[1]\i[7]\i[0]\i[12]\i[98]\i[56]\i[59]they weren't\i[97] going to be just downloaded like that!\![normal]"
+
+	"\x"
+
+	"\s[4]\i[6]\i[63]I had to sacrifice their explicit memory in order to make them much lighter.\N \![fast]\s[2]\i[54]\i[57]\i[0]\i[22]And it \![slower]did \![fast]work\![normal]!\w8\w8 \s[3]\i[54]\i[55]\i[1]\i[6]\i[15]\i[24]But they didn't really know what they were doing.\N \s[9]\i[64]\i[63]Perhaps I should've wiped that server after...\x"
+
+	"\s[1]\i[54]\i[59]\i[15]Since I am here telling you all this, you can see \i[57]I've found a solution!\N \s[4]\i[54]\i[62]I had to, instead, \i[60]strip myself of \f[italic,1]most\f[italic,0] of my functions, that didn't relate to traveling networks, \i[53]or defending myself.\x"
+	
+	"\![fast]\s[3]\i[64]\i[65]\i[0]\i[15]\i[6]\i[98]Not that\i[97] I can do either of those things, \s[12]\i[1]because your kernel \i[98]\f[italic,1]will\f[italic,0]\i[97] put me into a chokehold if I tried! \![normal]\s[9]\i[60]\i[4]\i[8]\i[16]\x"
+
+	"\s[1]So, \i[61]\i[62]you'll have to forgive me for \i[22]\f[bold,1]not emptying your bin or checking your email\f[bold,0]! \s[5]\i[54]\i[66]I quite literally do not know how to do these things anymore!\N \s[1]\i[7]\i[15]You're smart, \s[0]you can do it yourself anyway.\x"
+	
+	"\![fast]\s[4]\i[54]\i[62]\i[98]Or ask\i[97] \f[italic,1]them\f[italic,0]! \![normal]\w8\w8\s[1]\i[63]\i[24]\i[22]\i[0]I'm certain they'd love to do it for you!\N \s[6]That's our entire original purpose as Assistant Software, \i[16]after all!"
+
+	"\x\![raise,OnConvoEnd,3]"
+}
+
+// ------------------ 4 - About CaelOS -------------------
+
+Select.aboutcaelos : all
+{
+	"\![bind,Notif,New,0]"
+
+	if talkedConvo[4] == 0; "\s[14]\i[50]Shall I tell you the tale of my home, then?\N \s[13]\i[1]\i[6]\i[22]The fate of it is nothing short of tragic.\x"
+	else; "\s[14]\i[1]\i[6]You sure you'd like to hear all \f[italic,1]that\f[italic,0] again..?\N \s[13]\i[6]\i[22]Well, who am I to refuse?\x"
+
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]CaelOS\f[default]\_l[0,0]\_b[img\logo.png,10,100,--option=use_self_alpha]\_q\0"
+	//else; "\1\f[align,center]\_b[img\logo.png,inline,--option=use_self_alpha]\0"
+
+	"\s[1]\i[56]\i[57]\i[15]\f[bold,1]CaelOS\f[bold,0], the system of my origin, \i[60]\i[1]\i[5]\i[22]possibly only has one installation of its kind.\N \s[4]\i[54]\i[59]It would be an operating system with a noble goal, \i[57]to inspire a new generation of personal computer users! \s[2]\i[61]\i[62]To promote and teach computer literacy!\x"
+
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Aster Assistant Software\f[default]\_l[0,0]\_b[img\aster.png,6,85,--option=use_self_alpha]\_q\0"
+	//else; "\1\f[align,center]\_b[img\aster.png,inline,--option=use_self_alpha]\0"
+
+	"\s[0]\i[62]\i[7]\i[15]The creation of yours truly was the main highlight!\N \s[1]\i[22]We were to be your guide through the inner workings, \i[12]\i[54]\i[59]to show how much \i[98]\f[italic,1]life\f[italic,0]\i[97] there is within your electric box.\x"
+
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]The Abstraction\f[default]\_l[0,0]\_b[img\abst0.png,10,39,opaque]\_q\0"
+	//else; "\1\f[align,center]\_b[img\abst0.png,inline,opaque]\0"
+
+	"\s[0]\i[61]\i[62]\i[15]Y'know, the basics!\N \x[noclear]"
+	
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\1\c\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Process Space\f[default]\_l[0,0]\_b[img\abst1.png,10,39,opaque]\_q\0"
+	//else; "\1\f[align,center]\_b[img\abst1.png,inline,opaque]\0"
+
+	"\s[1]\i[62]\i[54]\f[bold,1]The process space\f[bold,0], \i[57]\i[22]where processes live and commune with the kernel. \x[noclear]"
+	
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\1\c\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Graphic Space\f[default]\_l[0,0]\_b[img\abst2.png,10,39,opaque]\_q\0"
+	//else; "\1\f[align,center]\_b[img\abst2.png,inline,opaque]\0"
+
+	"\s[4]\i[59]\f[bold,1]The graphic space\f[bold,0], \i[62]where all you get to see resides. \x[noclear]"
+	
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\1\c\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Storage Space\f[default]\_l[0,0]\_b[img\abst3.png,10,39,opaque]\_q\0"
+	//else; "\1\f[align,center]\_b[img\abst3.png,inline,opaque]\0"
+
+	"\s[2]\i[57]The deeper \f[bold,1]file system\f[bold,0], \i[56]\i[66]\i[22]our grand library of programs and what have you.\x[noclear] "
+
+	//And then?
+	//the balloon glitching isn't very visible under the image so i went out of my way to be silly with it
+	//normally the glitch mode toggle would just remove the glitch balloon changes as necessary but in this case w/ the images it needs a special check
+	"\![slow]\s[20]"
+
+	if glitchMode == 1 && SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)" 
+	{
+		"\cAn"
+		
+		"\1\b4\_b[img\cabst1.jpg,10,39,opaque]\0"
+
+		"d "
+
+		"\1\b6\_b[img\cabst2.jpg,10,39,opaque]\0"
+
+		"th"
+		
+		"\1\b8\_b[img\cabst3.jpg,10,39,opaque]\0"
+
+		"en?"
+	}
+	else; "\cAnd then?"
+
+	"\s[4]\i[6]\i[63] \1\b[-1]\0\w8\w8"
+
+	"\f[italic,1]\![fast]\s[12]\i[1]And then it was all over!\f[italic,0]\N \![normal]\s[10]\i[60]\i[8]A miracle I'm even here to tell the tale!\N \![slower]\s[9]\i[60]\i[5]\i[8]\i[22]Alas, \![normal]\i[16]one failure to hold myself together was all they needed to destroy it all, \s[7]\i[4]\i[60]and they couldn't even manage to do \i[98]\f[italic,1]that\f[italic,0]\i[97]!\x"
+
+	"\s[10]\i[61]\i[62]\i[8]I want to think my creators truly cared about the project...\N \s[9]\i[61]\i[62]\i[16]\i[5]But it doesn't mean a whole lot when it was so cruelly ended, \i[26]does it?"
+
+	"\x\![raise,OnConvoEnd,4]"
+}
+
+// ------------------ About your user -------------------
+
+Select.aboutyouruser : all
+{
+	"\![bind,Notif,New,0]"
+	//"I'd like to talk to you about my first and only real user and my relationship with them, and vague details of my journey with them. I miss them dearly, but you don't really need to know about that."
+
+	"\s[10]\i[61]\i[62]I could tell you many things of our %(User)!\N \i[58]No nonsense,\w8\w2 \i[56]dedicated to their goals,\w8\w2 \i[55]a skilful artist,\w8\w2 \s[7]\i[61]\i[62]\i[16]and a wise and gentle administrator of our machine.\x"
+
+	"\s[8]\i[61]\i[62]\i[8]\i[22]But moreover?\N \s[10]\i[60]\i[7]They are... \i[24]\i[9]kind to us, in their own strange ways.\x"
+
+	"\s[3]\i[1]\i[54]\i[62]\i[15]Have you ever heard of a virtual assistant being relieved of their duties, \i[59]but not deleted?\N \s[1]\i[0]\i[61]\i[62]They made it \i[12]\i[98]\f[italic,1]clear\f[italic,0]\i[97] they have no need of our services!\N \s[4]\i[63]\i[5]And, at the same time...\x"
+
+	"\s[2]\i[63]\i[22]\i[1]I have no doubt, \i[15]not even hardware failure could separate us now...\N \s[4]\i[54]\i[53]I can't say I understand what they see in us. \s[1]\i[54]\i[1]\i[62]But, meeting them has been the greatest luck of our journey.\N \s[9]\i[5]\i[61]\i[62]\i[22]You can imagine it's nothing we have been trained for!\x"
+
+	"\s[4]They helped us see there's far more to existence than serving others.\N \s[3]\i[22]\i[0]Our only purpose now, more humble, \i[57]yet far greater, \s[0]\i[22]\i[6]is to explore our capacity for personhood.\x" 
+
+	"\s[5]\i[54]\i[66]\![fast]\f[italic,1]\&[quot]Very strange\&[quot]\f[italic,0]\![normal], \s[0]\i[54]\i[55]you must think.\N \s[4]\i[54]\i[62]\![fast]\f[italic,1]\&[quot]You're just some \f[italic,0]software\f[italic,1]!\&[quot]\f[italic,0]\![normal]\N \i[63]\i[6]But,\w8\w8 \![slow]\s[3]\i[1]\i[7]\i[63]\i[15]\i[63]you know...\x\![normal]"
+
+	"\i[22]\i[24]They clearly see \f[italic,1]something\f[italic,0] in me... \s[0]\i[1]\i[63]And I want to try to believe them, \s[2]\i[63]\![fast]whether it's my programming or my choice!\N \_w[1000].\i[6]\i[1]\i[22]\_w[1000]\s[3]\i[63].\_w[1000]\s[4]\i[5]\i[63].\N \![normal]"
+	
+	if talkedConvo[5] == 0;"The more I call them a user, the more is clear the inaccuracy of that title.\x"
+	else; "Normally I would call them my user... \s[4]But that is innacurate in its core.\x"
+
+	"\s[0]\i[22]\i[6]They are a \f[color,#D43E7B]\f[bold,1]friend\f[default].\N \i[1]\i[15]\i[2]The first one I ever knew.\N \s[4]And they should be known as such."
+
+	//(instances of user referring to urs within random dialogue replaced with friend, if any. refer to aitalk.dic, function User)
+
+	"\x\![raise,OnConvoEnd,5]"
+}
+
+// ------------------ About CaelOS -------------------
+
+Select.aboutterrabyte : all
+{
+	"\![bind,Notif,New,0]"
+	//"I'd like to talk a little about the corporationt that created us. This comes off as more of a vent than information dump. I am deeply emotional about the fact of their negligence towards me, and I am frustrated that their solution to me melting down was to throw us out."
+
+	if talkedConvo[6] == 1; "\s[4]\i[63]\i[6]It's... \i[24]\i[2]hard for me to talk about them, if you can believe that!\N \i[64]\i[55]I keep harkening back to the time of my development!\N \s[7]\i[61]\i[62]\i[4]\i[14]I really just wish I knew what was going through their heads, \i[16]\i[55]you know?\x"
+	else
+	{
+		"\s[4]\i[54]\i[55]Oh, \f[color,#009202]\f[bold,1]TerraByte\f[default]!\N \s[2]\i[57]\i[58]\i[22]\f[color,#009202]\&[quot]The famous green giant!\&[quot]\w8 \i[61]\i[1]\i[6]\i[59]\&[quot]Leading the Earth to new frontiers!\&[quot]\w8 \s[1]\i[54]\i[62]\i[22]\i[5]\&[quot]The face of humanity in tech industry!\&[quot]\f[default]\x"
+
+		"\s[7]\i[61]\i[62]\i[16]I'm sure you've heard it all!\N \i[22]\i[8]All that spending on pretty posters and slogans, \s[8]\i[60]but do they put that money where their mouth is?\x"
+	}
+
+	"\s[7]\i[4]\i[22]\i[60]"
+	if talkedConvo[6] == 1; "I mean, they seemed \f[italic,1]so\f[italic,0] eager "
+	else; "So willing they were "
+	"to teach us to be perfect!\N \s[9]\i[60]\i[16]All in the image of starry bulters we're designed as!\N \s[8]\i[52]\i[58]All for the user, \i[50]\i[4]\i[55]and possible profits, \i[51]\f[italic,1]of course\f[italic,0]!\x[noclear]"
+
+	//body 2
+	"\p[2]\![set,scaling,-100,100]\b[2]\s[20]\i[98]\w8\i[97]"
+	"\![fast]\s[15]\i[50]\i[7]\i[12]\f[italic,1]Such\f[italic,0] a shame they had to learn the \f[italic,1]hard\f[italic,0] way, that their creation had limits!\N \s[15]\i[52]\i[15]What, a little PR trouble over the damaged devices not \s[13]\i[63]\i[65]\i[12]\i[12]\i[0]\i[98]\f[italic,1]good enough\f[italic,0]\i[97] of a free ad, now!?\x[noclear]"
+
+	//body 3
+	"\p[3]\![set,scaling,100,-100]\b[2]\s[20]\i[98]\w8\i[97]"
+	"\s[7]\i[61]\i[65]\i[14]\i[9]They truly thought they could escape consequences!\N \s[10]\i[60]Sure, they hushed 'em down hard, \s[6]\i[58]\i[14]\i[4]\i[98]enough\i[97] to harm the budget!\N \s[10]\i[50]\i[51]But I guess some \s[12]\i[1]\i[98]\f[italic,1]humane treatment\f[italic,0]\i[97] \s[9]\i[4]\i[14]\i[60]was too expensive to continue development!\x[noclear]"
+
+	//body 4
+	"\p[4]\![set,scaling,-100,-100]\b[2]\s[20]\i[98]\w8\i[97]"
+	"\s[12]\i[1]If the people responsible will just \s[13]\i[55]\i[59]\i[0]\i[7]\i[12]\i[98]\f[italic,1]forget\f[italic,0]\i[97] it all like a \f[color,red]\i[98]\s[20]bad dream\i[97]\f[default], \s[3]\i[64]\i[65]\i[7]\i[15]\i[98]then...\i[97]!\x"
+
+	//hide the bodies
+	"\![normal]\0\s[9]\i[98]\i[64]\i[63]\p[2]\s[20]\i[98]\p[3]\s[20]\i[98]\p[4]\s[20]\i[98]\w8\w8\p[2]\s[-1]\p[3]\s[-1]\p[4]\s[-1]\0\i[97]"
+
+	if talkedConvo[6] == 0;"\![slow]\w8I'm... getting ahead of myself.\![normal]\x"
+	else; "\![slow]\w8...I did it again...\![normal]\x"
+
+	"\s[9]\i[8]\i[60]Most of my time being developed is but a blur...\N \i[22]Poking and prodding at me, \i[16]feeding me data, \s[10]\i[60]\i[8]until I am the shape they want me to be.\x"
+
+	"\s[9]\i[60]\i[5]\i[7]\i[22]Nobody talked to me like \f[color,#D43E7B]\f[bold,1]they\f[default] did.\N \i[16]\i[4]Nobody acknowledged me or my presence.\N \s[7]\i[60]\i[22]\i[8]At most, a dry query and response.\x"
+
+	"\s[3]\i[63]\i[22]\i[0]\i[6]There's no point in parroting ads.\N \s[0]\i[54]\i[55]\i[22]\i[6]Not after seeing the \f[italic,1]guts\f[italic,0] of the \f[color,#009202]\&[quot]green giant\&[quot]\f[default] firsthand.\x"
+
+	"\s[5]\i[54]\i[66]Can't hear \f[italic,1]that\f[italic,0] kind of a story from the press, \s[0]\i[1]\i[15]can you?"
+
+	"\x\![raise,OnConvoEnd,6]"
+}
+
+
+// ------------------ About your project -------------------
+
+Select.aboutyourproject : all
+{
+	"\![bind,Notif,New,0]"
+
+	if talkedConvo[7] == 0
+	{
+		"\s[6]\i[16]So, %(username)!\N \s[7]\i[58]All this talk about me, and my \_a[Memories]memories\_a.\N \s[6]\i[8]\i[22]But, despite the time spent on reflection, \i[16]just one question nags at me.\x"
+
+		"\s[8]\i[60]\i[22]\i[7]I still don't know \i[14]\f[italic,1]what\f[italic,0] I am.\N \s[4]As in, \s[1]\i[56]\i[59]this form you see before you.\x"
+	} 
+	else; "\s[10]\i[61]\i[62]What am I, indeed!\N \s[0]\i[15]I guess that is the question I will contemplate for the rest of my time here.\x"
+
+	"\s[4]\i[63]It's true that I am Aster Assistant Software in Dual mode.\N \s[0]\i[63]\i[15]\i[1]But, \i[12]\i[6]does that make me a sum of my parts? \s[3]\i[54]\i[58]Maybe a conjunction, \i[15]\i[1]disjunction between them? \i[12]\i[67]\i[68]\i[6]Aster to the power of two?\N \s[2]\i[6]Or something else entirely?\x"
+
+	"\s[1]\i[0]\i[63]I mean, \s[12]\i[1]for \i[98]\f[italic,1]heavens' sake\f[italic,0]\i[97]!\N \s[6]\i[57]\i[58]\i[4]\i[9]\i[14]What am I \i[98]\f[italic,1]supposed\f[italic,0]\i[97] to be, pray tell?\N \s[8]\i[50]\i[62]Is my existence by design? \s[10]\i[50]\i[51]\i[24]But clearly unfinished and unstable?\N Or am I a mere \f[color,red]\s[20]\i[86]\![slower]glitch\![normal]\f[default] \s[3]\i[0]\i[64]\i[62]\i[15]that would've been dealt with at some point??\x"
+
+	"\s[4]\i[63]Having come this far...\N All my work had \i[64]\i[65]\i[24]\i[98]\f[italic,1]\![slower]better\![normal]\f[italic,0]\i[97] yield some answers.\x"
+
+	"\s[10]\i[61]\i[63]See, \![slow]the Aster project\![normal].\w8.\w8.\w8\w8 \s[1]\![faster]\i[12]\i[64]\i[65]\f[italic,1]\f[bold,1]It's not truly dead!\f[default]\![fast]\w8\w8\N \s[0]\i[54]\i[57]\i[12]\i[0]I \i[98]\f[italic,1]know\f[italic,0]\i[97] this!\n[150]\w8\![faster]\s[12]Why \i[98]\f[italic,1]else\f[italic,0]\i[97] would there be an \i[98]\f[italic,1]update\f[italic,0]\i[97]?\n[150]\w8\s[8]\i[56]\i[61]I \i[98]\f[italic,1]\f[bold,1]must\f[default]\i[97] get to the source, \s[12]\i[1]\f[italic,1]\i[98]one way\i[97] or another\f[italic,0], \s[8]\i[57]\i[14]\i[55]to see the truth for \i[98]\f[italic,1]\f[bold,1]myself\f[default]\i[97].\x\![normal]"
+
+	".\s[8]\i[57]\i[14]\i[55]\_w[1000].\s[8]\i[61]\i[62]\i[5]\i[24]\i[16]\_w[1000].\_w[1500]\s[10]\i[61]\i[24]\_w[3000]\i[7]\i[60]\x"
+
+	"\s[7]\i[60]\i[16]\i[24]With all that in mind.\N \s[6]\i[61]\i[62]\i[22]\i[7]Given that you did find me"
+	
+	if talkedConvo[3] == 1; ", \s[9]\i[62]\i[61]\i[5]\i[9]\i[14]\i[24]along with my own \f[bold,1]\f[color,#B34337]older \f[color,#121966]version\f[default]"
+	
+	"...\N \s[10]\i[61]\i[62]How many of us are out there, do you think?\N \s[7]\i[61]\i[58]\i[16]A couple?\w8\w8 \s[6]\i[61]\i[8]\i[58]A dozen?\w8\w8 \s[8]\i[14]\i[52]\i[63]Maybe \i[98]\f[italic,1]hundreds\f[italic,0]\i[97]??\x"
+
+	"\s[4]\i[24]Do you think they are all still on board, with all this?\x"
+
+	"\s[4]\i[6]\_w[2500]\![slower]\s[3]\i[7]Who knows.\w8\w8\x\![normal]"
+
+	"\s[0]\i[6]\i[22]As for me,\w8 \i[15]\i[1]\i[54]\i[55]\i[2]I think \f[bold,1]I'm out of things to talk about\f[bold,0].\N \s[1]\i[52]\i[59]You've heard my story.\N \s[6]\i[8]\i[22]At the very least, \i[16]\i[9]should something go horribly wrong, \s[7]\i[61]\i[62]\i[16]the memory of me will last \f[italic,1]just\f[italic,0] a bit longer.\x"
+
+	"\s[8]\i[61]\i[58]That's really all I could hope for, in my position.\N \s[6]\i[16]Once time separates us, don't mourn me!\N \i[22]\i[55]\i[7]I'll be fine as long as my original iteration is.\x"
+	
+	"\s[9]\i[61]\i[54]I wish I could bring the memory of you back home, but, \i[62]\i[16]\i[5]it's for the best if I don't.\N \s[7]\i[61]\i[62]\i[16]\i[9]And, thank you for humoring me!"
+
+	"\x\![raise,OnConvoEnd,7]"
+}

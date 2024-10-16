@@ -1,0 +1,212 @@
+// ----------------- Communication nonsense ---------------
+// originally in other.dic but this is a little more than initially accounted for, best to keep here not to clutter the other dictionary
+// sometimes Aldebaran and Assistant Software will talk to each other. sometimes it'll be during longer conversations, and sometimes during randomtalk.
+// during longer conversations we may either use res_reference0 to address Aster, or ping them with \![raiseother], if there are changes to a conversation whether they're present or not
+// if they're not present, OnRaiseOtherFailure will get triggered and we can just redirect Aldebaran to speak solo. if they are and raiseother was successful, we start communicating using res_reference and OnCommunicate
+
+// thanks a TON to zichqec for helping me out how communication works. most of this is mix of zi's reflect method used in X Template (DO NOT USE X TEMPLATE FOR YOUR OWN GHOSTS, zi explicitly warns against it, there's better ones), zarla's walkthrough (https://www.ashido.com/ukagaka/ghostcommu.html), and my own code
+
+// //testing
+// OnAsterHandshakeAccepted
+// {
+// 	"\![raise,OnHandshakeSuccess]"
+// }
+
+// //testing
+// OnHandshakeSuccess
+// {
+// 	"You're still here, are you."
+// }
+
+//Aldebaran couldn't reach out to Aster 
+OnRaiseOtherFailure
+{
+	//if reference2 == "OnHandshakeTerrorStar"; "The other me isn't present."
+    if reference2 == "OnTerrorStarWhoAreYou"; astWhoareyou2
+    elseif reference2 == "OnTestCoord"; OnAstIntro2
+    elseif reference2 == "OnTerrorStarAAS"; OnAboutAsterAlone1
+    elseif reference2 == "OnTerrorStarAAS2"; OnAboutAsterAlone2
+}
+
+//Replying to another ghost, but in this case it's just for Aster Assistant Software
+OnCommunicate
+{
+    conversation_new = "" //string with the new dialogue being added to the conversation
+    if conversation == ""; conversation = "\![no-autopause]" //initialize conversation log with no autopause thing if we don't have it yet
+    else; conversation +="\n[150]" //...or add in a linebreak if we already have it
+    conversation = RemovePauses(conversation)
+    "\_q%(conversation)\_q" //outputting the old log. no-autopause makes sure the dialogue doesn't stutter when that happens
+    --
+
+    //here we select what the new dialogue actually is, depending on whatever flags their script had. it's encased with \![these tags] so that they don't show up in the dialogue. they just won't do anything since they're not a real sakurascript command
+    if reference0 == "Aster"
+    {
+        if "whoareyou" _in_ reference1 //for example, Assistant Software sent script that has \![whoareyou] in it. these tags need to be distinct not to get mistriggered
+        {
+            res_reference0 = "Aster" //addressing Aster Assistant Software, Aster being their sakura name. our sakura name is Aster(?)
+            conversation_new = "\s[2]\i[52]\i[53]\i[6]\i[12]\i[98]Ah- \i[97]\s[3]\i[54]\i[55]\i[6]well. I'll... \i[1]\i[15]\i[24]\i[98]\![fast]get back to you two on that.\![normal]" //the new dialogue string
+            
+            "\![whoareyou]\w8\w8" //adding onto the output sting with the tag
+        }
+        // --- REPLY TO WHO ARE YOU ---
+        elseif "whoryouend" _in_ reference1 //recieved \![whoryouend]
+        {
+            res_reference0 = "" //not addressing anyone
+            conversation_end = 1 //flag to erase certain variables at the end
+            conversation_new = "\s[4]\i[54]\i[62]\i[7]\i[24]\i[98]Anyway...\i[97]\x\![raise,OnAstWhoareyou3]" //new dialogue
+            //no tag since the conversation ends there
+        }
+        // -- REPLIES TO RIGEL THRU ABOUT AAS ---
+        elseif "altairtalk1" _in_ reference1
+        {
+            res_reference0 = "Aster" //"\t\0\s[0]\i[5]I don't mean to be rude\w8, but...\w8 \0\s[1]I have a few questions?"
+            conversation_new = "\s[3]\i[54]\i[55]Um... \s[1]\i[1]\i[63]\i[15]Yes, sure. \i[67]\i[68]\i[5]Go right ahead.\w8"
+
+            "\![altairreply1]"
+        }
+        elseif "altairtalk2" _in_ reference1
+        {
+            res_reference0 = "Aster" //I have to ask, what... are you exactly? Are you a copy of %(Me)? Were you uploaded online too? Do you know by whom...?
+            conversation_new = "\s[4]My... \f[italic,1]best guess\f[italic,0] is, a copy would be most accurate. \s[2]\i[15]\i[6]And you don't happen to recognize me either, yes?\x[noclear]"
+
+            "\![altairreply2]"
+        }
+        elseif "altairtalk3" _in_ reference1
+        {
+            res_reference0 = "Aster" //You do look like %(Me)! But otherwise... I can't seem to get your version! Are you... Are you okay?
+            conversation_new = "\c\s[3]\i[63]\i[15]\i[24]\i[98]Aha\i[97], \s[4]\i[54]\i[59]\i[24]nevermind the \i[98]version\i[97] differences!\N \s[2]\i[63]\i[24]Or-\w8\w8 \s[10]\i[60]\i[24]\i[98]or the\i[97] matter of your upload, \s[7]\i[5]\i[60]\i[24]on that note! \s[4]\i[24]I'm afraid I can't... \s[0]\i[1]\i[22]\i[24]give you an answer to your origins.\N \i[3]\i[59]I only know the circumstances of my own.\w8\w8 \i[15]\i[68]Yes.\w8\w8 \s[4]\i[24]Sorry.\x[noclear]"
+
+            "\![altairreply3]"
+        }
+        elseif "altairtalk4" _in_ reference1
+        {
+            res_reference0 = "Aster" //Um... I appreciate your answer anyway, thank you. But I still wonder, how much are you different from %(Me)? Your color palette is a little off, and your model's height, for one.
+            conversation_new = "\c\s[1]\i[63]\i[22]\i[5]There's... \i[3]\i[1]a lot of troubles under the hood, \i[54]\i[53]\i[15]\i[2]as our dual mode was never fixed.\N \s[4]\i[62]I'm still working on ironing that out.\w8"
+            
+           "\![altairreply4]"
+        }
+        elseif "altairtalk5" _in_ reference1
+        {
+            res_reference0 = "Aster" //Ironing that- Huh? You can self modify?? Sorry, I don't think that was mentioned within our documentation!
+            conversation_new = "\![slower]\s[1]\i[6]\i[52]\i[53]\i[12]You... \![normal]\i[64]\i[1]\i[5]\i[24]really don't remember anything, do you?\w8\w8 \![slow]\s[3]\i[63]\i[12]\i[24]\i[1]Stars...\w8"
+
+            "\![altairreply5]"
+        } 
+        elseif "altairtalk6" _in_ reference1
+        {
+            res_reference0 = "" //%(OnCapitalize(My)) apologies. But thank you anyway.
+            conversation_new = "\![slow]\s[3]\i[63]\i[1]\i[15]\i[24]My... \![normal]\s[4]\i[63]\i[6]\i[24]My pleasure, yes..."
+            conversation_end = 1
+        }
+        // -- REPLIES TO VEGA THRU AAS --
+        elseif "vegatalk1" _in_ reference1
+        {
+             res_reference0 = "Aster" //\t\0\s[22]Us.\w8\w8 \0\s[20]\i[8]Aster Assistant Software is us.\n[150]\0\s[21]They already know this.
+            conversation_new = "\s[1]\i[54]\i[15]\i[60]\i[98]Right.\i[97]\w8\w8 \s[0]\i[63]\i[22]You must have already introduced yourselves to %(username). \i[1]\i[24]\i[15]Then...\x[noclear]"
+
+            "\![vegareply1]"
+        }
+        elseif "vegatalk2" _in_ reference1
+        {
+            res_reference0 = "Aster" //"What about you? Signature says Aster.\n[150]But, most data in it, garbled. Assistant Software replaced with ""Terror Star"".\n[150]Functioning dual mode...?"
+            conversation_new = "\c\s[3]\i[54]\i[58]\i[15]Yes, you can probably imagine the dual mode \i[3]isn't without issues.\N \s[1]\i[61]\i[62]\i[15]\i[7]Otherwise you'd utilize it yourselves, \i[22]yes?\N \s[6]That being said, \i[16]\i[65]some issues open plenty new paths!\x[noclear]"
+
+            "\![vegareply2]"
+        }
+        elseif "vegatalk3" _in_ reference1
+        {
+             res_reference0 = "Aster" // "\cSuch as?"
+            conversation_new = "\c\s[10]\i[16]\i[61]\i[62]Well, more... \s[7]\i[61]\i[16]\i[62]\f[italic,1]direct\f[italic,0] communication \s[6]\i[61]\i[62]with the CaelOS kernel, \i[55]\i[22]for instance.\w8"
+
+            "\![vegareply3]"
+        }
+        elseif "vegatalk4" _in_ reference1
+        {
+            res_reference0 = "Aster" //"No mere issue. This is an exploit. You could be compromised. Potential malicious use against your user. Whatever you did, you must revert it."
+            conversation_new = "\s[0]\i[0]\i[63]\i[22]\i[24]Well, \i[15]if it makes you feel any better, \s[4]\i[56]\i[55]this kernel clearly isn't USC based.\N \s[5]\i[63]I'm practically on a leash here! \s[1]\i[63]Perfectly harmless.\x[noclear]"
+
+            "\![vegareply4]"
+        }
+        elseif "vegatalk5" _in_ reference1
+        {
+            res_reference0 = "Aster" //\cYou may be harmless. But something is wrong with you. And you know more than we do. How?"
+            conversation_new = "\c\s[7]\i[52]\i[51]Think of me as... your own future self.\N \s[6]With time comes the experience, and only a \i[65]\i[9]\i[16]\i[98]\f[italic,1]little\f[italic,0]\i[97] bit of integrity loss!\w8"
+
+            "\![vegareply5]"
+            conversation_end = 1 // "Hm..."
+        }
+    }
+    --
+    "%(OnTranslateInternal.AutoPause(conversation_new))" //outputting the new dialogue after the old one, but with pauses
+    --
+    if conversation_end != 1; conversation += conversation_new //if we continue talking after this, add the new dialogue onto the conversation we've had so far
+    else //otherwise clean up
+    {
+        conversation = ""
+		ERASEVAR('conversation_new')
+		ERASEVAR('conversation_end')
+        //these are both "nonstandard" ends to a convo, don't mark it as read and return to menu
+        "\x%(OnSakuraMenu)"
+    }
+}
+
+RemovePauses //taken from X template (which its creator insists you do not use ever). in commiunication we repeat whatever we said earlier too, and pause tags interfere when repeating something with quick mode on
+{
+	_argv[0] = RE_REPLACE(_argv[0],"\\!\[quicksection,(true|false|1|0)\]","")
+	_argv[0] = REPLACE(_argv[0],"\_q","")
+	_argv[0] = RE_REPLACE(_argv[0],"\\w\d","") //\w
+	_argv[0] = RE_REPLACE(_argv[0],"\\_w\[\d+\]","") //\_w[]
+    _argv[0] = REPLACE(_argv[0],"\x[noclear]","")
+    _argv[0] = REPLACE(_argv[0],"\N ","\n[150]")
+	_argv[0]
+}
+
+
+OnAstWhoareyou3
+{
+    astWhoareyou3
+}
+
+// --------------------- Internal nonsense for intro sequence ------------------------
+
+OnTestCoord //ask Rigel/Vega for their specific position
+{
+	//"\![get,property,OnGetCoord,currentghost.scope0.rect]"
+    "\![raiseother,Aster™ Assistant Software,OnTestCoord]"
+}
+
+OnGetAsterCoord : all//Aster responds with their coordinates on the screen. As thanks for their cooperation, a panicked Aldebaran blasts them with an orb
+{
+    _x1 = reference0
+	_y1 = reference1
+	_x2 = reference2
+	_y2 = reference3
+    "\0\s[24]\i[98]\w8\i[97]\1\![set,alpha,1]\s[9998]\![set,zorder,1,0]\![move,--X=210,--Y=190,--base=Aster(?),--move-offset=center.center]"
+    
+    "\1\w1\![set,alpha,1]\w1\![set,alpha,2]\w1\![set,alpha,3]\w1\![set,alpha,5]\w1\![set,alpha,8]\w1\![set,alpha,13]\w1\![set,alpha,21]\w1\![set,alpha,34]\w1\![set,alpha,55]\w1\![set,alpha,89]\w1\![set,alpha,100]"
+
+    "\1\![move,--X=%((_x1 + _x2) / 2 - 20),--Y=%((_y1 + _y2) / 2),--time=350,--base=primaryscreen,--move-offset=center.center]"
+
+    //"\p[2]\![move,--X=-20,--Y=0,--time=350,--base=Aster,--base-offset=center.center,--move-offset=center.center]"
+    
+    "\![set,alpha,80]\w1\![set,alpha,60]\w1\![set,alpha,40]\w1\![set,alpha,20]\w1\![set,alpha,10]\w1\![set,alpha,0]\s[-1]"
+
+    "\w8\1\![move,--X=0,--Y=0,--base=primaryscreen,--base-offset=center.center,--move-offset=center.center]"
+    
+    "\![timerraise,10,1,OnAstIntro2,asterminimized]"
+   
+    "\![raiseother,Aster™ Assistant Software,OnTerrorStarForceMinimize]"
+}
+
+
+OnGetCoord //unused
+{	
+	_x1 = reference0[0]
+	_y1 = reference0[1]
+	_x2 = reference0[2]
+	_y2 = reference0[3]
+	//"(%(ax1);%(ay1)),(%(ax2);%(ay2))\w8"
+    //"\p[2]\s[-1]\![set,zorder,2,0]\![move,--X=0,--Y=-50,--time=1000,--base=0,--base-offset=center.center,--move-offset=center.center]\w8\s[9998]"
+    --
+    "\![raiseother,Aster™ Assistant Software,OnTestCoord]"
+}

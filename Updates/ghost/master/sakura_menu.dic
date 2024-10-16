@@ -1,0 +1,328 @@
+//Sakura menu (sakura being main character name in ukagakas) will host the following:
+//longer dialogues + pagination (main page content)
+//options
+//help?
+
+//Because there is an all modifier here, you don't need to write -- between menu options
+OnSakuraMenu : all
+{
+	"\0\b2\![set,autoscroll,disable]"
+	if SHIORI3FW.Eventid == "OnMouseDoubleClick"
+	{
+		lastGreeting = SakuraMenuGreetings
+		if _argv[0] == "Face"; lastGreeting = SakuraMenuFace //passed on from the doubleclick if the face collision is clicked 
+		//else; 
+
+		if soundMode == 1; "\![*]\q[Stop sound playback,soundEnd]"
+		elseif tutorialDone == 1
+		{
+			lastGreeting //output greeting
+
+			lastGreeting = SHIORI3FW.RemoveAllTags(lastGreeting) //remove all tags, including surface calls, so that he doesn't flicker animations
+		} 
+		else; MenuTutorial
+
+		if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\n[150]\_b[img\sep.png,inline,--option=use_self_alpha]"
+		else; "\n[150]\_q\f[align,center]-----\n[150]\f[align,left]"
+	} //The check here is so they won't comment if you click the back button. Remove if you prefer
+	//edit to the code also keeps the greeting used this time, so that it's kept between pages
+	
+	//if the user already has more than page one's conversation subject, set menu to page 2 And unlock movement back and fourth
+	if unlockedConvo[4] == 1; OnPromptPageTwo
+	else; OnPromptPageOne
+	//note: a page can fit 7 lines. 3 of them are reserved for Talk to me and Say that again, making space for 4 prompts at a time, assuming the greeting will be 2 lines at most.
+}
+
+Select.soundEnd
+{
+	if soundMode != 1; "\_q\f[bold,1][Sound already ended.]\f[bold,0]\_q\x"
+	else
+	{
+		lastGreeting = astSoundInterrupt
+		"\![sound,stop]\![notify,OnSoundStop]\b2%(lastGreeting)\c" //say the response, immediately erase it 
+	} 
+	--
+	"\![raise,OnSakuraMenu]" //...and show the menu with the saved line		
+}
+
+menuHeader: all //so that i don't have to retype it for every page
+{
+	if soundMode == 1; "\![*]\q[Stop sound playback,soundEnd]"
+	else; "\![no-autopause]%(lastGreeting)"
+
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\n[150]\_b[img\sep.png,inline,--option=use_self_alpha]"
+	else; "\n[150]\f[align,center]-----\n[150]\f[align,left]"
+}
+
+OnPromptPageOne : all
+{
+	//"%(SHIORI3FW.Eventid)"
+	"\b2\_q"
+	if SHIORI3FW.Eventid != "OnMouseDoubleClick"; menuHeader
+
+	"\![*]\q[Who are you?,whoareyou]"
+	if talkedConvo[0] != 1; " \f[sup,1]NEW\f[sup,0]"
+	//0 : the first dialogue available
+
+	if unlockedConvo[1] == 1
+	{
+		"\n\![*]\q[Why are you here?,whyareyouhere]"
+		if talkedConvo[1] != 1; " \f[sup,1]NEW\f[sup,0]"
+	}  //1 : 10-20 minutes after who are you is talked about?
+
+	if unlockedConvo[2] == 1
+	{
+		"\n\![*]\q[Where are you from?,whereareyoufrom]"
+		if talkedConvo[2] != 1; " \f[sup,1]NEW\f[sup,0]"
+	}  //2 : 10-20 minutes after why are you here
+	
+	if talkedConvo[0] == 1 && CheckAster == 1
+	{
+		"\n\![*]\q[About Aster™ Assistant Software,aboutaster]"
+		if talkedConvo[3] != 1; " \f[sup,1]BONUS\f[sup,0]"
+	}  //3 (opt) : unlocks if aster asssistant software is present in the ghost folder AND after first dialogue ends
+
+	"\n[150]\![*]\q[Say something,OnAiTalk]"
+	if LastTalk != ""; "\n\![*]\q[What did you say earlier?,OnLastTalk]"
+	""
+	
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"
+	{
+		"\_l[0,190]\_b[img\sep.png,inline,--option=use_self_alpha,--option=background]\_l[60]\q[Nevermind,blank]    \q[Options,OnShowOptions]\_l[230]"
+		if unlockedConvo[4] == 1; "\q[Next,OnPromptPageTwo]"
+	} 
+	else
+	{
+		"\n[150]\f[align,center]-----\n\q[Nevermind,blank] \q[Options,OnShowOptions] "
+		if unlockedConvo[4] == 1; "\q[Next,OnPromptPageTwo]"
+		"\f[align]"
+	} 
+}
+
+OnPromptPageTwo : all
+{
+	"\b2\_q"
+	if SHIORI3FW.Eventid != "OnMouseDoubleClick"; menuHeader
+
+	if unlockedConvo[4] == 1
+	{
+		"\![*]\q[About CaelOS,aboutcaelos]"
+		if talkedConvo[4] != 1; " \f[sup,1]NEW\f[sup,0]"
+
+	} //4 : 10-20 minutes after "where are you from"
+
+	if unlockedConvo[5] == 1
+	{
+		"\n\![*]\q[About your user,aboutyouruser]"
+		if talkedConvo[5] != 1; " \f[sup,1]NEW\f[sup,0]"
+	}  //5 : 10-20 minutes after who are you is talked about?
+
+	if unlockedConvo[6] == 1
+	{
+		"\n\![*]\q[About TerraByte,aboutterrabyte]"
+		if talkedConvo[6] != 1; " \f[sup,1]NEW\f[sup,0]"
+	}  //6 : 10-20 minutes after why are you here
+
+	if unlockedConvo[7] == 1
+	{
+		"\n\![*]\q[What are you\, really?,aboutyourproject]"
+		if talkedConvo[7] != 1; " \f[sup,1]NEW\f[sup,0]"
+	}  //7 : 10-30 minutes after about TB
+
+	//After Conversations
+	if talkedConvo[7] == 1; "\n\n\f[align,center][ Thank you for playing.\ ]\n\f[align,left]"
+	else
+	{
+		"\n[150]\![*]\q[Say something,OnAiTalk]"
+		if LastTalk != ""; "\n\![*]\q[What did you say earlier?,OnLastTalk]"
+	}
+
+	//page two already requires the conversation 4 to be unlocked, no need to add 
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\_l[0,190]\_b[img\sep.png,inline,--option=use_self_alpha,--option=background]\q[Back,OnPromptPageOne]\_l[60]\q[Nevermind,blank]    \q[Options,OnShowOptions]"
+	else; "\n[150]\f[align,center]-----\n\q[Back,OnPromptPageOne] \q[Nevermind,blank] \q[Options,OnShowOptions]\f[align]"
+}
+
+//options menu
+OnShowOptions : all
+{
+	"\![no-autopause]"
+	"\b2\_qOptions"
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\n[150]\_b[img\sep.png,inline,--option=use_self_alpha]"
+		else; "\n[150]\f[align,center]-----\n[150]\f[align]"
+
+	//talk rate
+	"\![*]\q[Change talking frequency,OnTalkRateMenu]\n"
+	if glitchMode == 0; "\![*]\q[Unlock full visual glitching,unlockglitch]\n" //limit
+	elseif glitchMode == 1; "\![*]\q[Limit visual glitching,lockglitch]\n"
+	if noVibrate == 0; "\![*]\q[Disable vibration,lockvibro]\n[150]"
+	elseif noVibrate == 1; "\![*]\q[Enable vibration,unlockvibro]\n[150]"
+	"\![*]\q[Open SSP Preferences,sspconfig]\n[150]"
+	
+	"\f[italic,1][ Not recommended for first time play ]\f[italic,0]\n"
+	if lockUtilities == 1;"\![*]\q[Unlock right click menu utilities,unlockutil]\n"
+	else; "\![*]\q[Lock right click menu utilities,lockutil]\n"
+	if disableWaiting == 0;"\![*]\q[Disable wait for new conversations,disablewait]"
+	else; "\![*]\q[Enable wait for new topics,enablewait]"
+	
+	//unlock/lock utilities
+	//set glitching to advanced/limited
+	//enable/disable vibration
+	//disable waiting for new dialogue
+
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\_l[0,190]\_b[img\sep.png,inline,--option=use_self_alpha,--option=background]\q[Back,OnSakuraMenu]\_l[60]\q[Nevermind,blank]    "
+	else; "\n[150]\f[align,center]-----\n\q[Back,OnSakuraMenu] \q[Nevermind,blank] \f[align]"
+}
+
+Select.sspconfig
+{
+	"\![open,configurationdialog]"
+}
+
+Select.unlockutil
+{
+	lockUtilities = 0
+	"\![no-autopause]\_q\f[italic,1][ \f[bold,1]Warning:\f[bold,0] This option unlocks default SSP features that aren't part of the intended experience, and have no custom responses. If you don't need these features, it's adviced you keep them locked. ]\_q\f[italic,0]\x"
+	--
+	OnShowOptions
+}
+
+Select.lockutil
+{
+	lockUtilities = 1
+	OnShowOptions
+}
+
+
+Select.unlockglitch
+{
+	glitchMode = 1
+	OnShowOptions
+}
+
+Select.lockglitch
+{
+	glitchMode = 0
+	OnShowOptions
+}
+
+Select.unlockvibro
+{
+	noVibrate = 0
+	OnShowOptions
+}
+Select.lockvibro
+{
+	noVibrate = 1
+	OnShowOptions
+}
+
+Select.disablewait :all
+{
+	"\![no-autopause]"
+	"\_q\f[italic,1][ \f[bold,1]Warning:\f[bold,0] Not recommended for first-time experience. Conversations will get unlocked as soon as you finish the previous ones. Are you sure? ]\f[italic,0]\n[150]"
+		
+	"\![*]\q[Yes\, do as I say!,definitelydisablewait]\n"
+	"\![*]\q[No,OnShowOptions]"
+}
+
+Select.definitelydisablewait : all
+{
+	disableWaiting = 1
+	stageTimePaused = stageTime //saving for future reference...?
+	OnUnlockConvo //technically should immediately activate the next convo
+	checkUnreadConvo //check if we already have technically new unread convos
+	OnShowOptions
+}
+
+Select.enablewait
+{
+	disableWaiting = 0
+	stageTime = stageTimePaused
+	ERASEVAR('stageTimePaused')
+	OnShowOptions
+}
+
+OnLastTalk
+{
+	LastTalk
+}
+
+OnTalkRateMenu : all
+{	
+	//This is just setting up a label, you may need to add to it or tweak it if you change what rates are available
+	// _talkrate = "Off"
+	// if aitalkinterval == 30; _talkrate = "30 seconds"
+	// elseif aitalkinterval == 60; _talkrate = "1 minute"
+	// elseif aitalkinterval == 180; _talkrate = "3 minutes"
+	// elseif aitalkinterval == 300; _talkrate = "5 minutes"
+	// elseif aitalkinterval == 600; _talkrate = "10 minutes"
+
+	"\![no-autopause]"
+	"\b2\_qChange talking frequency"
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\n[150]\_b[img\sep.png,inline,--option=use_self_alpha]"
+		else; "\n[150]\f[align,center]-----\f[align]\n[150]"
+
+	"\0\s[0]\i[51]\i[50]\![set,autoscroll,disable]"
+	"Current frequency: %(aitalkspeed)\n\n"
+	
+	"\![*]\q[Off*,OnTalkRateChange,Off]\n"
+	"\![*]\q[Slow,OnTalkRateChange,Slow]\n"
+	"\![*]\q[Normal,OnTalkRateChange,Normal]\n"
+	"\![*]\q[Fast,OnTalkRateChange,Fast]\n[150]"
+
+	"\f[bold,1]* Disables story progression.\f[bold,0]"
+
+	if SHIORI3FW.BalloonName == "Aster Tooltip (Side ?)"; "\_l[0,190]\_b[img\sep.png,inline,--option=use_self_alpha,--option=background]\q[Back,OnShowOptions]\_l[60]\q[Nevermind,blank]"
+	else; "\n[150]\f[align,center]-----\n\q[Back,OnShowOptions] \q[Nevermind,blank]"
+
+	// "\n"
+	// "\![*]\q[Back,OnSakuraMenu]  \![*]\q[Nevermind,blank]"
+}
+
+OnTalkRateChange
+{
+	aitalkspeed = reference0
+	OnRandTalkInterval
+	--
+	OnTalkRateMenu
+}
+
+//just experiments rn
+OnTestDrop
+{
+	//okay so we first need to get our screen size. for that we will insert OnDisplayChange into our "other" file.
+	//then we will put our ghost intentionally out of bounds and move them to their default coordinates. the drop will be about 1 second, it's a very fast intentional drop into your machine
+	
+	cutscene = 1 //will be a cutscene variable. just to ensure certain cutscenes don't interfere during passive mode. they SHOULDN'T but without this it's unreliable
+
+	//that's it that's the animation. there is an issue of the ghost disagreeing with being put out of bounds! maybe passive mode will help
+
+	//goal coordinates: display width -  shell width + 100, display width - shell height + 100 \x\![leave,passivemode]
+	//maybe set these as default coordinates for the ghost itself
+
+	"\![enter,passivemode]\b[-1]\w8\![move,--X=%(displayWidth / 2 - (452/2)),--Y=-500,--time=0,--base=primaryscreen]\![move,--Y=-%(displayHeight / 2 + (528/2))),--time=1000,--base=primaryscreen,--base-offset=left.bottom]\b[1]I am in the middle of the screen.\![move,--X=65,--Y=-320,--time=1000,--base=primaryscreen,--base-offset=left.bottom] Hello.\![raise,OnEndCutscene]"
+	//"\![move,--X=%(displayWidth - 500),--Y=-500,--time=0,--base=primaryscreen]\_w[100]\![move,--X=%(displayWidth - 130),--Y=bottom,--time=1000,--base=primaryscreen]"
+}
+
+OnEndCutscene
+{
+	"\C\![leave,passivemode]"
+	cutscene = 0
+}
+
+
+
+// OnSpeechDemo
+// {
+// 	"\![set,balloonwait,4]\s[8]\i[7]\i[22]\w8\w8\w8\i[16]\i[8]Hm?\w8\w8 \![set,balloonwait,2]\s[7]\i[5]\i[8]Why, \![set,balloonwait,1]we're already done with my primary sprites or something? \s[3]\i[54]\i[58]Given the previous attempt lasted us 3 days or so, \s[5]\i[54]\i[65]we \![set,balloonwait,4]sure\![set,balloonwait,1] took our time!\N \s[4]\i[54]\i[55]Very well, \s[0]\i[62]\i[15]\i[7]I can safely say there's a reason for the effort. \i[3]Compared to\![set,balloonwait,4]\i[12]\i[5]\i[24]... \![set,balloonwait,1]\s[5]My \![set,balloonwait,2]components, \s[4]\![set,balloonwait,1]shall we say, \s[0]as of me speaking, \i[22]\i[57]I have 6\% more images to work with.\N \s[13]\i[15]\i[7]And we plan to throw in a few more for effect.\N \s[14]\i[50]\i[22]While we're all one and the same, \s[13]\i[52]\i[55]\i[61]\i[7]\i[15]I could easily tell you I'm just a little more advanced now. \s[17]\i[63]\i[65]Quite appropriate, timeskip and all!\N \s[12]And we've not done much actual code yet! \s[2]\i[54]\i[67]This is all just my lovely visuals!\N \s[6]\i[61]\i[62]\i[9]\i[16]Talk soon~!"
+// }
+
+// OnSimpleGlitch
+// {
+// 	"\s[3]\i[54]\i[58]\i[1]\i[6]Well...\w8 I wouldn't co\s[19]oooooooo\![set,balloonwait,0.1]\![embed,OnMojibake,300]\s[3]\i[6]\i[12]\i[24]\i[61]\i[59]\c\x\![set,balloonwait,1.5]\b0\_w[30].\w8.\w8.\w8\i[7]\i[1]\i[15]\i[68]\i[67]Sorry about that..."
+// }
+
+// OnFullGlitch
+// {
+// 	"\s[3]\i[54]\i[58]\i[1]\i[6]Well...\w8 I wouldn't co\s[20]oo\b4oo\b6ooo\b8\![set,balloonwait,0.1]\![embed,OnMojibake,350]\s[3]\i[6]\i[12]\i[24]\i[61]\i[59]\b0\c\x\![set,balloonwait,1.5]\_w[30].\w8.\w8.\w8\i[7]\i[1]\i[15]\i[68]\i[67]Sorry about that..."
+// }

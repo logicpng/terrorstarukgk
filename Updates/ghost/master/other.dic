@@ -1,0 +1,287 @@
+//todo: write simpler tags for balloon speed change (i.e. \![fast],\![slow],\![faster],\![slower])
+OnTranslate
+{
+	_talk = reference0
+	
+	//This is what makes %(embedded_elements) work in script input
+	if reference1 == "" && reference2 == "" //If this is from the input box
+	{ //send input box : no event (ref2) , no special flag (ref1)
+		_talk = EVAL('"' + REPLACE(_talk,'"','""') + '"')
+	}
+	
+	//If you want to add anything to OnTranslate, like text replacement, I would put it after this point, generally. Just make sure it's before the TOSTR(_talk)
+
+	TOSTR(_talk)
+}
+
+//Written by Zichqec https://ukagaka.zichqec.com/
+OnTranslateInternal.AutoPause
+{
+	_talk = _argv[0]
+	
+	if "\![no-autopause]" !_in_ _talk
+	{
+		/*
+		//Additional options if you want ellipsis to have little pauses between each dot. Personally, I think I want to do that manually, for when I want a particular flavor. If you want this, just uncomment it.
+		
+		_talk = REPLACE(_talk,"... ",".\w2.\w2.\w8 ") //Ellipsis
+		_talk = REPLACE(_talk,"..? ",".\w2.\w2?\w8 ") //Question mark + ellipsis
+		_talk = REPLACE(_talk,"..! ",".\w2.\w2!\w8 ") //Exclamation point + ellipsis
+		*/
+		
+		_talk = REPLACE(_talk,", ",",\w4 ") //Comma
+		_talk = REPLACE(_talk,". ",".\w8 ") //Period
+		_talk = REPLACE(_talk,"? ","?\w8 ") //Question mark
+		_talk = REPLACE(_talk,"! ","!\w8 ") //Exclamation point
+		//_talk = REPLACE(_talk,"- ","-\w8 ") //Dash - This one seems to happen a lot when I don't want it, so I am commenting it out
+		_talk = REPLACE(_talk,"\N ","\n[150]\w8\w8") //i do these a lot and they're not followed by spaces
+		_talk = REPLACE(_talk,"; ",";\w4 ") //Semicolon
+		_talk = REPLACE(_talk,": ",":\w4 ")
+	}
+	
+	_talk
+}
+
+//more accessible glitching. if Limited glitching is selected, calls for glitched balloons will be cancelled, and Aldebaran will glitch without flashing corrupted sprties, just wonky animations
+OnTranslateInternal.LimitGlitch
+{
+	_talk = _argv[0]
+
+	if glitchMode == 0
+	{
+		//al anims
+		_talk = REPLACE(_talk,"\s[20]","\s[19]")
+
+		//nuke balloons. ballon 0, 1, 2, 3 are "normal" for both sakura and kero
+		_talk = REPLACE(_talk,"\b4","")
+		_talk = REPLACE(_talk,"\b5","")
+		_talk = REPLACE(_talk,"\b6","")
+		_talk = REPLACE(_talk,"\b7","")
+		_talk = REPLACE(_talk,"\b8","")
+		_talk = REPLACE(_talk,"\b9","")
+		_talk = REPLACE(_talk,"\b[10]","")
+		_talk = REPLACE(_talk,"\b[11]","")
+		_talk = REPLACE(_talk,"\b[12]","")
+		_talk = REPLACE(_talk,"\b[13]","")
+		_talk = REPLACE(_talk,"\b[14]","")
+		_talk = REPLACE(_talk,"\b[15]","")
+		_talk = REPLACE(_talk,"\b[16]","")
+		_talk = REPLACE(_talk,"\b[17]","")
+		_talk = REPLACE(_talk,"\b[18]","")
+		_talk = REPLACE(_talk,"\b[19]","")
+	}
+
+	_talk 
+}
+
+OnTranslateInternal.LimitVibrate
+{
+	_talk = _argv[0]
+
+	if noVibrate == 1
+	{
+		_talk = REPLACE(_talk,"\i[98]","")
+		_talk = REPLACE(_talk,"\i[97]","")
+	}
+
+	_talk 
+}
+
+//simplify balloonwait into simple speed commands. mostly for ease of code
+OnTranslateInternal.SpeedControls
+{
+	_talk = _argv[0]
+
+	//al anims
+	_talk = REPLACE(_talk,"\![slowest]","\![set,balloonwait,8]")
+	_talk = REPLACE(_talk,"\![slower]","\![set,balloonwait,4]")
+	_talk = REPLACE(_talk,"\![slow]","\![set,balloonwait,2]")
+	_talk = REPLACE(_talk,"\![normal]","\![set,balloonwait,1]")
+	_talk = REPLACE(_talk,"\![fast]","\![set,balloonwait,0.6]")
+	_talk = REPLACE(_talk,"\![faster]","\![set,balloonwait,0.4]")
+	_talk = REPLACE(_talk,"\![fastest]","\![set,balloonwait,0.2]")
+
+	_talk 
+}
+
+//This bit of code is what makes menu options that don't start with On direct to Select.options instead. Remove or comment it if you prefer!
+OnChoiceSelect
+{
+    EVAL("Select.%(reference0)")
+}
+
+//This is just here so you can use anchors to link to websites if you want. You can link to websites with normal menu choice tags! If you do, a handy URL preview will show up in the balloon!
+OnAnchorSelect
+{
+	if "http://" _in_ reference0 || "https://" _in_ reference0; "\j[""%(reference0)""]"
+	elseif "On" !_in_ reference0; EVAL("Link.%(reference0)") //for "dictionary" responses, more in word.dic
+}
+
+//Hotkeys
+OnKeyPress
+{
+	if reference0 == "f1"; "\![open,readme]"
+	elseif checkDevMode == 1 //these are only really necessary for development i think
+	{
+		if reference0 == "t"; OnAiTalk 
+		elseif reference0 == "r"; OnLastTalk
+		elseif reference0 == "d"; "\![open,developer]" //i think this and reloading shiori doesn't even work without dev mode
+		elseif reference0 == "s"; "\![reload,shiori]" //i mean aster allows reloading the shell without dev mode so
+		elseif reference0 == "x"; "\![raise,OnTestLine]" //the dev check is mostly to disable this thing. i may forget to comment its contents out and i don't want to reuncomment it every single time
+	}
+}
+
+//Happens about 30 seconds after a script ends, by default, to bring them back to normal poses
+OnSurfaceRestore
+{
+	if hidden == 1 || petoverstim == 1 || conversation != "" || CHAIN.IDName == "ch_nap"; return
+	//if astWait != 1; "\1\s[-1]\0\s[0]"
+	"\1\s[-1]\0\![set,alpha,100]"
+	-- //idle animations??
+	if astListen == 1
+	{	
+		astIdleListen //listening idle animations
+	} 
+	elseif RAND(3) == 0 // 1 in 4 chance to change pose
+	{
+		astIdleStand
+		astIdleRecline
+		astIdleChesthover
+	} //otherwise keep it and play animation with the set pose
+	else
+	{
+		switch GetPose
+		{
+			astIdleStand //standing surfaces
+			astIdleRecline //reclining surfaces
+			astIdleChesthover //chesthover surface
+		}
+	}
+}
+
+//Happens when the ghost is unminimized. You *can* include dialogue, but you don't *have* to. I have included this event because if you don't, it defaults to \0\s[0]\1\s[10], which you don't want in some cases, such as if your ghost uses different surfaces or has a different number of characters.
+OnWindowStateRestore
+{
+	"\1\s[-1]\0"
+	--
+	if RAND(4) == 0; "%(astRestore)"
+	else
+	{
+		"\s[0]%(FadeIn)"
+		"\s[6]%(FadeIn)"
+		"\s[13]%(FadeIn)"
+		--
+		"\![raise,OnSurfaceRestore]" //raising an event helps end the time critical state set up in fade in
+	}
+}
+
+OnWindowStateMinimize
+{
+	"%(FadeOut)\s[-1]\![set,alpha,100]\w8\w8"
+	//...oh right having the shell actively move during minimization kills SSP. hiding the surface and restoring opacity should help. it weren't the pauses that saved aster per se it was rigel stopping shaking because enough time has passed lol
+}
+
+//for animation weirdness
+OnDisplayChange
+{
+	displayWidth = reference1
+	displayHeight = reference2
+}
+
+OnDisplayHandover
+{
+	if reference0 == "update"; hasMultiScreen = 1 //will impact like One random dialgoue
+}
+
+
+//—————————————————————————————— User pronoun related ——————————————————————————————
+
+they
+{
+	if SHIORI3FW.UserSex == "male"; "he"
+	elseif SHIORI3FW.UserSex == "female"; "she"
+	else; "they"
+}
+
+them
+{
+	if SHIORI3FW.UserSex == "male"; "him"
+	elseif SHIORI3FW.UserSex == "female"; "her"
+	else; "them"
+}
+
+their
+{
+	if SHIORI3FW.UserSex == "male"; "his"
+	elseif SHIORI3FW.UserSex == "female"; "her"
+	else; "their"
+}
+
+theirs
+{
+	if SHIORI3FW.UserSex == "male"; "his"
+	elseif SHIORI3FW.UserSex == "female"; "hers"
+	else; "theirs"
+}
+
+themself
+{
+	if SHIORI3FW.UserSex == "male"; "himself"
+	elseif SHIORI3FW.UserSex == "female"; "herself"
+	else; "themself"
+}
+
+//%(they) %(p('are','is'))
+//You can change the name of this function if you want! I kept it short so it's fast to type
+p
+{
+	if SHIORI3FW.UserSex == "undef"; _argv[0] //they are
+	else; _argv[1] //he is/she is
+}
+
+/*
+
+An example of the above setup:
+"%(they) %(p('were','was')) looking for that earlier, I'll ask if %(they)'%(p('ve','s')) found it."
+
+If using they, the %(p) functions will return the first word specified, resulting in:
+"they were looking for that earlier, I'll ask if they've found it."
+
+If not using they, for example if using she, it will return the second specified word instead, resulting in:
+"she was looking for that earlier, I'll ask if she's found it."
+
+With this function, you can quickly customize words that need to change based on whether it should be singular or plural. Just remember; the %(p) function is set up so that the first word you specify matches with the 'they' labels used on the pronoun functions. You can always switch that around if you like, too.
+
+*/
+
+//This just makes %(username) match with the username determined by the SSP prefs, rather than having to use the %username environment variable which is *not* the same and which you can't do things like TOUPPER to.
+//If you want to have the user be able to set a nickname or something, you may want to change username to a variable instead and get rid of this!
+username
+{
+	SHIORI3FW.UserName
+}
+
+//\![raise,OnTestLine]
+OnTestLine : all
+{ 
+		// _partOne = OUTPUTNUM('astRandomOne')
+		// _partTwo = OUTPUTNUM('astRandomTwo')
+
+		// _chance =  ((_partOne + _partTwo) / _partOne) + 1
+
+		// "%(_chance)"
+}
+
+//returns which set of surfaces aldebaran is currently in. needed for when we should keep a response to an event within the same position set, such as being petted
+GetPose
+{
+	//0 - Standing
+	//1 - Floating, reclining
+	//2 - Floating, cheststand 
+	case SHIORI3FW.LastSurface[0]
+	{
+		when 0-5, 19, 20; 0
+		when 6-12; 1
+		when 13-18; 2
+	}
+}

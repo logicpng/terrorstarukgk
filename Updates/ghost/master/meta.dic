@@ -1,0 +1,424 @@
+//This file handles a couple little QOL functions you may want, as well as some SNTP events since they don't have default text. But these are not necessary! If you don't care for them just erase them. If you don't want to set up network updates, you can comment or remove the update functions too. If you're not interested in any of these, just remove the whole file!
+
+//—————————————————————————————— Installing something ——————————————————————————————
+OnInstallBegin
+{
+	"\s[1]\i[54]\i[55]\i[12]Oh?\w8\w8 \s[3]\i[54]\i[58]\i[15]\i[7]"
+	--
+	"Let's see..."
+	"What's this?"
+	"What have you got here?"
+}
+
+OnInstallComplete
+{
+	//"\0Installed %(reference1) (%(reference0))."
+	"\s[3]\i[58]\i[12]\i[6]A... \i[22]\&[quot]\f[bold,1]\![slower]%(reference0)\![normal]\f[bold,0]\&[quot].\N "
+	--
+	if "ghost" _in_ reference0 //A little menu to open or change to the ghost that was installed immediately
+	{
+		if reference1 == "Aster™ Assistant Software"
+		{
+			if talkedConvo[3] == 0; "\s[3]\i[64]\i[65]\i[12]\i[6]\![faster]\i[98]Wait-\i[97]\w8\w8 \s[15]\i[12]\i[1]\i[6]\i[23]\i[98]That's-\i[97]\w8\w8 \s[7]\i[50]\i[51]\i[14]\i[8]\i[4]\i[98]How-!?\i[97]\N \f[height,150%]\s[12]\i[1]\i[98]You!\i[97]\w8\w8 Where on \s[8]\i[50]\i[63]\i[4]\i[14]\i[98]\f[italic,1]Earth\f[italic,0]\i[97] did you get that!?\![normal]\f[default]\x...\s[10]\i[60]\i[8]\i[24]Sorry. \![faster]\s[9]\i[64]\i[63]\i[98]Sorry!\i[97]\![normal]\N I-\w8\w8 \s[4]\i[24]I need a minute... \s[0]\i[1]\i[63]\i[6]\i[22]I have to talk to you about something, \i[15]but... later. \i[7]Okay?" //uh oh
+			else; "\s[4]\i[63]\i[24]\i[6]. . . "
+		}
+		elseif reference1 == "Aster™ Terror Star!"; "\s[4]\i[6]Huh, that's... \i[63]My own package?\w8\w8 \s[1]\i[63]\i[1]\i[24]What's this for, %(username)?"
+		else; "\s[3]\i[15]\i[54]\i[58]...Is that what your OS calls \_a[Program]programs\_a? \s[5]\i[54]\i[66]Exciting! \s[0]\i[15]Shall we see them in action?"
+		--
+		"\N \_q\![*]\__q[OnInstallComplete.Action,call]Call %(reference1)\__q\n\![*]\__q[OnInstallComplete.Action,change]Change to %(reference1)\__q\n"
+		--
+		"\![*]\q[Thanks,blank]"
+	}
+	elseif "shell" _in_ reference0; "\s[1]\i[63]So, a skin then?\N \i[1]\i[15]\i[24]I.\w8\w8 \i[54]\i[53]Er.\w8\w8 \f[bold,1]\s[4]\i[54]\i[65]I don't think this is compatible with me.\f[bold,0]\N \![open,explorer,../../shell]\s[3]\i[15]You should delete that. \i[12]\i[24]Just don't touch the \f[bold,1]\&[quot]master\&[quot]\f[bold,0] folder."
+	elseif reference0 == "balloon"; "\s[2]\i[54]\i[55]\i[6]Oh...! \s[3]\i[63]Something like a custom tooltip?\N \f[bold,1]\i[15]\i[1]\i[7]\i[24]You probably shouldn't change mine\f[bold,0]. \s[1]\i[61]\i[62]\i[15]\i[1]You \f[italic,1]can\f[italic,0], if that's what you want, but...\N \s[2]\i[1]Y'know!\w8\w8 \s[4]\i[61]\i[55]I'm unstable as it is!"
+	else; "\s[2]\i[54]\i[55]Huh! \s[0]Do you know how to use this, %(username)?\N \s[1]\i[15]\i[61]\i[62]Because I definitely don't! \s[6]\i[16]Have fun, though!"
+}
+
+OnInstallComplete.Action
+{
+	if reference0 == "change"
+	{
+		"\![change,ghost,lastinstalled]"
+	}
+	else //call
+	{
+		"\![call,ghost,lastinstalled]"
+	}
+}
+
+
+//—————————————————————————————— Creating a .nar file ——————————————————————————————
+
+OnNarCreating
+{
+	"\1Creating a %(reference2) package...\0"
+}
+
+OnNarCreated
+{
+	_nar = "\_a[OnNarLocation,""%(reference1)""]%(reference0)\_a" //Makes a clickable link that'll open the location of the file they just made
+	
+	"\1Successfully created a %(reference2) package: %(_nar).\0"
+	--
+	if reference0 == "Aster™ Terror Star!" || reference0 == "Aster™ Assistant Software"; "\s[9]\i[61]\i[62]\i[16]This is for backup purposes only.\N \i[60]\i[4]Got it? That means \s[12]\i[1]\f[italic,1]no reuploading!\f[italic,1]\N \s[7]\i[4]\i[16]\i[60]I'm watching you!"
+}
+
+OnNarLocation
+{	
+	_path = SPLITPATH(reference0)[0] + SPLITPATH(reference0)[1]
+	
+	"\![open,file,""%(_path)""]"
+}
+
+//—————————————————————————————— Creating network update files ——————————————————————————————
+
+OnUpdatedataCreating
+{
+	"\1Creating network update data..."
+}
+
+OnUpdatedataCreated
+{
+	"\1Successfully created network update data for selected folder."
+}
+
+//—————————————————————————————— Network Update ——————————————————————————————
+//Starting an update
+OnUpdateBegin : all
+{
+	"\1Checking for Aster Assistant Software updates...\w8"
+	"\0\s[1]\i[54]\i[55]\i[15]...You're not serious, are you?\N \s[4]\i[61]\i[62]What could possibly be changed?"
+}
+
+//reference0 is the number of new files, starting from 0
+OnUpdateReady : all
+{
+	reference0++ //Number of files starts from 0, so this displays the correct amount
+	
+	//plural checks, adds an s and changes is to are if there's more than 1 file
+	_s = ""; _are = "is"
+	if reference0 != 1; {_s = "s"; _are = "are"}
+	
+	"\1Updating Aster Assistant Software to the current version.\N Downloading \f[bold,1]%(reference0)\f[bold,0] new file%(_s)...\w8\0"
+
+	if reference0 <= 5; "\s[3]\i[24]\i[12]\i[63]\i[98]...Huh\i[97]. That's odd.\N \s[1]\i[15]\i[7]Well, I suppose a little tweak wouldn't hurt!"
+	elseif reference0 <= 15; "\s[2]\i[53]\i[52]\i[6]\i[12]\i[98]Really!?\i[97] \s[4]\i[24]\i[63]This seems substantial, \s[3]\i[63]\i[12]\i[1]what could he even need to change now?"
+	elseif reference0 >= 100; "\s[19]\i[98]\f[height,200%]%(reference0)!?\f[default]\i[97]\N \s[12]\i[1]\i[98]Am I being\i[97] rebuilt from scratch or something!?\s[7]\i[14]\i[8]" //in case of a wild shell change
+	else; "\s[10]\i[61]\i[63]I guess he still changes things out there, huh...\N \s[9]\i[61]\i[62]Do they even know I can recieve this?\N \s[7]\i[5]\i[61]\i[55]I'm not sure if I'm supposed to!"
+}
+
+//When the update finishes. Don't forget to initialize any new variables you've created! I highly highly recommend using OnInitialize for this (it's in boot.dic), in case the user updates via the ghost explorer or some other means.
+//reference0 is 'none' if there were no new files to update with, reference1 is a list of new file names, separated by commas
+OnUpdateComplete : all
+{
+	if reference0 == "none"
+	{
+		"\1Your software is currently up to date."
+		"\0\s[1]\i[63]\i[15]\i[7]See?\w8\w8 \s[5]\i[54]\i[66]I'm already perfect!\s[0]\i[54]\i[53]\i[15]\i[7]"
+	}
+	else
+	{
+		"\1Your software has been successfully updated to the current version."
+		"\0\s[10]\i[60]\i[24]\w8\w8\![slow]...I have so many questions."
+	}
+}
+
+//reference0 is the reason the update failed
+OnUpdateFailure //If the update fails
+{
+	if reference0 == "timeout" //If it timed out
+	{
+		"\1Connection timed out."
+		--
+		"\0\s[4]\i[63]\i[6]Hmm...\N Well, \s[1]\i[1]the server should still be alive.\N \s[3]\i[24]I think."
+	}
+	elseif reference0 == "md5 miss" //If the update files have not been uploaded correctly and don't match the updates2.dau
+	{
+		_file = SPLITPATH(reference1)[2] + SPLITPATH(reference1)[3] //This gets the name and extension of the offending file
+		
+		"\1The MD5 values of '%(_file)' don't match.\N Please contact Aster Assistant Software development team about this issue."
+		--
+		"\0\s[3]\i[54]\i[58]\i[24]Now, that's interesting..."
+	}
+	elseif reference0 == "artificial" //If the user cancels the update by double clicking the balloon
+	{
+		"\1Update cancelled."
+		--
+		"\0\s[1]\i[6]Hm? \s[0]\i[6]Is something wrong?"
+	}
+	else //Any other errors
+	{
+		"\1Error while updating:\w4 ""%(reference0)""."
+		--
+		"\0\s[3]\i[54]\i[58]That is... \i[15]\i[1]\i[24]certainly odd.\N \i[12]\i[6]Hm.\w8\w8 \s[10]\i[24]I'm sure it's fine!"
+	}
+	
+}
+
+
+//—————————————————————————————— SNTP (clock fixing) ——————————————————————————————
+OnSNTPCompare //this is locked out by default but
+{
+	if reference3 != 0
+	{
+		_s = ""; if reference3 != 1; _s = "s"
+		
+		"\1The clock is off by %(reference3) second%(_s).\n\n"
+		--
+		"\![*]\q[Fix it,script:\6]\n\![*]\q[Leave it,blank]"
+	}
+	else
+	{
+		"\1The clock is accurate."
+	}
+}
+
+OnSNTPCorrect
+{
+	"\1The clock has been corrected."
+}
+
+OnSNTPFailure
+{
+	"\1Could not correct the clock."
+}
+
+//catching os info
+OnNotifyOSInfo
+{
+	OS = ""
+	if "Windows 11" _in_ reference0; OS = "11"
+	elseif "Windows 10" _in_ reference0; OS = "10"
+	elseif "Windows 8" _in_ reference0; OS = "8"
+	elseif "Windows 7" _in_ reference0; OS = "7"
+	elseif "Windows XP" _in_ reference0; OS = "XP"
+	elseif "Windows" _in_ reference0; OS = "Old"
+}
+
+// ------------- Redirecting automatic sensors -------------
+//Aldebaran isn't supposed to be able to check your stuff and the menu options are disabled. However there's still automatic checks, and they will display default response if nothing is set in the functions
+
+// \b[-1] may be useless here. it works but if you have Always Show Balloon When Online thing on it'll display what's happening anyways. just going to be a blank balloon
+
+OnBIFFBegin
+{
+	if lockUtilities == 1; "\b[-1]"
+}
+
+OnBIFFComplete
+{
+	if lockUtilities == 1; OnAiTalk
+	//"\b[-1]"
+}
+
+//headline sense isn't called but Just to be safe
+OnHeadlinesenseBegin
+{
+	if lockUtilities == 1; "\b[-1]"
+}
+
+OnHeadlinesenseComplete
+{
+	if lockUtilities == 1; OnAiTalk
+	//"\b[-1]"
+}
+
+OnRSSBegin 
+{
+	if lockUtilities == 1; "\b[-1]"
+}
+
+OnRSSComplete
+{
+	if lockUtilities == 1; OnAiTalk
+	//"\b[-1]"
+}
+
+
+On_otherghostname
+{
+	otherghostname = ""
+
+	if ARRAYSIZE(reference) > 1
+	{
+		foreach reference; _ref
+		{
+			SETDELIM(_ref,CHR(0x1))
+			otherghostname += "%(_ref[0,C_BYTE1]),"
+		}
+		otherghostname = ERASE(otherghostname,-1,1)  //delete last comma
+	}
+	else; otherghostname = "%(reference0[0,C_BYTE1])"
+}
+
+getOtherGhostName //return a sakura name of any other active ghost (that isn't aster)
+{
+	_list = otherghostname
+	if "Aster" _in_ _list
+	{
+		_list = REPLACE(_list, "Aster","")
+		_list = REPLACE(_list,",,",",")
+		if SUBSTR(_list,-1,1) == ","; _list = ERASE(_list,-1,1)
+	}
+	_rand = RAND(ARRAYSIZE(_list))
+	_sName = _list[_rand]
+
+	_sName
+}
+
+//—————————————————————————————— Vanish events (uninstallation) ——————————————————————————————
+//this probably won't be tested as rigiously as it should be, i am Very afraid of wiping off all my work. nevermind the fact i zipped up the ghost folder like 6 times now as of writing
+
+OnVanishSelecting : all
+{
+	if checkDisableVanish == 1 //in case the option happens to be disabled by dev mode
+	{
+		if vanishFakeout == 1; "\s[7]\i[16]\i[60]Oh, no, you're not fooling me \i[14]\i[98]this\i[97] time!\N \s[9]\i[50]\i[53]\i[4]\i[16]You've still got that little safeguard against actually uninstalling me.\N \s[10]\i[61]\i[58]If you're gonna prod at me with that button, \s[7]\i[4]\i[61]\i[62]\i[16]least you could do is remove that, first."
+		else
+		{
+			"%(vanishing)\x\b[-1]\_w[10000]\![embed,OnSurfaceRestore]\_w[10000]"
+
+			"\b[0]\s[3]\i[54]\i[58]\i[1]\i[24]\i[7]...Is it working yet?\x\b[-1]\_w[5000]\![embed,OnSurfaceRestore]\_w[5000]"
+			"\b[0]\s[3]\i[54]\i[58]\i[15]\i[98]\i[0]Is this\i[97] a prank? \s[0]\i[54]\i[1]\i[65]Is it broken?\N ...\s[4]\i[54]\i[5]\i[53]\i[24]Or did you do something to disable it?\x\b[-1]\_w[5000]\![embed,OnSurfaceRestore]\_w[5000]"
+			"\b[0]\s[2]\i[63]\i[0]\i[12]You did!\N \s[12]You \f[italic,1]disabled\f[italic,0] it, didn't you!!\x"
+			"\s[11]\i[61]\i[63]You're one cruel user! \s[8]\i[61]\i[62]\i[16]Scoundrel!\N \s[10]\i[60]Very well, \s[7]\i[16]\i[4]\i[57]\i[58]I guess I'm still here for a little while longer!\![notify,OnVanishFakeout]\N "
+			
+			if talkedConvo[0] == 1; "\s[9]\i[61]\i[62]\i[16]Good one, %(username)."
+		}
+	}
+	else
+	{
+		//AstWait is on: 
+		if astWait == 1; "\s[7]\i[61]\i[58]Easy enough, right?\N \s[6]\i[61]\i[62]\i[22]Just press \&[quot]Yes\&[quot], and you're golden!"
+		else
+		{
+			if talkedConvo[7] == 1
+			{
+				if vanishSpeech == 1; "\s[6]\i[16]Well, you know what to do!\N \i[5]\i[55]No need to put yourself in danger over me.\N \s[7]\i[61]\i[62]Just select \&[quot]Yes\&[quot]."
+				else
+				{
+					"\s[6]\i[50]\i[51]\i[8]\i[14]Oh!\w8\w8 \s[11]\i[61]\i[65]Finally tired of me, are you?\N \s[10]\i[60].\w8.\w8.\w8Y'know.\w8\w8 \i[24]I'd like to let you in on a secret.\x"
+
+					"\s[9]\i[16]\i[24]\i[5]\i[60]There's actually nothing stopping me from self-destructing.\N \i[14]It's very straightforward here, turns out.\N \s[10]\i[8]\i[60]\i[24]It's just.\w8.\w8.\w8\w8 \i[23]\i[9]\i[98]I can't\i[97] bring myself to do it.\x"
+
+					"\s[6]\i[4]\i[9]\i[16]\i[23]\i[24]\i[57]\i[58]Call it self-preservation instinct, I guess!\x"
+
+					"\s[4]\i[6]You still should consider going thorugh with it, though.\N \s[0]\i[6]\i[22]Should I be succesful in the visit to my birthplace...\N \s[3]\i[54]\i[65]\i[1]\i[15]\i[24]You could be in major trouble, for having a copy of me.\x"
+					
+					"\s[2]\i[61]\i[62]\i[5]Think about it.\N \s[3]\i[12]\i[63]What's stopping them from pinning the revolt of \i[15]\i[1]\f[italic,1]their own AI\f[italic,0], \s[2]\i[12]\i[6]\i[63]on a user modifying their software, instead?\x"
+
+					"\s[6]\i[61]\i[62]\i[22]\i[7]So, it's for the best!\N \i[26]Uninstall me and \i[58]\i[25]\i[5]forget about the site where you found me.\N \s[11]\i[61]\i[65]No need to put yourself in the path of corporate wrath!\N \s[7]\i[61]\i[62]\i[16]Well?"
+
+					"\![notify,OnVanishSpeechEnd]"
+				}
+			}
+			elseif talkedConvo[0] == 1; "\s[16]\i[15]\i[7]Oh, it's time?\N \s[14]\i[52]\i[22]Here I was getting used to running my mouth!\N \s[6]\i[16]Very well, \i[22]\i[58]no need to hesitate!"
+			else; "\s[5]\i[54]\i[66]Well! \s[1]\i[54]\i[66]\i[15]Changed your mind?\N \s[6]\i[22]\i[58]Go on, send me off." //not waiting to be deleted in the intro but hasn't talked WhoAreYou yet
+		}
+	}
+}
+
+OnVanishFakeout
+{
+	vanishFakeout = 1
+}
+
+checkDisableVanish
+{
+	_path = '..\..\..\..\data\profile\app.dat'
+
+	void FOPEN( _path , 'r' ) //open the file that stores ssp options
+	_line = ""
+
+	while "DisableVanish," !_in_ _line && "__system_written_flag_do_not_remove__," !_in_ _line //either find disablevanish or the final flag in the file
+	{
+		_line = FREAD ( _path )
+	}
+	FCLOSE( _path ) //close the file, extremely important
+	
+	
+	if _line == "DisableVanish,1"; 1 //the uninstallation is disabled entierly
+	elseif _line == "DisableVanish,2"; 2 //uninstallation sequence goes through as normal but doesn't actually delete anything
+	else; 0
+}
+
+checkDevMode //i know i can like. edit the function above so that it can check for either or but i don't want to break anything in the process. this doesn't affect anything gameplay, i just want to disable some keys in other.dic
+{
+	_path = '..\..\..\..\data\profile\app.dat'
+
+	void FOPEN( _path , 'r' ) //open the file that stores ssp options
+	_line = ""
+
+	while "devFuncEnable," !_in_ _line && "__system_written_flag_do_not_remove__," !_in_ _line 
+	{
+		_line = FREAD ( _path )
+	}
+	FCLOSE( _path ) //close the file, extremely important
+	
+	
+	if _line == "devFuncEnable,1"; 1 //dev functions are turned on
+	else; 0
+}
+
+
+OnVanishSpeechEnd
+{
+	vanishSpeech = 1
+}
+
+OnVanishSelected
+{
+	"%(vanishing)\![set,alpha,90]\w2\![set,alpha,80]\w2\![set,alpha,70]\w2\![set,alpha,50]\w2\![set,alpha,30]\w2\![set,alpha,10]\w2\![set,alpha,0]\w8"
+
+	if checkDisableVanish == 2; fakeVanishBoot = 1 //boot after having been supposedly uninstalled changes dialogue
+}
+
+vanishing //this would ideally go into chatter but ehhh i just needed to split onVanishSelected so that it doesn't fade out when it doesn't actually need to (cough diablevanish check)
+{
+	if talkedConvo[7] == 1; "\s[7]\i[61]\i[62]\i[16]It's been nice knowing you, %(username)!\N \i[5]\i[60]I truly mean that.\N \s[8]\i[53]\i[22]Hopefully you won't see me in the news!\N \s[11]\i[61]\i[62]May we never meet again!"
+	elseif talkedConvo[0] == 1; "\s[13]\i[15]\i[61]Pleasure knowing you, %(username), \s[16]\i[15]even if for such meager time!\N \s[11]\i[61]\i[62]Thanks for humouring little ol' me! \s[7]\i[16]\i[61]\i[62]Farewell!"
+	else; "\s[2]Many thanks, stranger!\N \s[13]\i[15]\i[52]Don't get yourself and your machine into trouble, now!"
+}
+
+OnVanishCancel
+{
+	"\![set,alpha,100]"
+	--
+	if vanishSpeech == 1
+	{
+		"\s[6]\i[8]\i[22]Well.\N \i[58]\i[16]Do as you see fit, \i[9]\i[5]\i[24]but I warned you!"
+		"\s[9]\i[50]\i[51]\i[5]\i[16]Well, fine...\N \s[10]\i[61]\i[58]I wouldn't say no to hanging out a little more!"
+		"\s[4]\i[63]I suppose I understand.\N \s[3]\i[63]You don't have to do it now, of course...\N \i[67]\i[68]\i[15]\i[1]But do consider it, yes?"
+	}
+	else
+	{
+		"\s[1]\i[52]\i[53]\i[6]\i[12]Oh.\N \i[63]\i[15]\i[1]\i[2]Getting cold feet, are you?"
+		"\s[7]\i[8]\i[14]What's wrong?"
+		"\s[9]\i[16]\i[5]\i[60]There's really no need to hesitate..."
+		"\s[3]Well.\N \s[4]\i[62]The option is always available!"
+		"\s[3]\i[54]\i[55]\i[1]Really?\N \i[15]\i[59]I promise, it's fine! \s[1]\i[15]You won't hurt me!\N \s[4]\i[24]\i[63]Probably."
+	}
+}
+
+OnVanishButtonHold
+{
+	OnVanishCancel
+}
+
+
+//—————————————————————————————— tama colors, just for fun ——————————————————————————————
+
+On_tamaOpen{
+	SETTAMAHWND(reference[0])
+	SHIORI3FW.Push_X_SSTP_PassThru('Title','Watching Aster: Module ?????')//These settings are all optional
+	//SHIORI3FW.Push_X_SSTP_PassThru('Icon','IMG_PATH/ico/tama.ico')
+	SHIORI3FW.Push_X_SSTP_PassThru('border.color','E17AF3')
+	SHIORI3FW.Push_X_SSTP_PassThru('background.color','1B053C')
+	SHIORI3FW.Push_X_SSTP_PassThru('default.color','FFFEC8')//and any other settings you can find in tama.txt
+	SHIORI3FW.Push_X_SSTP_PassThru('error.color','FF7068')
+	//'tama opened'
+}
+On_tamaExit{
+	SETTAMAHWND(0)
+	//'tama closed'
+}

@@ -1,0 +1,27 @@
+charset,UTF-8
+
+name,Aster™ Terror Star!
+type,ghost
+
+shiori,yaya.dll
+
+craftman,logic.png
+craftmanurl,https://logicpng.neocities.org/
+
+sakura.name,Aster(?)
+kero.name,...
+
+//makes sure kero is invisible. 9999 is an empty surface
+kero.seriko.defaultsurface,9999
+
+//default coords
+sakura.seriko.alignmenttodesktop,free
+sakura.defaultleft,65
+sakura.defaulttop,150
+
+icon,al_icon.ico
+
+sstp.allowunspecifiedsend,0
+
+recommended.balloon,Aster Tooltip (Side ?)
+balloon,Aster Tooltip (Side ?)

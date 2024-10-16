@@ -1,0 +1,337 @@
+//AITALK.DIC - dictionary for randomtalk mechanics. actual dialogue is in chatter.dic, and conversations called from the menu or consisting of many parts are in convo.dic
+
+OnAiTalk
+{
+	if soundMode == 1 || petoverstim == 1 || conversation != ""; return //don't talk during sound playback or when overwhelmed from petting; also if currently in conversation with aster
+	--
+	OnRandTalkInterval //pick next randomtalk interval. there are no static times 
+	--
+	if astWait == 1 && delWait < 5; astDelWait //"waiting" post-into stage, aldebaran expecting you to delete him
+	elseif delWait >= 5 && astWait == 1; astStickAround //aldebaran gives up on waiting and after that "normal" operation begins
+	elseif astWait == 0 //said normal operation
+	{
+		LastTalk = "" //start the empty last talk
+		if hidden == 1 && CHAIN.IDName != "ch_walk"; LastTalk += "%(FadeIn)" //return the boy if somehow the walk chain gets interrupted. this Has Happened
+		OnUnlockConvo //unlock conversation check, appends lastTalk with the notification bind if a new conversation gets unlocked
+		if CHAIN.IDName == "" //not chain talk
+		{
+			LastTalk += RandomTalk //append a random line. it used to be after this but that killed the chains
+		}
+		else //chain talk
+		{
+			LastTalk += ChainTalk //append a chain talk line
+		}
+		LastTalk //return the resulting last talk
+		stageTime = stageTime + aitalkinterval //adding onto the timer for next unlocks. needless to say if you don't allow aldebaran to talk at all nothing gets added
+	}	
+}
+
+//change talk intervals
+//maybe tweak the times...? they seem uneven when slow or fast
+OnRandTalkInterval
+{
+	_rand = RAND(5)
+
+	case _rand
+	{
+		when 0; aitalkinterval = 60 //1min
+		when 1; aitalkinterval = 90 //1.5min
+		when 2; aitalkinterval = 120 //2min
+		when 3; aitalkinterval = 180 //3min
+		when 4; aitalkinterval = 240 //4min
+	}
+
+	if aitalkspeed == "Off"; aitalkinterval = 0
+	//elseif aitalkspeed == "Slow"; aitalkinterval = aitalkinterval + (aitalkinterval /2)
+	//elseif aitalkspeed == "Fast"; aitalkinterval = aitalkinterval - (aitalkinterval /2)
+	elseif aitalkspeed == "Slow"; aitalkinterval = aitalkinterval * 2 //2min - 8min
+	elseif aitalkspeed == "Fast"; aitalkinterval = aitalkinterval / 2 //30sec - 2min
+}
+
+//the function that will actually Do the unlocking over time
+//for NOW the waiting period on all conversations is 15 minutes. i will have to test that and ask people to actually beta test on what feels better. rn i don't have the content to back any kind of wait
+OnUnlockConvo
+{
+	//
+	if disableWaiting == 1; stageTime = 9999
+
+	if unlockedConvo[1] != 1 //why are you here //is the second topic unlocked yet?
+	{
+		if talkedConvo[0] == 1 && stageTime >= 900 //if not, did we talk about the first topic, and did 15 minutes pass?
+		{
+			unlockedConvo[1] = 1 //if so, unlock second topic
+			LastTalk += "\![bind,Notif,New,1]" //and add binding the dressup for the thing that will be said soon
+		} 
+	}
+	elseif unlockedConvo[2] != 1 //where are you from //and then proceed with checking the same with third topic and so on
+	{
+		if talkedConvo[1] == 1 && stageTime >= 900
+		{
+			unlockedConvo[2] = 1
+			LastTalk += "\![bind,Notif,New,1]"
+		} 
+	}
+	elseif unlockedConvo[4] != 1 //About CaelOS. 3 is optional and unlocked through a different check so it's skipped
+	{
+		if talkedConvo[2] == 1 && stageTime >= 900;
+		{
+			unlockedConvo[4] = 1
+			LastTalk += "\![bind,Notif,New,1]"
+		} 
+	}
+	elseif unlockedConvo[5] != 1 //About your user
+	{
+		if talkedConvo[4] == 1 && stageTime >= 900
+		{
+			unlockedConvo[5] = 1
+			LastTalk += "\![bind,Notif,New,1]"
+		} 
+	}
+	elseif unlockedConvo[6] != 1 //About Terrabyte
+	{
+		if talkedConvo[5] == 1 && stageTime >= 900
+		{
+			unlockedConvo[6] = 1
+			LastTalk += "\![bind,Notif,New,1]"
+		} 
+	}
+	elseif unlockedConvo[7] != 1 //About your project
+	{
+		if talkedConvo[6] == 1 && stageTime >= 900
+		{
+			unlockedConvo[7] = 1
+			LastTalk += "\![bind,Notif,New,1]"
+		} 
+	}
+}
+
+RandomTalk : nonoverlap_pool
+{
+	if talkedConvo[7] == 1 //final convo: What Are You?
+	{
+		//possibly making the formula very weird but this is on the off chance i add dialogue before release that may make these pools uneven
+		//i will Probably not add any new dialogue post-release, only change things that don't work correctly but i have some aughost drafts left as of writing
+		//and therefore reducing these to static 1/2 or 1/3 may be inaccurate
+		//this may not be very accurate either because the math is done in integers. but i think with the pools being relatively even it does the trick
+
+		_partOne = OUTPUTNUM('astRandomOne')
+		_partTwo = OUTPUTNUM('astRandomTwo')
+		_partThree = OUTPUTNUM('astRandomThree')
+
+		_chanceOne =  ((_partOne + _partTwo + _partThree) / _partOne) + 1
+		_chanceTwo = ((_partTwo + _partThree) / _partTwo) + 1 //not using partOne since it's not chosen in this case
+
+		if RAND(_chanceOne) == 0; astRandomOne //with even pools becomes 1/3
+		elseif RAND(_chanceTwo) == 0; astRandomTwo //with even pools becomes 1/2
+		else; astRandomThree
+	}
+	elseif talkedConvo[3] == 1 //fourth convo: About CaelOS
+	{
+		_partOne = OUTPUTNUM('astRandomOne')
+		_partTwo = OUTPUTNUM('astRandomTwo')
+
+		_chance =  ((_partOne + _partTwo) / _partOne) + 1
+
+		if RAND(_chance) == 0; astRandomOne
+		else; astRandomTwo
+	}
+	else; astRandomOne //Who are you? / Why are you here? / Whrere are you from? (+ About AAS)
+}
+
+
+
+OnSecondChange
+{
+	if soundMode == 1 //currently playing sound
+	{
+		soundSince = GETSECCOUNT - soundStart //how many seconds have passed?
+		if soundSince == 5
+		{
+			astListen = 1 //modifies behavior when double clicking
+			if !BalloonIsOpen; OnSurfaceRestore //will lead into listening idle anim if no balloon shows, in other.dic
+		}
+	}
+	else
+	{
+		//code taken from Xander's Refuge by Zichqec with permission
+		//A little bit of custom code to make him do surface restore randomly between dialogues, to make him a little more lively
+		_since = GETSECCOUNT - SHIORI3FW.TalkEndTime
+	
+		//Every 15 seconds
+		if _since % 20 == 0 && !BalloonIsOpen
+		{
+			if RAND(4) == 0; OnSurfaceRestore
+		}
+	}
+	--
+	//if you're holding a mouse button over one of his hands. quite literally handholding
+	if handhold != ""
+	{
+		diffHandhold = GETSECCOUNT - handhold //get current time
+		
+		//if !BalloonIsOpen
+		//{
+			case diffHandhold
+			{
+				when 3
+				{					
+					case GetPose
+					{
+						when 0-1; "\i[23]"
+						when 2; "\i[24]"
+					}				
+				}
+				when 8
+				{
+					astHandHold
+				}
+			}
+		//}		
+	}
+	--
+	//petting counter reset
+	if petprogress != 0
+	{
+		diffPettime = GETSECCOUNT - pettime //how much time has passed since last being petted?
+
+		//if (diffPettime % 10 == 0) && (diffPettime != 0); petprogress = petprogress - 2 //every ten seconds go back two steps???
+		//if petprogress < 0; petprogress = 0 // don't let the counter become negative, it'll just go on forever
+		if diffPettime == 30; petprogress = 0
+	}
+	--
+	//al got petted too much and glitched out
+	if petoverstim == 1 && petprogress == 0
+	{
+		ERASEVAR('petoverstim')
+		astPetAfter
+	}
+}
+
+//code inspired by Xander's Refuge by Zichqec with permission
+//As the name implies, this checks if the balloon is currently open or not.
+//Will be 0 if the balloon is not open, and 1 if the balloon is open
+BalloonIsOpen
+{
+	//"balloon" _in_ var.req.value[ASEARCH("Status",var.req.key)]
+	"balloon" _in_ status
+
+	//accidentally discovered a much shorter way of doing this
+}
+
+////////////////////////////
+
+OnAstWaitStart //start sequence where al patiently waits for you to delete him at the beginning
+{
+	astWait = 1 //start OnAstWait. this modifes our OnAiTalk
+	delWait = 0 // wait timer
+}
+
+CheckAster //checks whether you have Aster Assistant Software installed. it's my previous ukagaka project and involves the same character(s) from a previous point of time
+{
+	if ASEARCH("Aster™ Assistant Software",installedghostlist) != -1; 1
+	else; 0
+}
+//To check whether Aster is Currently Running instead i can use SHIORI3FW.IsGhostExist('Aster')
+
+FadeOut //hide character
+{
+	hidden = 1
+	"\t\![set,alpha,90]\w1\![set,alpha,80]\w1\![set,alpha,70]\w1\![set,alpha,50]\w1\![set,alpha,30]\w1\![set,alpha,10]\w1\![set,alpha,0]"
+}
+
+FadeIn //return character
+{
+	//hidden = 0
+	ERASEVAR('hidden')
+	--
+	"\t\![set,alpha,20]\w1\![set,alpha,50]\w1\![set,alpha,90]\w1\![set,alpha,100]\w8\w8"
+}
+
+//generate garbage text
+OnMojibake
+{
+	_symb = 0
+	if reference0 != ""; _symb = reference0
+	else; _symb = 10
+	_moji = ""
+
+	_i = 0
+	for _i = 0; _i < _symb; _i++
+	{
+		//_moji += "\_u[%(RAND(3000) + 20)]"
+		_moji += "\_m[%(RAND(255))]" //unicode garbage didn't look very uniform (haha), so the garbage is ascii symbols instead. i definitely Didn't pick that up from corru.observer
+	}
+	--
+	"%(_moji)"
+}
+
+// ----------- LONGER CONVERSATION RELATED MECHANICS ---------------
+
+//because all these commented out functions (in convo.dic) were Stupidly Redundant. why didn't i do it this way to begin with
+//sets up conditions for new unlocks
+OnConvoEnd
+{
+	if reference0 != 7 && reference0 != 3
+	{
+		if talkedConvo[reference0] != 1 
+		{
+			talkedConvo[reference0] = 1
+			postNewConvo
+		}
+	}
+	else; talkedConvo[reference0] = 1
+	--
+	checkUnreadConvo
+	--
+	OnSakuraMenu
+}
+
+//resets stage waiting time or unlocks the next topic if such an option is set. additionally checks if there's still unread convos to reenable the dressup if needed. this shouldn't really happen but just to be safe
+postNewConvo
+{
+	if disableWaiting == 1
+	{
+		stageTimePause = 0
+		OnUnlockConvo
+	}
+	else; stageTime = 0
+}
+
+//put on the notification dressup if there's an unlocked conversation that was not yet read (aside from the opt topic), and take it off if there is nothing new
+checkUnreadConvo
+{
+	_i = 0
+	_a = 0
+	//for _i from 0 to 7
+	for _i = 0; _i < 8; _i++
+	{
+		if _i == 3; _i++ //skipping bonus topic
+		if talkedConvo[_i] == 0 && unlockedConvo[_i] == 1; _a++
+	}
+	if _a > 0; "\![bind,Notif,New,1]"
+	else; "\![bind,Notif,New,0]"
+}
+
+//we only have one dressup item for functional purposes. the variable notifNew will inform some behavior, like greeting in sakura menu. if it's off we don't really need it, so we can erase it
+OnNotifyDressupInfo 
+{
+	if "1" _in_ reference0; notifNew = 1
+	else; ERASEVAR('notifNew')
+} 
+
+User //references to Urs
+{ 
+	"\f[color,#D43E7B]\f[bold,1]"
+	--
+	if talkedConvo[5] == 1;
+	{
+		
+		"friend"
+		"dear friend"
+		"best friend"
+		"only friend"
+	}
+	else; "user"
+	--
+	"\f[default]"
+}

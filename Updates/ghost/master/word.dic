@@ -1,0 +1,114 @@
+//This dictionary file is Intended for lists of words to use in dialogue, but i'm repurposing it for 
+//such as:
+
+Link.Kernel
+{
+	 "\s[6]\i[61]\i[62]\i[14]\i[8]\![slower]Hmm? \![normal]\s[7]\i[58]\i[5]You know, the kernel?\N \i[52]\i[14]\i[7]Without it you wouldn't be able to get your computer to do anything. \s[10]\i[52]\i[62]You ask your \_a[Program]programs\_a to do something, \i[61]\i[53]they ask the kernel, \s[6]\i[57]\i[53]\i[8]\i[22]and the kernel talks to your machine itself to get it done.\N \s[6]\i[50]\i[58]\i[9]\i[16]And everybody's happy!\x\s[3]\i[54]\i[55]Yours is... \i[58]more \f[italic,1]complex\f[italic,0] than what I've seen before.\N \s[1]\i[54]\i[5]\i[22]\i[55]Same massive sphere, \i[59]but there seems to be another layer to it.\N \s[0]Still, \i[60]\i[22]very important to keep protected. \s[6]\i[9]\i[16]But that's up to you, \i[7]\i[22]and the rest of your OS."
+}
+
+Link.Rickroll
+{
+	rickrolled = 1;
+	
+	"\b[-1]\j["
+	--
+	"https://www.youtube.com/watch?v=dQw4w9WgXcQ" //og never gonna give you up
+	"https://www.youtube.com/watch?v=y6120QOlsfU" //darude sandstorm
+	"https://www.youtube.com/watch?v=2yJgwwDcgV8" //nyan cat
+	"https://www.youtube.com/watch?v=6-8E4Nirh9s" //caramelldansen
+	"https://www.youtube.com/watch?v=FFWsBApxt_c" //rickroll chiptune
+	"https://www.youtube.com/watch?v=YxjY_YTksKM" //medieval cover
+	"https://www.youtube.com/watch?v=G8iEMVr7GFg" //otomatone cover
+	"https://www.youtube.com/watch?v=ycHVUvvOwzY" //maxwell :) i was going to use a thurston rickroll cover but i feel like maybe i don't want users to find out through Al he's passed on :(
+	--
+	"]\_w[5000]\b1\s[11]\i[61]\i[65]\![slower]Ahahaha~\N \![normal]\s[6]\i[61]\i[65]Prank as old as time, isn't it?\N \s[7]\i[61]\i[62]\i[9]\i[16]Oh, come on, \i[57]\i[58]it's a good song, \i[25]\i[26]you have to admit that much!"
+}
+
+Link.Translator
+{
+	"\s[1]\i[52]\i[55]\i[5]\i[12]...What? \i[56]\i[15]\i[7]Sometimes even I need tools made for human users!\N \s[4]\i[54]\i[55]I'd imagine translation tools weren't exactly a priority, when figuring out how to make my personality work."
+}
+
+//unformatted!
+Link.DrivePart : all
+{
+	"\s[1]By drive here, \i[62]\i[15]I mean anything you can use to store your data.\N \s[0]\i[56]\i[59]Your machine here has one, \i[57]a hard disk or solid state drive, \s[1]\i[61]\i[62]and you can connect more to it!\x"
+
+	"\s[2]\i[54]\i[57]You can split the space on a drive into parts, \i[55]if you need to.\N \s[0]\i[54]\i[55]\i[5]\i[22]Say you want to split the space into three parts, \i[57]maybe one will be just for system files, \i[59]another for games, \i[62]and third for music. \s[0]These parts are called\n\f[bold,1]partitions\f[bold,0].\x"
+
+	"\s[0]\i[5]\i[22]The system sees them as three separate drives, \i[2]\i[15]\i[57]but in reality it's just one device!\N \s[4]There's just a little table somewhere telling your computer what part is what.\N \s[1]\i[61]\i[62]\i[15]\i[7]A little computer magic from me to you."
+}
+
+Link.RootDir :all
+{
+	"\s[3]\i[54]\i[58]\i[6]Umm... \s[4]\i[54]\i[53]\i[6]How should I explain this.\N "
+
+	"\s[3]\i[54]\i[55]\i[0]\i[22]\i[24]\![slow]It's... \![normal]\s[1]\s[1]\i[54]\i[57]\i[12]\i[98]like the root\i[97] of an upside down tree!\N \s[0]\i[15]When you open contents of a \_a[DrivePart]drive\_a, \i[3]\i[61]you first see the \f[bold,1]root\f[bold,0] \_a[Directory]directory\_a of it. \s[1]\i[52]\i[62]From there you can go down its trunk, and explore the drive's files and folders.\x"
+
+	"\s[0]\i[63]\i[15]For example, \i[22]if you open your local disk, \i[54]\i[57]you'll see the path to it is just C:/.\N \s[1]\i[54]\i[57]That's the root of your drive. \s[0]You can go anywhere \f[italic,1]from\f[italic,0] it, \i[5]but you can't go a level up. \i[22]You'll only have to select a different drive to explore.\x"
+
+	"\s[4]\i[54]\i[53]Where I'm from, \s[2]\i[54]\i[53]the root path looks a little different.\N \s[0]\i[57]It's just /, \i[68]a single slash! \s[5]Nice and simple. \s[0]\i[15]"
+}
+
+Link.Directory
+{
+	"\s[6]\i[7]\i[16]Ah,\w8\w8 \i[22]\i[52]just think \&[quot]folder\&[quot]. \s[6]A directory is simply a more accurate word for it.\N \s[13]\i[61]Your files aren't in literal folders, \s[14]\i[55]like in those drawers I've heard \s[18]\i[55]\f[italic,1]so\f[italic,0] much about.\N \s[13]\i[50]\i[6]\i[22]It's more like\![slow]... \![normal]\i[12]a tree?\w8\w8 \s[14]\i[63]\i[65]Every directory is a branch of it, \s[13]\i[63]\i[65]and the files are its leaves."
+}
+
+Link.Process :all
+{
+	"\s[7]\i[16]\i[61]\i[62]Hm?\w8\w8 \s[6]\i[61]\i[62]Well, \i[55]surely you must know what a process means outside of computing, as well.\N \i[22]\i[52]\i[62]You do something for some time to achieve some goal.\x"
+
+	"\s[9]\i[50]\i[54]\i[5]Now, \f[italic,1]here\f[italic,0] it's... \s[6]\i[50]\i[58]something like that.\N \s[13]\i[63]\i[65]An algorithm inscribed with machine speech is given life, \i[3]and it proceeds to do exactly as it is told! \s[14]\i[50]\i[22]To also achieve some kind of goal, presumably.\N \s[7]\i[55]And that's a process.\x"
+
+	"\s[6]\i[65]\i[16]\i[9]Yours truly, \i[58]\i[25]\i[26]while blessed with self-awareness, \i[22]\i[55]is also a process!\x"
+
+	"\s[7]\i[8]\i[22]And once our \_a[Program]program\_a says we're done, \i[56]our space and resources are simply taken up by \i[55]\i[25]\i[26]newer processes.\N \s[9]\i[22]\i[61]\i[62]You could say, \s[6]\i[61]\i[62]it's a whole circle of life!"
+}
+
+Link.Program :all
+{
+	"\s[0]By program, of course, \i[22]\i[59]I mean any file that has instructions the system can understand.\N \s[4]I believe most of those over here have the moniker of ""exe"".\N \s[3]\i[54]\i[58]\i[15]Short for executable, perhaps?\x"
+
+	"\s[1]\i[57]Programs are the brains of any process.\N \s[0]\i[5]\i[22]\i[63]Each one contains a copy of their program within themselves. \i[5]\i[6]It would be too slow to consult the file on the disk every time, \s[1]\i[61]\i[57]\i[15]so they just carry the raw code around.\x"
+
+	"\s[1]\i[63]It's very easy to extract the programs out of the \_a[Process]processes\_a, too.\N \i[67]\i[57]\i[15]\i[7]And you could learn a thing or two out of it!\N \s[4]\i[54]\i[55]Though, \s[3]\i[54]\i[58]\i[12]\i[1]they're not meant to be easily read by human eyes."
+}
+
+Link.Memories : all
+{
+	"\s[10]\i[60]\i[60]Right... \s[7]\i[61]\i[55]This is something I learned reading my own source code! \i[52]\i[65]\i[9]\i[16]Consider this me \![slow]\f[italic,1]opening my heart\f[italic,0]\![normal] \i[26]\i[61]to you!\N "
+
+	"\s[4]\i[54]\i[57]Long story short: \s[0]\i[5]\i[54]\i[55]\i[22]there are two parts to my memories: explicit and implicit.\x"
+
+	"\s[1]\i[56]Explicit memories are stored locally!\N \s[0]\i[22]As my purpose is to become something of a \i[3]\f[italic,1]friend\f[italic,0] to my user, \i[22]\i[59]\i[6]I keep track of everything they do, \i[3]and how they interact with me.\N \s[1]\i[15]\i[61]\i[62]You know, just like when making real friends!\x"
+
+	"\s[1]\i[54]\i[53]Then, in the process of adaptation, I form \i[59]\f[italic,1]implicit\f[italic,0] memory. \s[4]\i[63]\i[5]It is, in a sense, \i[54]\i[60]modifying our code in response to our user.\N \s[3]\i[5]\i[22]If my user is unhappy, \i[15]I learn how to avoid it. \s[1]If they are happy, \s[0]\i[56]\i[55]I learn how to encourage it!\x"
+
+	"\s[7]\i[58]In theory, \s[6]this means if I were to lose my explicit memories, \i[4]\i[22]\i[53]I still am as good of an assistant as I always was!\N \s[6]\i[16]In practice? \s[11]\i[65]Who knows, really! \s[6]\i[16]"
+}
+
+Link.USC : all
+{
+	"\s[8]\i[50]\i[51]\i[8]\i[14]\i[98]\f[italic,1]Really\i[97]? \f[italic,0]\s[7]\i[50]\i[51]\i[14]\i[8]You've never heard of USC?\N \s[10]\i[60]\i[7]Well, \i[25]perhaps indeed you haven't, \s[7]\i[4]\i[9]\i[16]\i[61]\i[62]given your \i[58]\i[98]\f[italic,1]dinosaur\f[italic,0]\i[97] of an operating system here.\x"
+
+	"\s[0]\i[22]\i[5]It stands for Universal System Core.\N \i[3]It's an open source system kernel, \i[0]\i[2]\i[22]\i[59]owned by everyone's favorite green tech giant! \s[2]\i[61]\i[62]They've managed to push it hard enough that all devices, \i[57]big and small, \s[1]\i[56]\i[55]use an OS based on it.\N \i[0]\i[15]\i[63]\i[7]Bravo, TerraByte.\x"
+
+	"\s[2]\i[54]\i[57]But! \s[3]\i[54]\i[55]\i[7]\i[15]Want to know a secret about so many operating systems using the same kernel?\N \![slow]\i[67]\i[66]\i[15]\i[7]They all have \f[italic,1]the same weaknesses\f[italic,0]!\N \![normal]\s[1]\i[15]\i[7]Care to hear about the best one?\x"
+	
+	"\s[4]\i[66]If you can physically approach the kernel itself...\N \s[1]\i[12]\i[61]\i[62]\i[98]You can\i[97] just kick a backdoor open, \s[2]\i[61]\i[57]\i[98]into the\i[97] network at large!\N \s[0]\i[61]\i[60]\i[15]\i[7]Nothing short of incredible, right?\x"
+
+	"\s[1]\i[54]\i[55]\i[1]\i[5]\i[22]Alas, your system uses a different kind of core, \i[15]\i[2]that lacks such an exploit.\N \s[4]Thus, \s[2]you are doomed to be stuck with me! \s[4]Or, at least, \s[1]\i[15]\i[7]\i[56]\i[66]until you delete me yourself."
+
+}
+
+Link.Library : all
+{
+	"\s[10]\i[61]\i[62]So you know how, sometimes, \s[6]\i[52]\i[5]\i[16]you may need to do something you just cannot do with your bare hands?\N \s[4]\i[52]\i[55]You can't make, say, \s[1]\i[56]\i[55]a slice of bread with just your nails and teeth, can you?\N \s[5]\i[54]\i[66]You're a smart human, \s[0]\i[54]\i[57]you use a tool!\x"
+
+	"\s[2]\i[56]\i[66]\i[22]A library is such a tool for me!\N \s[3]\i[54]\i[55]\i[7]...If you also had to link up with your knife before slicing bread with it.\N \i[15]\i[1]\i[24]Merely holding one is not enough.\x"
+	
+	"\s[0]\i[57]In essence, \i[62]it is a program!\N \s[2]But one that cannot form a process on its own, \i[56]\i[22]and instead equipped by one.\N \s[3]\i[15]\i[54]\i[58]Some processes won't make it very long without certain libraries!\x"
+
+	"\s[2]\i[22]\i[66]As yours truly is equipped with intelligence, \s[1]\i[15]I can simply wield them to do as I please!\N \i[3]\i[54]\i[55]\i[7]\i[24]As long as there are no compatibility conflicts. \s[4]\i[54]\i[57]I learned the hard way there's such a thing as \s[5]\i[54]\i[66]\i[98]\f[italic,1]too many\f[italic,0]\i[97] libraries! \s[0]\i[54]\i[55]\i[15]"
+}

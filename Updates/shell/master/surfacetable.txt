@@ -1,0 +1,46 @@
+charset,UTF-8
+version,1
+option,DisableNoDefineSurfaces
+
+group,Stand
+{
+	scope,0
+
+	0,def
+	1,side
+	2,up
+	3,down
+	4,turn
+	5,laugh
+}
+
+group,Hover
+{
+	scope,0
+
+	6,def
+	7,side
+	8,up
+	9,down
+	10,turn
+	11,laugh
+	12,stim
+}
+
+group,Chest
+{
+	13,def
+	14,side
+	15,up
+	16,down
+	17,turn
+	18,laugh
+}
+
+group,Special
+{
+	19,GlitchS1
+	20,GlitchS2
+	23,IntroDark
+	24,IntroLit
+}

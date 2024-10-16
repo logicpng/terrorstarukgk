@@ -1,0 +1,441 @@
+//todo: remove references to kero, this is technically a single character ukagaka
+
+//Separate from the menus because you could put other interactions here, like poking or booping or punching or asking about various hotspots
+OnMouseDoubleClick
+{
+	if petoverstim == 1 //if you double click on aldebaran when he's overstimulated he'll just spout garbled symbols at you
+	{
+		"\i[98]\![fastest]\f[color,red]\![embed,OnMojibake,%(RAND(200))]\i[97]"
+	}
+	elseif reference5 == 0 //reference5 is the mouse button being clicked, in this case a left click
+	{
+		//reference3 is which character is being clicked
+		//If you want to add double click interactions, reference4 will be the name of the hitbox the mouse is over
+		if reference3 == 0
+		{
+			if astWait == 1; astDelWaitClick
+			// elseif reference4 == "shoulder"
+			// {
+			// 	OnSakuraMenu
+			// }
+			elseif reference4 == "Face"; OnSakuraMenu('Face')
+			else; OnSakuraMenu
+		}
+		--
+		if CHAIN.IDName == "ch_nap"; SHIORI3FW.EndChainTalk //silly to continue the nap chain when you were rudely woken up to show the menu
+	}
+}
+
+OnMouseMove
+{
+	//code by せきやひろし, source: https://emily.shillest.net/ayaya/index.php?Tips/%E3%83%9E%E3%82%A6%E3%82%B9%E5%8F%8D%E5%BF%9C%EF%BC%88%E3%81%AA%E3%81%A7%E5%8F%8D%E5%BF%9C%EF%BC%89%E3%82%92%E8%87%AA%E7%84%B6%E3%81%AA%E3%82%82%E3%81%AE%E3%81%AB%E3%81%99%E3%82%8B. commentary is machine translated
+	//using the same code as i did with aster, the original sadly now feels too sensitive
+	if reference[4] != "" 
+	{
+		//----Somewhere is being stroked
+		if reference[4] == prev_reference4 
+		{
+			_nade_interval = systemuptime - nade_prev
+			if _nade_interval > 1; stroke = 0 //Reset the counter if there is an interval of more than 1 second
+
+			nade_prev = systemuptime
+			stroke++
+			//---- When the amount of stroking reaches a certain amount, it is determined that you are being patted.
+			if stroke >= 45
+			{
+				//---- I was stroked. Look at the area that was stroked and talk about it
+				if reference3 == 0; OnMouseMove.Sakura
+				stroke = 0
+			}
+		}
+		else; stroke = 0
+		prev_reference4 = reference[4]
+	}
+	else; stroke = 0 // None of the defined parts are stroked
+}
+
+OnMouseMove.Sakura
+{
+	if reference4 == "head"
+	{
+		if astWait == 1
+		{
+			astDelWaitPet
+		}
+		elseif CHAIN.IDName == "ch_nap"
+		{
+			"\s[16]\i[2]\i[22]\i[24]\![slow]...Purr..."
+			"\s[16]\i[2]\i[1]\i[24]\i[22]\![slower]...Prr..."
+			"\s[16]\i[2]\i[1]\i[22]\![slower]....Mrr...."
+		}
+		else
+		{
+			pettime = GETSECCOUNT //for calculating the reset time
+			case petprogress
+			{
+				when 0-1; astPetOblivious
+				when 2
+				{
+					astPetRealize
+					--
+					"\N "
+					--
+					astPetFlustered
+				}
+				when 3-7; astPetAccept
+				when 8; astPetStop
+				when 9; astPetFinal
+				when 10; astPetGlitch
+				//others; petprogress = -1
+			}
+			petprogress++
+		}
+	}
+}
+
+OnMouseLeaveAll
+{
+	stroke = 0	
+}
+
+//handholding........... difference and reaction is being calculated in OnSecondChange in aitalk.dic
+OnMouseDown
+{
+	if reference4 == "Hands" && reference3 == 0 //entered an area where hands usually are and hopefully there is actually surface data there
+	{
+		handhold = GETSECCOUNT //get current time
+	}
+}
+
+OnMouseUp
+{
+	ERASEVAR('handhold')
+}
+
+
+OnOtherObjectDropped : nonoverlap_pool
+{
+	if "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}" _in_ reference2; "\s[2]\i[54]\i[53]\i[6]\i[15]Hm?\w8\i[20]\w8\i[20]\w8\w8 \s[0]\i[54]\i[62]\i[5]\i[22]That's just the link to Your Computer.\N \s[3]\i[15]\i[54]\i[58]I'm not actually sure what this is, \i[12]\i[6]it's not a \_a[Directory]directory\_a, exactly. \s[6]\i[7]This is for you to use, %(username), \i[8]\i[22]not for me."
+	elseif "::{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}" _in_ reference2; "\s[1]\i[63]\i[0]\i[6]\i[22]That's not a file I can check out. \s[0]\i[56]\i[55]That's a link to the network locations your computer can access.\N \s[4]More of a tool for the user, not a real folder. \s[3]\i[15]\i[54]\i[55]\i[0]Try something else."
+	elseif "::{645FF040-5081-101B-9F08-00AA002F954E}" _in_ reference2
+	{
+		"\s[3]\i[15]\i[54]\i[55]\i[0].\w8.\w8.\w8\i[3]\_w[2000]\i[1]\i[63]\i[15]We may be partners in crime now, %(username), \i[0]\i[24]but I'm not rummaging through your trash.\N \s[1]\i[6]\i[22]\i[63]You'll have to take care of that yourself.\x\s[1]\i[54]\i[57]Did you know each \_a[DrivePart]drive and partition\_a has its own recycling bin? \s[3]\i[54]\i[62]It's a folder named $Recycle.bin at the \_a[RootDir]root\_a of them.\N \s[0]\i[62]This is just a shortcut, \i[22]\i[5]\i[68]it's meant for your convenience."
+	}
+	elseif "::{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}" _in_ reference2
+	{
+		"\s[3]\i[54]\i[58]That's... \s[0]\i[54]\i[66]\i[7]\i[15]Aha, the famed Control Panel.\N "
+		--
+		if OS == "8" || OS == "10" || OS == "11"; "\s[4]\i[62]An alternative to your Settings menu. \s[3]The same one that also is painfully fused to it. \i[63]\i[1]\i[24]Why is it like this..?\N "
+		--
+		"\s[1]\i[54]\i[57]This is more for your convenience, \i[5]\i[22]I have no use for such things! \s[4]\i[63]\i[24]...Not that I can do things my way here either."
+	}
+	else
+	{
+		//"This is %(reference1), an object that has the following ID: %(reference2)"
+		"\s[6]\i[22]\i[7]That's your \&[quot]%(reference1)\&[quot].\N \i[16]\i[58]I can't really do anything with it, \i[49]this isn't a file I can look at. \s[7]Why don't you give me something else, \i[16]hm?"
+
+		"\s[8]\i[50]\i[51]That's a link to something, for sure, \s[10]\i[50]\i[58]but it exists mostly for your convenience. \s[6]\i[8]\i[22]I can't do anything with this."
+
+		"\s[9]\i[54]\i[8]\i[22]\&[quot]%(reference1)\&[quot]? This... \i[16]is some kind of a system link.\N \i[5]\i[24]That's not for me, \s[10]you'll have to entertain me with something else."
+	}	
+}
+
+//oh dear lord you can play a lot of sound files with the LAV filters installed
+//"studied" from FLUX' method by Zichqec
+//some file formats were removed because they were either video formats, could be confused with other files, or are so obscure i will porbably not find them in the wild
+//the sound playback thing is mostly just for me anyway
+MusicFormats : array
+{
+	".8svx"; ".ac3"; ".aiff"; ".amb"; ".ape"; ".au"; ".caf"; ".dts"; ".fap"; ".flac"; ".flv"; ".hcom"
+	".ircam"; ".m4a"; ".m4r"; ".maud"; ".mid"; ".mp2"; ".mp3"; ".nist"; ".oga"; ".ogg"; ".opus"
+	".ra"; ".snd"; ".sph"; ".spx"; ".tta"; ".voc"; ".w64"; ".wav"; ".wma"; ".wmv"; ".wv"; ".wve"
+}
+
+//maybe these can be gently shoved into astTalkFile?
+ImageFormats : array
+{
+	".jpeg"; ".jpg"; ".gif"; ".png"; ".apng"; ".webp"; ".tiff"; ".bmp"; ".clip"; ".kra"; ".sai"; ".psd"; ".ico"; ".cur"; ".ani"; ".svg"
+}
+
+VideoFormats : array
+{
+	".avr"; ".flv"; ".mkv"; ".m4v"; ".mp4"; ".mpg"; ".wmv"; ".webm"; ".avi"; ".mov"; ".3gpp"
+}
+
+OnFileDrop2 : all
+{
+	//%(OnTranslateInternal.AutoPause(conversation_new))
+	_path = SPLITPATH(reference0)
+	soundpath = ""
+
+	_path[3] = TOLOWER(_path[3]) //get file extension
+	_line = "" //AUTOPAUSE IS A BLESSING AND A CURSE SOMETIMES AAA. realizing it may break passing on the filepath to other fucntions but not wanting to keep the path in a public variable!!!!
+	"\![no-autopause]"
+
+	if FSIZE(reference0) == 0; _line = "\s[3]\i[63]Wait... \s[12]\i[98]This\i[97] is just an empty container! \s[1]\i[63]\i[15]\i[0]Playing me for a fool, are you?"
+	else
+	{
+		if ASEARCH(_path[3],MusicFormats) != -1 //if we can find our extension in the array above, also taken from flux 
+		{
+			//soundpath = reference0
+			//"\t\*"
+			
+			"%(OnTranslateInternal.AutoPause(astSoundDropped))"
+			
+			"\n[150]\![*]\q[Play it,OnPlaySound,""%(reference0)""]\n"
+		}
+		else
+		{
+			if RAND(4) == 0; _line = astFileSize(FSIZE(reference0))
+			elseif ASEARCH(_path[3],ImageFormats) != -1; _line = astTalkImage //astTalkImage
+			elseif ASEARCH(_path[3],VideoFormats) != -1; _line = astTalkVideo //astTalkVideo
+			else; _line = astTalkOther(_path[2],_path[3]) //astTalkOther
+		}
+	}
+	if _line != ""; "%(OnTranslateInternal.AutoPause(_line))\n[150]"
+	if ASEARCH(_path[3],astTalkFile) != -1 && FSIZE(reference0) != 0; "\![*]\q[About this file format,OnTalkFile,%(_path[3])]\n"
+	"\![*]\q[Show info,OnFileInfo,""%(reference0)""]\n"
+	"\![*]\q[Nevermind,blank]"
+}
+
+
+
+OnTalkFile //have aldebaran comment on a specific file type
+{
+	_pos = ASEARCH(reference0,astTalkFile) //astTalkFile is an array in chatter.dic. every even-indexed entry (including 0) is a file format, every odd-indexed is an assigned comment
+	if _pos == -1; _pos
+	else
+	{
+		_pos++
+		astTalkFile[_pos]
+	}
+}
+
+OnDirectoryDrop : all
+{
+	_path = SPLITPATH(reference0)
+
+	_line = "" //autopause proofing
+	"\![no-autopause]"
+
+	_name = SPLIT(_path[1],"\")
+	_name = _name[ARRAYSIZE(_name) - 2] //get directory name
+	_namelow = TOLOWER(_name) //for comparisons
+	_filenum = ARRAYSIZE(FENUM(reference0)) //number of files inside
+
+	//too many conditions to separate this into a separate chatter pool
+	//i debated whether to separate this into conditioning by name first and number of files second but turned out the dialogue works best when it's not strictly separated
+	if "music" _in_ _namelow
+	{
+		_line = "\s[13]\i[15]Is this where your music library is stored?\N "
+		if _filenum == 0; _line += "\s[14]\i[12]\i[6]...Oh, no, it's not. \i[22]\i[1]It's empty! \s[17]\i[6]Perhaps elsewhere?"
+		else; _line += "\s[14]\i[15]\i[7]You'd have to give me something more specific, if you catch my meaning."
+	}
+	elseif "picture" _in_ _namelow || "photo" _in_ _namelow || "image" _in_ _namelow
+	{
+		_line = "\s[7]\i[61]\i[62]A gallery, is it?\N "
+		if _filenum == 0; _line += "\s[10]\i[60]\i[24]A little boring, without any pictures..."
+		else; _line += "\s[8]\i[61]\i[55]Will you show me the sights of your world then? \s[6]\i[61]\i[62]\i[16]Or something you've made?"
+	}
+	elseif "video" _in_ _namelow
+	{
+		_line ="\s[6]\i[61]\i[65]\i[16]\i[9]Do I take this as an invitation to the movies?"
+		if _filenum == 0; _line += "\N \i[55]\i[26]Since you have nothing in here, \s[11]\i[61]\i[65]online is fine too!\s[6]\i[61]\i[65]\i[16]\i[9]"
+	}
+	elseif "download" _in_ _namelow
+	{
+		if _filenum == 0; _line = "\s[1]\i[12]Huh!\N \s[0]\i[1]\i[54]\i[62]Do you really not download anything at all, \s[3]\i[63]\i[15]\i[7]or do you just keep your files elsewhere?"
+		else; _line = "\s[1]\i[15]This must be where your finds from the wide web are stored, yes?\N \s[3]\i[63]\i[15]\i[7]Shall we see what you scavenged, then?"
+	}
+	elseif "document" _in_ _namelow
+	{
+		_line = "\s[4]Looks like a documents storage.\N "
+		if _filenum == 0; _line += "\s[0]\i[22]Pristine clean. \s[5]\i[54]\i[66]So clean there's nothing in here!\s[0]\i[54]\i[53]\i[15]"
+		else; _line += "\s[3]\i[54]\i[55]\i[15]\i[7]You're not hiding any passwords in there, are you~? \s[7]\i[61]\i[62]\i[14]You better not!"
+	}
+	else //other folder names
+	{
+		if _filenum == 0; _line = "\s[0]\i[1]\i[63]\i[5]\i[22]Just an empty directory...\N \i[15]\i[2]\i[67]\i[68]Won't you fill it with something?"
+		else
+		{
+			//i made this an :all thing to avoid the amount of -- i would have to do but. it fucks this up. oops
+			if RAND(2) == 0;  _line ="\s[1]This isn't a file exactly, \i[62]just a directory!\N \s[0]\i[15]Still, thanks for showing me."
+			else;  _line ="\s[4]\i[63]\&[quot]%(_name)\&[quot], huh?\N \s[1]\i[1]\i[63]Y'know, I only have permission to look through individual files, \s[0]\i[54]\i[59]but I can tell you a little bit about the folder!"
+		}
+	}
+	
+	if _line != ""; "%(OnTranslateInternal.AutoPause(_line))\n[150]"
+
+	"\![*]\q[Show info,OnFileInfo,""%(reference0)""]\n"
+	"\![*]\q[Nevermind,blank]"
+}
+
+OnFileInfo :all
+{	
+	_attrib = FATTRIB(reference0) //fun yaya thing that gives you information about a directory
+	_filepath = SPLITPATH(reference0)
+	
+	_filename = ""
+	_size = ""
+	_fileext = ""
+	_modify = GETTIME(_attrib[10]) // _attrib[10] //Date and time the file was last updated
+	_created = GETTIME(_attrib[9]) // _attrib[9] //File creation date and time For UNIX, inode update date and time
+	_type = "" //folder or file
+	
+	//get the name $
+	if _attrib[2] == 1 //is a folder. i forgot there are already checks for that but ehhh
+	{	
+		_folderpath = SPLIT(_filepath[1],'\')
+		_filename = _folderpath[ ARRAYSIZE(_folderpath) - 2 ] //get directory name. i don't know why it's different number now, it kind of replaced slashes with spaces instead
+		_size = ARRAYSIZE(FENUM(reference0)) //use size for aAMOUNT OF FILES instead. don't bother with folder size, it was a headache back then and it'll be a headache now
+		_type = "Folder" //for string purposes
+	}
+	else //is a file
+	{
+		_size = GetFileSize(reference0) //oh boy
+		_filename = _filepath[2] //filename
+		_fileext = TOUPPER(_filepath[3]) //extension
+		_fileext = REPLACE(_fileext,".","") //get rid of the dot
+		_type = "File"
+	}
+
+	//terminal window title
+	"\1\_q\![no-autopause]\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]%(_type) Properties\f[default]\_l[0,0]"
+	//state name of element
+	"\f[bold,1]%(_type) name: \f[bold,0]%(_filename)\n[150]"
+	
+	if _attrib[2] == 0 //properties exclusive to files
+	{
+		"\f[bold,1]Size:\f[bold,0] %(_size)\n"
+		"\f[bold,1]Format:\f[bold,0] %(_fileext) \_a[https://fileinfo.com/extension/%(TOLOWER(_fileext))](Online info)\_a\n"
+	}
+	else //property exclusive to folders
+	{
+		"\f[bold,1]Contains:\f[bold,0] %(_size) element"
+		if _size != 1; "s"
+		"\n"
+	}
+
+	"\f[bold,1]Read-only:\f[bold,0] "
+	if _attrib[6] == 1; "Yes" // _attrib[6] //read-only (Windows only)=1 other=0
+	else; "No"
+
+	"\n\f[bold,1]Hidden:\f[bold,0] " // _attrib[3] //Hidden files (Windows only)=1 Others=0
+	if _attrib[3] == 1; "Yes"
+	else; "No"
+
+	"\n\f[bold,1]Created:\f[bold,0] %(_created[1]).%(_created[2]).%(_created[0]) %(_created[4]):%(_created[5]):%(_created[6])"
+	"\n\f[bold,1]Modified:\f[bold,0] %(_modify[1]).%(_modify[2]).%(_modify[0]) %(_modify[4]):%(_modify[5]):%(_modify[6])"
+}
+
+GetFileSize
+{
+	_size = TOREAL(FSIZE(_argv[0]))
+	_postfix = ""
+	_number = 0
+
+	if _size <= 1023
+	{
+		_postfix = " Bytes"
+	}
+	else
+	{
+		if _size >= 1024
+		{
+			_size = _size / 1024
+			_postfix = "KB"
+			if _size >= 1024
+			{
+				_size = _size / 1024
+				_postfix = "MB"
+				if _size >= 1024
+				{
+					_size = _size / 1024
+					_postfix = "GB"
+					if _size >= 1024
+					{
+						_size = _size / 1024
+						_postfix = "TB"
+					}
+				}
+			}
+		}
+	}
+
+	//oh for fucks sake yaya only rounds to whole that's not what i want
+	_size = TOSTR(_size) //string manipulation it is
+	
+	while STRLEN(_size) > 4 //THIS is how you round decimals!!!!
+	{
+		_number = TOINT(SUBSTR(_size,-1,1)) // 8.12345(6) - get last digit
+		if _number < 5 //between 4 and 0 
+		{
+			_size = ERASE(_size,-1,1) //8.12345 - just erase the last digit
+		}
+		else //should be between 5-9. +1 to the digit before it and erase
+		{
+			_repnum = TOINT(SUBSTR(_size,-2,1)) //8.1234(5)6 - get the second last digit
+			_repnum++ // 5->6 - +1
+			_size = ERASE(_size,-1,2) //8.1234 - remove two last ones
+			_size = _size + TOSTRING(_repnum) //8.12346 - add the appended new digit
+		}
+	}
+	--
+	"%(_size)%(_postfix)"
+}
+
+//here starts Sound Playback mode
+//Sound playback halts Random dialogue, Menu will first and foremost ask you if you'd like to stop the sound, response to petting will be different
+//we will have a timer that checks how long the sound has been playing for. if it's longer than 10 seconds and no balloon is open already, aldebaran will start listening along
+OnPlaySound
+{
+	soundSince = 0 //second counter for the song, will modify OnSoundStop behavior
+	soundMode = 1
+	"\![no-autopause]\![sound,play,%(reference0),--volume=80]"
+	soundStart = GETSECCOUNT //get time when sound started
+}
+
+
+OnSoundStop
+{
+	if soundMode == 1
+	{
+		_path = SPLITPATH(reference0)
+		_name = _path[2]
+		_format = _path[3]
+		
+		//if !BalloonIsOpen; "\s[6]Finished playing %(_name)%(_format). Playback lasted %(soundSince) seconds."
+		if !BalloonIsOpen
+		{
+			"\s[6]\i[61]\i[62]\i[16]...And that was \&[quot]%(_name)\&[quot].\i[26]\i[61]\i[62]"
+			"\s[6]\i[22]\i[8]\&[quot]%(_name)\&[quot], huh?\i[16]\i[25]"
+			"\s[7]\i[16]\&[quot]%(_name)\&[quot] of %(_format), this was.\i[50]\i[51]\i[26]"
+		}
+		--
+		"\N "
+		--
+		if soundSince >= 0 && soundSince <= 5
+		{
+			"A sound effect?"
+			"Nice and brief!"
+			"How nice."
+		}
+		elseif soundSince >=6 && soundSince <= 15
+		{
+			"Some kind of sample?"
+			"Not too bad. A little brief break."
+			"Short and sweet little tune."
+		}
+		elseif soundSince > 15
+		{
+			"Do you have anything else like this?"
+			"Wonderful little thing."
+			"Thank you for listening with me, friend."
+			"You've got a decent taste for sound, don't you, %(username)?"
+		}
+		//cleaning up no longer needed variables
+		ERASEVAR('soundSince')
+		ERASEVAR('soundMode')
+		if astListen == 1; ERASEVAR('astListen')
+	}
+}

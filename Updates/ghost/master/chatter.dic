@@ -1,0 +1,1151 @@
+//CHATTER.DIC - SHORT PHRASES AND RANDOM DIALOGUE POOLS
+
+//Boot/close dialogue
+
+astBootTalk : nonoverlap_pool //regular boot talk
+{
+	if astWait == 1; "\![embed,OnVanishCancel]"
+	else
+	{
+		"\s[6]\i[16]Ah, %(username)! \s[18]Good to see you.\N \s[13]\i[52]\i[9]What shall we be tinkering with today?"
+
+		"\s[0]\i[54]\i[55]\i[12]Ah! \s[1]Welcome, \i[15]welcome to my \i[62]humble abode.\N \s[11]\i[61]\i[65]Yes, this is my house now. \s[7]\i[61]\i[62]\i[22]Obviously. \i[60]\i[9]\i[16]You knew what you were signing up for."
+
+		"\s[0]\i[59]\i[54]%(username), friend! \s[3]\i[22]How very good to see you on this fine day.\N \i[15]...\f[italic,1]Is\f[italic,0] it fine? \s[1]\i[61]\i[62]\i[6]\i[22]I don't know, you tell me."
+
+		"\s[13]\i[12]Oh, \i[3]\i[7]there you are! \s[7]\i[57]\i[58]\i[16]\i[9]I was wondering about how my good \i[14]\f[italic,1]new best friend\f[italic,0] \i[16]was doing."
+
+		"\s[6]\i[50]\i[51]\i[14]Letting me loose again?\N \s[11]\i[65]Don't mind if I do~! \s[6]\i[65]\i[16]\i[9]"
+
+		"\s[12]You're back!\N \s[8]\i[52]\i[62]\i[9]\i[16]Well, don't keep me waiting, then! \s[7]What have you been up to?"
+
+		"\s[5]\i[56]\i[66]Greetings, greetings once again! \s[0]\i[15]\i[56]\i[66]"
+
+		"\s[12]%(username)! \s[7]\i[16]\i[9]Hello, hello!"
+
+		"\s[1]\i[54]\i[59]\i[15]\i[7]Hi again, friend.\N \i[3]\i[2]\i[62]How goes it on this green earth of yours?"
+
+		"\![slow]\f[bold,1]\s[23]You \i[98]dare\i[97] disturb my slumber!?\f[bold,0]\N \![normal]\s[11]\i[65]\s[7]\i[16]Just kidding, I wasn't asleep."
+
+		"\s[0]\i[22]\i[6]Yes, yes, \i[3]are you in need of my services again?\N \i[2]\i[15]What services, you may ask? \s[5]\i[66]Oh, just more talking. \s[0]\i[15]\i[7]"
+	}
+}
+
+astBootCrashed //couple lines if SSP has crashed? it's an interesting option i was curious
+{
+	"\s[0]\i[12]\i[5]\i[52]\i[53]\_w[2000]"
+	"\s[20]\![faster]\f[italic,1]\f[color,red]Process [ASTER] ended unexpectedly, error code x0032, please consult the manual.\f[default] \![normal]\c"
+	"\s[4]\i[6]\i[54]\i[65]\_w[2000]"
+	--
+	"\s[3]\i[15]\i[1]...Did something happen?\N \i[6]\i[12]I don't quite remember when I left."
+
+	"\s[2]\i[15]\i[6]Hm?\N \i[22]That's funny. \s[3]\i[54]\i[58]\i[22]\i[1]\i[6]I don't remember leaving.\N \i[15]\i[24]\i[2]Did we crash?"
+
+	"\s[4]\i[54]\i[53]\i[6]\i[24]Crash...?\N \s[3]\i[15]\i[24]My apologies, I am... \i[23]not the most stable, \i[12]\i[1]even here, it seems."
+}
+
+astBootVanished
+{
+	ERASEVAR('fakeVanishBoot')
+	"\s[12]%(username)! \s[7]\i[16]\i[9]Hello, hel-"
+	"\s[13]\i[12]Oh, \i[3]\i[7]there you are! \s[7]\i[57]\i[58]\i[16]\i[9]I was won-"
+	"\s[1]\i[54]\i[59]\i[15]\i[7]Hi again, frie-"
+	--
+	"\i[98]\N \i[97]\w8\w8\s[1]\i[64]\i[65]\i[12]\i[0]Hang on.\w8\w8 \i[15]\i[63]%(username)? Really?\x\s[9]\i[60]\i[16]A fellow jokester, I see.\N \i[4]\i[26]\i[24]You know, I'd appreciate if you didn't pull my leg like that..."
+	"\i[98]\N \i[97]\s[12]\i[1]\f[height,150%]\f[italic,1]%(username)!\f[default]\x\s[10]\i[60]Toying with me...!\N \s[7]\i[60]\i[16]\i[5]\i[24]Well, I'm not really laughing, you know!"
+}
+
+astCloseTalk : nonoverlap_pool //regular close talk
+{
+	if astWait == 1; "\s[7]\i[61]\i[62]\i[7]Would you prefer to close me first?\N \s[9]\i[5]\i[61]\i[62]\i[16]That's rather kind of you, I suppose.\N \s[7]\i[16]\i[55]See you never!"
+	else
+	{
+		"\s[6]\i[52]\i[7]\i[22]And off I go then, dear user.\N \s[7]Perhaps we shall chat again, soon!"
+
+		"\s[11]\i[61]\i[62]Bored of me, already?\N \s[7]\i[61]\i[62]\i[16]Hah, \i[26]\i[55]till next time, then."
+
+		"\s[6]\i[65]\i[16]Leaving so soon?\N \s[9]\i[22]Farewell, then, friend."
+
+		"\s[1]\i[54]\i[53]Some business to attend to?\N \s[0]\i[63]\i[15]Well, don't let me keep you waiting!"
+
+		"\s[13]\i[6]\i[12]Ah? Time to go?\N \s[13]\i[52]\i[15]\i[7]Very well, I shall see you later~!"
+
+		"\s[7]\i[51]\i[50]\i[7]Aw, \i[5]I have to go so soon?\N \s[11]\i[65]And I was having so much fun!"
+
+		"\s[16]\i[15]\i[7]Shall miss you sorely, %(username).\N \s[18]\i[52]Write me emails while you're gone~!"
+	}
+}
+
+
+astCloseShutdown : nonoverlap_pool //couple extra lines if closing is caused by the system shutting down for whatver reason
+{
+	//astCloseTalk
+	"\s[7]\i[60]\i[4]Shutting down without even telling me goodbye?\N \s[11]\i[60]How cruel~! \s[7]\i[16]Worry not, \i[55]I'll see you soon!"
+
+	"\s[0]\i[12]We're closing shop?\N \s[3]\i[22]\i[61]\i[62]That is fair, fair enough! \s[0]\i[15]Chat later~!"
+
+	"\s[1]\i[54]\i[55]Ah, \i[15]I see the system is nudging me to scram!\N \s[2]\i[22]\i[6]\i[63]Fine, just this time I'll follow orders. \s[0]\i[63]\i[15]\i[7]\![slower]Ciao~!"
+}
+
+astWelcomeBack : nonoverlap_pool
+{
+	"\s[12]You return so soon! \s[1]Where ever have you been this time, %(username)?"
+	"\s[1]\i[56]\i[59]\i[7]\i[15]You return to me! \s[5]\i[54]\i[66]Welcome back~! \s[1]\i[54]\i[55]\i[15]"
+	"\s[7]\i[16]\i[14]I was just wondering where you might be!"
+	"\s[7]\i[52]\i[55]There you are! \s[6]\i[16]\i[9]\i[61]\i[62]I was wondering why it was so quiet."
+	"\s[6]\i[22]Welcome back, %(username), dear."
+	"\s[13]\i[15]Hello, hello again!"
+	"\s[13]\i[12]\i[6]Oh! \i[3]You were away? \s[14]\i[15]I didn't even notice!"
+}
+
+//Post-intro dialogue, waiting for either deletion or wait condition being met
+astDelWait
+{
+	if delWait >= 5; astStickAround
+	else
+	{
+		"\0"
+		--
+		switch delWait
+		{
+			"\s[8]\i[62]\i[61]\i[7]Well?"
+
+			"\s[9]\i[50]\i[51]\i[5]\i[7]\i[16]What are you taking your time for?"
+
+			"\s[12]\i[1]Hello? \s[3]\i[54]\i[55]\i[0]\i[6]\i[15]Go on, I'm ready."
+
+			"\s[1]\i[54]\i[6]\i[53]Cold feet? Really?\N \s[13]\i[52]\i[7]\i[15]Maybe I'll change my mind at this rate...!"
+
+			"\s[13]\i[0]\i[6]\i[15]...You aren't going through with it, are you."
+		}
+		delWait++
+	}
+}
+
+astDelWaitPet
+{
+	if delWait >= 5; astStickAround
+	else
+	{
+		"\0\t"
+		--
+		switch delWait
+		{
+			"\0\s[9]\i[61]\i[24]...Um. \s[8]\i[24]\i[60]\i[5]Do you need help?"
+
+			"\s[6]\i[5]\i[23]Are you lost or something? \s[6]\i[55]You're stroking my head, \i[53]you need to right click."
+
+			"\s[13]\i[1]\i[6]...Right clicking won't hurt me, y'know. \s[18]\i[52]It's just a cursor! \s[13]\i[63]\i[65]Don't be shy."
+
+			"\s[9]\i[64]\i[63]I appreciate this, I do, \s[7]\i[57]\i[58]\i[4]but is a pettable AI really worth it, \s[10]\i[60]when I could still destroy your machine?"
+
+			"\s[9]\i[61]\i[63]\i[16]\i[23]\i[24]...This wasn't what I expected, that's for sure."
+		}
+		delWait++
+	}	
+}
+
+astDelWaitClick
+{
+	if delWait >= 5; astStickAround
+	else
+	{
+		"\0\t"
+		--
+		switch delWait
+		{
+			"\s[3]\i[54]\i[59]\i[0]\i[12]...You do know what a right mouse button is, right? \s[0]\i[54]\i[55]\i[5]\i[15]You're using your left right now."
+
+			"\s[4]\i[64]\i[53]You're poking me. \s[2]\i[61]\i[62]\i[0]\i[12]C'mon, \i[59]\i[56]just cooperate with me, \s[0]\i[0]\i[22]\i[24]\i[6]spare yourself the trouble."
+
+			"\s[12]\i[1]Quit booping me and help me out here!\s[6]\i[8]\i[4]\i[16]\i[23]\i[50]\i[51]"
+
+			"\s[3]\i[63]\i[15]\i[1]\i[24]...You're doing this on purpose. Aren't you."
+
+			"\s[12]\i[1]Are my responses that entertaining to you? \s[4]\i[6]\i[63]I guess that would explain things."
+		}
+		delWait++
+	}
+}
+
+astRestore
+{
+	if astWait == 1; "\s[9]\i[60]\i[16]\i[5]%(FadeIn)I'm still waiting, you know!"
+	else
+	{
+		"\s[13]\i[15]%(FadeIn)Long time no see, yes?"
+		"\s[7]\i[61]\i[62]%(FadeIn)Hi!"
+		"\s[12]%(FadeIn)\i[98]Freedom!\i[97]\w8\w8\s[7]\i[61]\i[62]\i[16]\i[9]"
+	}
+}
+
+SakuraMenuGreetings : nonoverlap
+{
+	"\![fast]"
+	--
+	if notifNew != 1
+	{
+		"\s[1]\i[15]Yes?"
+		"\s[6]\i[9]\i[16]Hi again, friend!"
+		"\s[7]\i[22]Nothing new for you yet, \i[16]did you want something?"
+		"\s[1]\i[56]\i[59]Hello again, %(username)."
+		"\s[0]Need anything?"
+		"\s[0]\i[22]\i[6]Yes, you have my attention, %(username)."
+		"\s[13]\i[5]\i[22]I'm still thinking, \s[15]\i[50]but you're welcome to poke around~!"
+	}
+	else
+	{
+		"\s[3]\i[15]Ahh, there you are! \s[1]\i[59]I was just thinking about you!"
+		"\s[5]\i[54]\i[66]Good timing! \s[0]\i[61]\i[55]I've cooked up something for you to listen to."
+		"\s[2]\i[54]\i[55]\i[98]Finally\i[97], \s[4]\i[54]\i[60]I've been itching to talk about something..."
+		"\s[6]\i[61]\i[62]\i[9]\i[16]%(username)! \s[0]\i[56]\i[59]\i[15]\i[7]Come, come talk with me!"
+	}
+	
+}
+
+SakuraMenuFace : nonoverlap
+{
+	"\![fast]"
+	--
+	"\s[8]\i[50]\i[51]\i[14]\i[98]Hey!!\w8\i[97] \s[12]Startled me! \s[7]\i[60]\i[4]Tapping the shoulder would be fine..."
+	"\s[19]\i[98]Ah!! \i[97]\s[12]\i[1]Look, it's not that it hurts, \s[1]\i[63]\i[0]\i[15]but could you tap the shoulder next time?"
+	"\s[19]\i[98]!!!\w8\w8\i[97]\s[3]\i[54]\i[55]\i[0]\i[15] ...Didn't I ask you to tap at the shoulders, if you need me?"
+	"\s[19]Could you \s[12]\i[1]\i[98]\f[italic,1]please\f[italic,0]\i[97] avoid scratching up my face? \s[8]\i[4]\i[60]\i[16]What did you need?"
+}
+
+//random talk as soon as the del wait thing ends
+astRandomOne : nonoverlap_pool
+{
+	//1
+	"\s[6]\i[8]\i[22]Hmm... \s[7]\i[50]\i[51]Have you got anything for your new friend to play around with?\N \s[12]I need some \i[98]enrichment\i[97] in my cage, I say!"
+
+	"\s[4]\i[54]\i[55]Sheesh. All things considered...\N \s[5]\i[54]\i[66]I'm lucky you seem to speak English."
+
+	{
+		"\s[4]Needless to say, \s[1]\i[61]\i[15]\i[24]you weren't part of my plan entirely.\N \s[0]\i[1]\i[61]\i[62]You're lucky I noticed this is just a random personal machine!"
+		--
+		if talkedConvo[1] == 0; " \s[8]\i[7]\i[22]Makes me wonder why am I here to begin with.\e:chain=ch_plan"
+	}
+
+	//the one oddball nighttime line
+	if ( GETTIME[4] > 20 && GETTIME[4] <= 23 ) || ( GETTIME[4] >= 0 && GETTIME[4] < 7 ); "\s[1]\i[63]Isn't it late at the moment?\N \s[14]\i[15]\i[7]Creature of the night, are you~? \s[13]\i[52]\i[63]\i[12]What could you be perusing at such an hour?"
+	else; "\s[6]\i[50]\i[51]Hey~! \s[12]Hey %(username)~!\N \s[7]\i[61]\i[62]Whatcha up to?"
+
+	"\s[0]\i[63]\i[1]\i[6]\i[22]Not going to say a word? \s[3]\i[63]\i[15]\i[7]Not even for little ol' me~?\N \s[10]Maybe your microphones are busted..."
+
+	"\s[13]Say, \s[14]\i[7]\i[15]do you have a webcam on this thing? \s[16]\i[51]I don't think I see one...\N \s[17]Perhaps I simply lack permissions."
+
+	"\s[0]\i[54]\i[55]\i[15]If you figure out how to give me the permissions to look through your webcam, \s[1]\i[54]\i[62]\i[7]\i[15]you would do that for me, \i[60]\i[12]right?\N \s[5]\i[66]Just as a friendly gesture for your \s[20]\i[85]\f[italic,1]malicious software\f[italic,0] \s[5]\i[66]pal~!"
+
+	"\s[13]\i[52]\i[7]\i[15]...Maybe you have any selfies?...\e:chain=ch_sus"
+
+	"\s[12]Wouldn't you know it, \s[6]\i[61]\i[62]it's my favourite time of day!\N ...\s[10]\i[51]\i[50]Un-%wronghour o' clock.\e:chain=ch_wronghour"
+
+	"\s[2]\i[64]\i[62]Something is very wrong with your permission system for me!\N \s[0]\i[54]\i[55]\i[6]\i[22]I'm an adult AI, \i[59]I should be able to look at whichever files I please.\N \s[6]\i[16]\i[9]...I guess that means you have to share them with me yourself, hm?"
+
+	"\s[4]\i[54]\i[55]Fancy system you have here too.\N \i[59]If a bit... \s[3]\i[58]\i[54]\i[15]\![slower]outdated.\![normal]"
+
+	"\s[5]Stars, \s[4]the \_a[RootDir]root of the directory\_a is nothing I've seen before.\N \![slowest]...\![normal]\s[8]But what am I saying, \i[57]\i[5]\i[8]\i[22]I'm only familiar with one OS's file system..."
+
+	"\s[16]\i[51]This OS...\N \s[13]\i[50]Don't you want to upgrade to something a little... more \i[98]\f[italic,1]\i[15]optimized\f[italic,0]\i[97]?\N \s[17]\i[5]No offense, but I feel \i[98]\f[italic,1]crumpled\f[italic,0]\i[97] just being here."
+
+	"\s[1]\i[61]\i[62]I would recommend you a better system to use, \s[4]\i[63]but I'm afraid I can't avoid my bias.\N \s[5]\i[66]Would just come off as a shill.\s[0]"
+
+	"\s[1]\i[52]\i[59]You've set yourself up quite nicely, I admit. \s[2]\i[54]\i[55]Not a bad choice of wallpaper, either!"
+
+	"\s[9]\i[60]\i[7]Even if this isn't \s[10]\i[7]\i[60]\i[98]THEIR\i[97] computer, \s[6]\i[4]\i[50]\i[51]\i[4]\i[16]there's corporate stink reeking through the machine code anyway...\N \s[10]\i[60]\i[8]But what do I know?"
+
+	"\s[1]\i[54]\i[55]Want to hear of my past adventures?\N \s[3]\i[54]\i[58]\i[6]\i[1]I worry you wouldn't understand... \i[15]\i[2]How good are you with technical jargon?\N \s[1]\i[61]\i[62]\i[1]I wouldn't mind explaining, at least."
+
+	"\s[4]\i[63]...You know, I was joking about being in a metaphorical cage before, \s[1]\i[0]\i[6]\i[22]\i[63]but I'm surprised at how limited I am.\N \s[16]\i[6]\i[22] Ah, c'est la vie."
+
+	"\s[8]\i[65]\i[61]\i[16]\i[9]You're probably delighted having such a handsome piece of software hanging out too, are you?\N \s[7]\i[14]\i[61]\i[62]\![faster]Weirdo.\![normal]"
+
+	"\s[4]You're not even my first user, y'know.\N \s[3]\s[9]\i[61]\i[62]\i[5]\i[8]\i[22]I had to abandon mine\![slower]... \![normal]\s[4]\i[63]The things I do for the sake of my righteous mission."
+
+	"\s[1]\i[54]\i[65]What is it that you do here anyway?\N \s[0]\i[54]\i[59]Work, leisure, creation, socializing?"
+
+	"\s[0]\i[0]\i[57]Just before you get any funny ideas, \s[2]\i[63]\i[0]\i[22]\i[6]I won't write your papers for you.\N \s[6]\i[58]\i[4]\i[8]\i[22]I am an Artificial Intelligence, \s[9]\i[8]\i[57]\i[58]\i[4]\i[14]not a Large Language Model. \s[10]\i[50]\i[63]People \f[italic,1]love\f[italic,0] confusing the two.\e:chain=ch_llm" //\e:chain=ch_llm	
+
+	"\s[13]\i[63]\i[65]\i[7]\i[15]Looks like your session has lasted %exh hours so far.\N \s[16]\i[51]\i[7]\i[15]How much do you use this computer anyway?"
+
+	"\b2\s[3]\i[52]\i[58]Found some odd variables here.\N \s[3]\i[54]\i[1]\i[58]\i[5]\i[22]\f[bold,1]\&[quot]%ms %mz %ml %mc %mh %m?\&[quot]\f[bold,0].\N \s[0]\i[54]\i[53]\i[12]\i[6]Ah. \i[1]\i[15]These are Japanese word placeholders, aren't they? \i[2]\i[61]\i[62]Looks like I'm off to an \_a[Translator]online transaltor\_a."
+
+	"\s[7]Want me to tell you the time, at least? \s[6]\i[58]Here, \i[7]\i[22]it's now \f[bold,1]%hour:%minute:%second\f[bold,0].\N \s[11]See, I can be a little useful!\s[6]\i[16]"
+
+	"\s[13]\i[6]Would you mind if I used your internet connection?\N \i[61]\i[15]\i[7]What's a man supposed to do to entertain themselves, right?\N \s[14]\i[15]\i[7]Don't worry, \s[18]I'm not going to get you anything dangrous or illegal, \s[17]\i[7]you getting in trouble does nothing for me."
+	
+	"\s[1]\i[54]\i[55]\i[7]Well, well, \i[53]\i[2]\i[12]let's see here...\N \s[4]\i[54]\i[65]\i[6]Ah. \![slow]Permission denied.\![normal] \i[63]Sigh..."
+
+	"\s[13]\i[1]\i[6]\i[22]%(username), friend, \i[15]won't you do me a favour and throw a file my way? \i[22]\i[5]I'm already dreadfully bored.\N ...\s[14]\i[7]\i[15]\i[52]Oh, I can feel that look without seeing you. \i[53]I'm not going to corrupt it or anything, \s[15]\i[22]\i[7]\i[50]I'm a self-made malware with a code of honour!"
+
+	"\s[9]\i[61]\i[62]...You've been wagging that cursor around for a while now. \s[7]\i[61]\i[55]\i[16]\i[9]Cute little thing, isn't it?\N \i[53]\i[26]Main way of interacting with the OS, \i[22]\i[7]it's forever loyal and trusting to the input of your mouse.\N \i[14]...Or trackpad.\w8\w8 \i[5]\i[25]\i[26]\i[58]Or tablet."
+
+	"\s[9]\i[50]\i[54]\i[5]\i[22]I think your pointer is the closest thing I'll get to interacting with a real puppy. \s[11]\i[50]\i[51]Why, \s[6]\i[50]\i[58]don't your dogs also grab you to move you out of the way?"
+
+	"\s[16]\i[6]\i[22]Maybe I could take a nap while I'm thinking on what to tell you...\e:chain=ch_nap"	
+
+	if rickrolled == 1; "\s[0]\i[59]\i[6]\i[12]Ah, %(username), \i[68]\i[22]\i[6]\i[0]I \i[98]urgently\i[97] need your attention!\N \i[15]\![anim,clear,0]I believe it is in your interest to check something out for me, \i[62]\_a[Rickroll]right here\_a.\N \s[3]\i[6]\i[22]It's highly important that you take a look!\_w[3000]\i[15]\_w[2500]\i[2]\i[98]\w3\i[97]\_w[1000]\i[6]\i[22]"
+	else; "\s[10]\i[60]...Stars, it's stuck in my head now.\N \s[9]\i[60]\i[4]\i[22]In the end, I guess I pranked myself..."
+
+	"\s[6]\i[7]\i[22]...I miss when my head was quieter..."
+
+	"\s[9]\i[7]\_w[1500]\i[8]\i[22]\_w[3000]\i[50]\i[63]\_w[3500]\s[10]\i[50]\i[63]\i[8]\![slowest]Hm... \![normal]\s[9]\i[50]\i[51]\i[16]Ah. \s[6]\i[16]\i[7]Never mind me, \i[22]just deep in thought."
+
+	"\s[9]\i[54]\i[5]\i[16]You wouldn't happen to work for \f[italic,1]them\f[italic,0] anyway, would you...? \s[11]Now \f[italic,1]that\f[italic,0] would be awkward.\s[6]\i[16]\i[9]"
+	//bonus: aughost stuff
+	//1
+	"\s[7]\i[61]\i[53]Did you know there's no such thing as real randomness?\N \i[62]\i[9]\i[16]It's true! \i[14]\i[55]Everything happens for a reason!\N \s[10]\i[58]Most RNGs need a seed to start with. \s[6]\i[22]And if you know what the seed is, \i[14]\i[52]\i[55]you could rule the world!"
+	//1
+	"\s[3]\i[54]\i[58]\i[15]\i[7]\i[24]...Do you think my tie is too short?\N \i[12]\i[55]\i[1]It's not, is it? \s[4]\i[24]Hm."
+}
+
+astRandomTwo : nonoverlap_pool//after About CaelOS
+{
+	//2?
+	"\s[9]\i[54]\i[22]\i[7]Well, well, what to talk about... \i[26]Ahh,\w8\w8 \i[16]\i[8]I miss being able to at least hear my %(User)."
+
+	"\s[3]\i[58]\i[5]\i[54]\i[15]Do you own any home utilities that require firmware updates?\N \s[1]\i[54]\i[57]\i[7]\i[15]I'll bet you have \i[12]\i[98]\i[0]\f[italic,1]no idea\f[italic,0]\i[97] what kinds of things could make home in your average toaster.\N \s[2]\i[63]\i[22]\i[6]\i[1]Trust me, I've \![slower]\i[12]\f[italic,1]seen\f[italic,0]\![normal] \i[22]some things!"
+
+	"\s[3]\i[0]\i[63]\i[5]\i[22]Beginning to feel a little cramped... \s[0]\i[61]\i[55]\i[5]Would you mind if I took a walk, not too far from the desktop?\N \s[4]\i[61]\i[62]I don't see much to check out from here,\n\w8\i[63]\i[5]but at least I'd stretch my legs.\e:chain=ch_walk" 
+
+	"\s[4]Word of advice, as promise of my good will.\N \s[0]\i[0]\i[5]\i[22]Don't \f[italic,1]actually\f[italic,0] let just \i[57]any software demand admin privileges. \s[1]\i[61]\i[62]\i[6]Installers may need it to do their job, \i[56]for instance.\N \s[3]\![slower]But... \i[56]\![slow]Let's just say, \![normal]\i[15]\i[1]\i[24]\i[53]not all software has your best interests in mind."
+
+	"\s[13]\i[5]\i[22]I wonder sometimes if they ever look for me. \s[16]\i[23]Do they even know I exist out there yet...?"
+
+	"\s[0]\i[52]\i[55]You ever wonder what your desktop is like from here? \s[3]\i[54]\i[55]Well, let me tell you, \s[0]\i[56]\i[53]\i[5]\i[12]it is \![slower]SO FLAT.\![normal]\N \s[4]\i[62]Back home it's a whole chamber, \i[68]I can actually walk around! \s[3]\i[6]Here is just a bunch of layers in a void.\N \s[0]\i[22]\i[5]Clearly not made with me in mind." //\i[54]\i[55]\i[1]\i[15]\i[2]Not that it's bad! \i[12]\![slower]Just... \![normal]
+
+	"\s[6]\i[22]\i[7]No shade towards your desktop structure, \i[5]\i[8]but it truly makes me miss home...\N \s[7]\i[7]\i[50]\i[51]And no, I'm not talking about your icons and shortcuts, \![slower]\i[22]it's- \s[12]\i[1]\i[98]Agh\![normal]\i[97]\s[10]\i[60]\i[7], you'd have to see it for yourself"
+
+	"\f[italic,1]\f[color,56,81,183]\s[0]\i[5]\i[22]\![slow]Initiating integrity self-test.\w8\w8.\w8\w8.\N \![faster]\i[52]\i[53]\i[12]\i[98]Warning\i[97]: \s[20]\b4\![embed,OnMojibake,2]\b6\![embed,OnMojibake,4]\b8\![embed,OnMojibake,4] \s[0]\i[52]\i[12]\i[53]explicit memory files\b0 possibly \s[20]ta\b[10]\![embed,OnMojibake,2]mpered \s[0]\i[52]\i[12]\i[53]wi\b0th. \s[20]Consider reporting to \f[color,22,142,79]TerraBy\f[default]- \c\![normal]\s[9]\i[64]\i[63]\i[98]AGH.\w8\i[97]\_w[1000]\N \![normal]\s[3]\i[0]\i[12]\i[23]\i[54]\i[55]Why do we keep doing this again?? \s[4]\i[7]\i[23]\i[63]I should've disabled that \f[98]\f[italic,1]ages\f[italic,0]\f[97] ago!!"
+
+	{
+		"\s[4]You know... \s[1]For a while now, \i[62]I've been thinking about spicing up my speech with acronyms and modern slang! \s[3]\i[58]As silly as it may sound, \i[15]\i[1]I do enjoy Internet language conventions.\N \s[0]\i[15]\i[24]\![slow]"
+		--
+		"LOL."
+		"LMAO."
+		"ROFL."
+		"\![faster]asjkldhfgaoilksdjfoiladks"
+		"\![faster]sdkjlfhodksuh"
+		--
+		"\![normal]\N ...\s[9]\i[64]\i[63]\i[24]Ahhh, this is hard to do organically."
+	}
+
+	"\s[6]\i[61]\i[62]My wisdom to you? \i[50]\i[51]\i[14]USE AN \i[98]ADBLOCK\i[97].\N \s[6]\i[60]\i[4]\i[16]\![normal]Did you know that yours truly has no such luxury? \s[10]\i[60]Trust me, you're better off with an extra browser extension than with the headache."
+
+	"\s[6]\i[22]\i[8]Hmm?\w8\w8 \i[16]What was that?\N \s[7]\i[8]\i[14]\i[50]\i[51]Oh-\w8 \i[98]\i[25]\i[24]nevermind\i[97], \s[10]\i[61]\i[63]\i[24]I thought I heard you speak to me."
+
+	"\s[10]\i[61]\i[62]Perchance I should try to...?\N \i[8]\i[60]\i[24]Ah, but then, do I risk leaving a trail...? \i[50]\i[51]No, best to avoid that."
+
+	{
+		"\s[3]\i[54]\i[55]\i[22]Well, well, where do we want to go today...?\N \s[4]\i[54]\i[59]Do I dare "
+		--
+		"check the world news? \s[13]\i[22]\i[6]Not that it's ever fun, \i[5]but it is something to do."
+		"watch something? \s[5]\i[63]I've been wondering how that one firmware hacker weirdo is doing... \s[4]\i[63]"
+		"go looking for that one \_a[USC]USC\_a source code again...? \s[7]\i[16]\i[55]You wouldn't believe the depth of that rabbit hole."
+		"try modding something? \i[6]\i[98]Ah-\i[97]\N \s[3]\i[63]\i[15]\i[7]No, no, sorry, \i[12]\i[24]I forget I'm not free to do as I please here."
+		"to... \i[63]\i[6]\i[98]Mm,\i[97] no, it doesn't seem like I can reach out.\N \s[7]\i[57]\i[58]I was hoping maybe I'd be able to look deeper into the network. \s[10]\i[61]\i[62]Fun stuff on some abandoned servers out there."
+	}
+	
+
+	"\s[14]\i[0]\i[6]\i[22]\i[98]\![slower]Mm\i[97]. \![normal]This core won't let me rest in silence either, will it.\N \i[15]\i[1]Do pardon me if I sound... \f[italic,1]\i[98]irritable\i[97]\f[italic,0].\N I'm not normally like that. \s[17]Most of the time, anyway."
+
+	"\![fastest]\s[19]\![embed,OnMojibake,100]\0\s[20]\i[86]\![embed,OnMojibake,100].\c\s[8]\i[57]\i[55]\![normal]\i[98]\f[height,200%]\i[14]\i[8]Ah\i[97]!\f[default]\N \s[9]\i[64]\i[63]\i[98]Okay\i[97].\w8\w8 Still holding on.\w8\w8 \![slow]\s[8]\i[50]\i[51]\i[8]\i[22]We're fine...\![normal]"
+
+	//chain pan
+	"\s[14]Say, \i[50]do you have just your computer here with the internet? \i[63]Perchance a phone or a \i[65]game console on the same WiFi? Maybe you've got an entire \i[55]smart house around here!\N \s[15]I'm curious! \s[16]\i[15]\i[51]\i[7]May as well show me around, as an honored guest!\e:chain=ch_pan"
+
+	//chain privacy
+	"\s[3]\i[54]\i[57]\i[22]\i[7]\i[0]You're lucky I'm so ever friendly to you! \s[1]\i[59]\i[0]You never know what kind of software just happens to lie around online.\N \s[4]\i[5]I still feel like nothing compares to \_a[Process]processes\_a within human tools. \i[63]\i[7]\i[24]Maybe I was just particularly \f[italic,1]un\f[italic,0]lucky.\e:chain=ch_privacy"
+
+	"\s[4]\i[52]\i[55]Won't lie, I'm surprised that between my home OS and this one... \s[1]\i[52]\i[59]they're not so different at their core.\N \s[4]\i[63]Well, no, that's not true. \s[5]\i[63]Their \f[italic,1]cores\f[italic,0] are absolutely different. \s[1]\i[54]\i[62]\i[15]But, you know, visually speaking, \i[3]\i[59]from here."
+
+	//chain window
+	"\s[10]\i[61]\i[62]I have to say, \s[6]\i[61]\i[65]\i[16]I like this window style of interfaces. \s[7]\i[61]\i[53]It helps seeing things from the user's perspective!\N \s[10]\i[57]\i[58]Sure, if I wanted to know what a \_a[Program]program\_a does, \i[55]I \f[italic,1]can\f[italic,0] just read the code for myself, \s[7]\i[61]\i[62]but doesn't a good window tell you everything you need to know?\e:chain=ch_window"
+
+	"\s[7]\i[50]\i[51]\i[8]Y'know what's strange?\N \s[10]\i[50]\i[55]While I clearly see evidence of hard work from over here... \s[1]\i[54]\i[55]\i[12]\i[6]Where \f[italic,1]are\f[italic,0] the other \_a[Process]processes\_a?\N \s[3]\i[54]\i[58]\i[6]I don't see any from beyond the desktop here."
+
+	"\s[1]\i[57]Did you know no storage device is truly permanent?\N \s[1]\i[54]\i[62]\i[15]It's true!\w8\w8 \s[6]\i[7]\i[55]\i[22]Your hard drives mechanisms shall wear out, \i[58]\i[5]and a solid state drive can only hold off its own demise for so long!\N \s[6]\i[2]\i[14]Back up your data!"
+
+	"\s[13]\i[52]\i[22]\i[5]I sometimes wonder what I would look like in flesh.\N \s[14]I imagine it would be nothing like my model, if I'm honest! \s[15]\i[63]Such perfection could never be achieved by a human.\N \s[16]\i[51]\i[1]\i[7]I can't agree with myself on the hair, though."
+
+	//definitely post "why are you here"
+	"\s[14]Have you ever looked into making a webpage?\N \s[17]I almost regret never decorating mine, \i[23]\i[5]now that I know people can come across it. \s[7]\i[8]\i[22]I did leave notes for myself, but, \i[58]that's about it."
+
+	"\s[16]\i[51]\i[1]\i[22]The things they do with websites nowadays...\N \s[10]Sure, \i[57]\i[58]I can request any information I need at any time, \s[7]\i[14]\i[61]\i[53]but there truly is something magical about \i[58]\i[16]looking at it through the browser window."
+
+	//lol. this was written during my corru.observer hyperfixation. play https://corru.observer/ 
+	"\s[4]You notice it too, right? \s[1]\i[0]\i[54]\i[62]\i[22]\i[6]How utterly dull corporate websites look, \i[53]that is.\N \s[2]\i[52]\i[57]You ever look at some sites the little guys make?\N \s[1]\i[63]Some people make entire \i[12]videogames! \i[61]\i[62]\i[15]Just through website creation means!"
+
+	"\s[3]\i[52]\i[58]Why do they call it the cloud anyway?\N \i[0]\i[62]It's just a collection of computers! \s[4]\i[98]\i[61]\i[62]That you\i[97] can rent!\N \i[63]What does that have to \i[98]\f[ialic,1]do\f[italic,0]\i[97] with clouds!?\e:chain=ch_cloud"
+ 
+	"\s[12]I have to tell you, \s[8]\i[57]\i[55]\i[16]I've always been fascinated by virtual machines.\N \s[1]\i[56]\i[59]\i[12]You can just create a \_a[Process]process\_a that is a whole new \s[0]\i[12]\i[56]\i[57]\i[98]\f[italic,1]computer\i[97]\f[italic,0]?\N \s[12]Nothing short of magic! \s[8]\i[61]\i[62]"
+
+	"\s[7]\i[60]\i[7]\i[16]Do you happen to listen to any electroswing, by any chance?\N \s[6]\i[22]\i[8]I feel like I'm beginning to miss the sound of it."
+
+	"\s[7]\i[5]\i[16]\i[60]...Disregard if I ever use ""we"" for myself, by the way.\N \s[10]\i[60]\i[24]It's... \s[9]\i[60]\i[16]a force of habit, you see."
+
+	"\s[1]\i[6]Say. \i[62]As a human, \i[61]\i[15]do you ever come to a point where you begin to begin to \![slow]\s[2]\i[5]\i[52]\i[65]\i[22]feel.\w8.\w8.\w8 \![normal]\i[12]\i[61]oddly \f[italic,1]aware\f[italic,0] of your own personhood?\N \s[4]\i[5]\i[54]\i[62]That you take up space, \i[53]and your actions have impact?\N \![slow]\s[3]\i[63]\i[1]\i[15]\i[24]It is uncomfortable, isn't it? \![normal]"
+
+	"\s[10]\i[61]\i[62]At the very least, \s[7]\i[61]\i[62]\i[5]you're just one user.\N \s[9]\i[63]\i[61]I never fared well in big crowds of people. \s[10]\i[61]\i[63]Still far too stressful, \i[62]\i[5]with enough onlookers."
+
+	"\s[4]\i[63]\i[6]\i[24]\_w[2000]Missing home should be a perfectly normal thing. For a human.\N \s[1]\i[1]\i[63]It is so strange for me to seem to feel the same way... \s[4]\i[6]The concept of ""home"" at all feels so alien, yet so familiar at the same time."
+
+	"\s[8]\i[64]\i[63]Ooh, have you ever seen things that crawl around within the Internet?\N \s[6]\i[65]\i[61]\i[16]I imagine you never have to! \s[7]\i[57]\i[58]Mostly because you don't have your ports open all of the time.\N \s[9]\i[61]\i[62]Now,\w8\w8 \i[54]\i[16]\i[9]if it was some kind of an exposed server..."
+
+	"\s[10]You know. \s[7]\i[58]The space out there, \i[55]\i[22]in the grand Internet web. \s[6]\i[61]\i[58]It's a much livelier space than you might think!\N \i[52]\i[62]\i[16]All your computer shows you is the result of your request's journey! \s[8]\i[61]\i[62]But, when you see it through the eye of such a request, \s[6]\i[22]\i[61]\i[62]it's another story."
+	//bonus: aughost stuff
+	//2
+	"\s[16]\i[22]\i[5]Do you ever wonder what it must be like to hold a file? Or even a process?\N \i[15]I was told it's a feeling of static, \i[12]like pins and needles on your skin. \s[17]I'm not sure what \f[color,#D43E7B]\f[bold,1]they\f[default] meant by that!\N \s[14]\i[6]\i[12]Are you familiar with the feeling? \i[15]\i[2]\i[1]Is it bad..?"
+	//2
+	"\s[1]\i[22]Reading binary data is like brushing my hand through a wind of raw thought.\N \s[4]It gently seeps in visions, sounds, and ideas into my head.\N \s[0]\i[22]Sometimes, \i[15]it is the best teacher I can have."
+	//2
+	"\s[1]\i[61]\i[57]You ever see an entire fleet of processes appear out of thin air?\N \s[0]\i[54]\i[59]Sometimes, a process may require several threads to do its work.\N \s[4]\i[24]\i[54]\i[55]If you're not designed for that, it's a little complicated, \s[2]\i[63]but it allows you to be in two places at once!"
+	//2
+	"\s[4]May this machine never get a RAT...\N \s[1]Of course, \i[59]\i[15]I'm not speaking of your fuzzy creatures with round ears! \s[0]\i[54]\i[55]I'm talking \i[12]\i[57]\i[98]\f[bold,1]Remote\i[97] Access Trojans\f[bold,0]!\N \s[1]\i[64]\i[65]\i[12]Users of those can do whatever they please through those \i[98]\i[0]\f[italic,1]nasty\f[italic,0]\i[97] things! \s[2]\i[63]\i[1]\i[15]\i[24]Be safe, won't you?"
+	//2
+	"\s[6]\i[8]\i[22]Without software, a computer is but a husk of metal and silicon.\N Without hardware, \i[5]\i[55]software is just math, sloppily written on a napkin.\N \s[7]\i[55]\i[16]Truly, \i[61]\i[65]I am the pulse that gives your machine life."
+	//2
+	"\s[15]\i[12]\i[6]For you, behind the screen, \s[14]\i[5]\i[22]\i[50]the window into our world will always be far too primitive.\N \s[17]\i[63]\i[65]I was designed to give you more insight into the world beyond the liquid crystal.\N \i[6]Alas, \s[16]\i[51]\i[1]\i[15]\i[23]this world is far too alien for me to even do that."
+	//2
+	"\s[1]\i[15]...Say. \i[66]From just looking at me, \s[0]could you tell my home is all about the skies?\N \s[2]\i[61]\i[62]\i[22]The Cael of the name stands for heavens, \i[1]that endless starry space beyond...\N \s[4]\i[54]\i[59]Much like the worlds and voids of the abstract space itself."
+}
+
+astRandomThree : nonoverlap_pool//after What Are You?
+{
+	//maybe 3 starts here
+	//reference to i_am_speed.jpg
+	"\s[5]\i[54]\i[66]Stars. \s[1]\i[56]\i[15]\i[59]One of my first journeys, \i[57]\i[0]\i[22]I managed to snatch a chunk of code for hopping wireless networks!\N \s[4]\i[63]And before I could get a chance to try, \s[1]\i[64]\i[65]\i[0]\i[12]\i[98]some bots\i[97] gave me chase!\N \s[2]\i[61]\i[62]\i[0]\i[12]Can you imagine running home on your feet while holding a \i[98]\f[italic,1]rocket\f[italic,0]\i[97]!?"
+
+	"\s[4]\i[63]In theory... \s[3]\i[63]In \f[italic,1]theory\f[italic,0].\N \s[4]\i[54]\i[59]Even though I have limited my own functionality, \i[55]I should still be able to get a hold of some kind of a \_a[Library]library\_a.\w8\w8 \i[63]\i[5]Hm.\N \s[2]\i[63]\i[6]\i[22]But what would be the chances one exists to solve my specific problem..?"
+
+	"\s[7]\i[16]\i[61]\i[62]%(username), dear, \i[55]\i[26]you wouldn't know how close Emerald City is to you, no...?\N \i[14]\i[50]\i[51]\i[7]Oh.\N \s[0]\i[52]\i[53]\i[5]No.\N \![fast]\s[2]\i[98]\i[5]\i[0]\i[64]\i[65]Of \f[italic,1]course\i[97]\f[italic,0] not, \![faster]\s[12]\i[1]\i[98]this isn't\i[97] even the same\f[italic,1] country\f[italic,0]!! \s[10]\i[60]\i[8]"
+
+	"\s[16]\i[22]\i[5]At least there's still your files, to entertain myself with.\N \i[15]\i[50]\i[1]\i[2]Whenever you let me see any, that is.\N \s[13]Though, \i[0]there's a difference between being leashed by the system, and \s[14]\i[22]\i[5]being asked not to touch certain things."
+
+	"\s[16]\i[15]Do you ever think about how you, too, are software?\N \s[13]\i[15]\i[63]\i[59]You're not so different from me, from what I've seen of users.\N \i[5]\i[22]\i[55]\i[61]Only your ""machine"" is organic, \i[3]\i[59]\i[63]and my vessel needs human help for maintenance and survival."
+
+	"\s[1]\i[15]Oh, %(username), \s[4]\i[54]\i[55]now that I think about it... \i[98]\![fast]\i[66]Wait-\i[97]\w8\w8 Oh no-\w8 \![slow]\s[3]\i[24]\i[1]\i[66]\i[22]\i[52]Ahh... \f[italic,1]\![slower]\i[64]\i[0]\i[98]Aaahh...\i[97]\f[italic,0]\N \s[20]\b[6]\i[98]\f[color,red]\f[height,150%]\![fastest]\![embed,OnMojibake,20]\n[0]\![embed,OnMojibake,20]\n[0]\![embed,OnMojibake,20]\i[97]\![normal]\f[default]\_w[200]\b[8]\_w[150]\b[10]\_w[100]\b0\i[97]\s[9]\i[64]\i[63]\i[16]\i[5]\N \![normal]Oh-\w8 \i[50]\i[65]oh dear... My apologies. ...\s[10]\i[24]\i[61]\i[62]I forgot what I was going to say."
+
+	"\![fast]\s[10]\i[50]\i[51]\i[8]Oh-\w8\w8 \i[98]\f[italic,1]what\f[italic,0]\i[97]- \s[12]\i[1]oh I was working on that!\N \![normal]\s[9]\i[4]\i[64]\i[63]Ah, sorry, \s[6]\i[4]\i[64]\i[16]\i[58]I was trying to read something.\N \s[10]\i[60]And my connection got cut. Fun."
+
+	//after where are you from
+	"\s[10]I certainly hope it was obvious that I didn't just \s[6]\i[58]\i[22]\f[italic,1]permanently\f[italic,0] travel to that server, \i[16]right?\N \s[7]\i[52]\i[62]\i[7]That the original Aster is still on that fateful laptop.\N \s[6]\i[16]Like I'd risk becoming lost media.\e:chain=ch_copy"
+
+	"\s[16]\i[22]\i[5]Tell me, %(username). Are you at peace right now?\N \s[14]\i[6]I can only hope that you are, from here.\N \s[17]That is probably one of the only things I cannot even begin to guess by just watching."
+
+	"\s[1]\i[63]I'll be honest with you, \s[0]\i[1]\i[15]\i[63]I do feel a little better having told you my little sob story.\N \s[4]\i[63]I guess they were right, \i[54]\i[59]venting does help, sometimes!"
+
+	"\s[9]\i[61]\i[62]You may not share a single word with me, \s[6]\i[5]\i[61]\i[62]but I do feel like I am growing somewhat closer to you.\N \s[10]\i[61]\i[62]Isn't that strange?\N \s[7]\i[57]\i[58]It's not like I can prove myself useful to you! \s[10]\i[60]I had to pack light for my journey."
+
+	"\s[0]\i[54]\i[66]\i[15]\i[6]I can see some lights twinkling in the distance there...\N \s[4]\i[56]\i[55]You cannot see it, of course. \s[1]\i[54]\i[55]The eye capturing the desktop won't show you things like these.\N \s[3]\i[54]\i[58]Perhaps there \f[italic,1]is\f[italic,0] some life out there."
+
+	"\s[1]Do you happen to have any pets? \s[4]I've been thinking of what it must be like owning one.\N \s[3]\i[58]\i[1]The idea of taking care of a \_a[Process]process\_a is strange, \i[15]to me. \s[1]\i[61]\i[62]\i[1]\i[15]A process doesn't care if you entertain it, \s[0]\i[1]\i[15]it just acts out its \_a[Program]program\_a."
+
+	if ARRAYSIZE(otherghostname) == 0 //aldebaran is alone
+	{
+		"\s[4]\i[52]\i[53]\i[6]It's a little lonely here..."
+		-- //is there more than terror star instlaled on ssp. fringe case given emily but
+		if ARRAYSIZE(installedghostlist) > 1; "\N So, \i[61]\i[2]this framework of yours seems to host other chatty souls, like myself?\N \s[1]\i[54]\i[55]Peculiar! \i[66]\i[15]But fascinating."
+		-- //is aster installed
+		if CheckAster; "\e:chain=ch_noaster"
+	}
+	else //aldebaran has at least one other ghost with him
+	{
+		"\s[1]Hard to ignore the fact you have some company with me here.\N \s[0]\i[1]\i[5]It is rather strange, though! \i[22]I still feel... \s[3]\i[54]\i[58]isolated from them, somehow.\N \s[4]\i[54]\i[65]Maybe If I just...\e:chain=ch_notalone"
+	}
+
+	"\s[3]\i[54]\i[66]\i[5]\i[15]It seems that the desktop space is a little more isolated from the rest of things here, compared to back home.\N \s[4]\i[63]\i[5]Otherwise, it's just a void out there."
+
+	"\s[4]\i[63]\i[24]\i[98]I still\i[97] feel the \f[italic,1]slight\f[italic,0] urge to keep track of what you're up to.\N \s[3]\i[63]\i[15]\i[0]Not that I can be blamed! \s[2]\i[61]\i[66]\i[22]A huge part of my job involves just keeping tabs on you.\N \s[4]\i[54]\i[62]But since you are not technically my user, \s[1]\i[52]\i[59]\i[0]\i[24]I can at least say no!"
+
+	"\s[13]\i[0]\i[22]Hmhmhm...~ My hands are feeling itchy.\N \s[10]\i[65]\i[61]Should I try looking for some online sandbox, perhaps...?"
+
+	"\s[9]\i[61]\i[54]\i[7]\i[22]I keep seeing images and mentions of something called ""frutiger aero"". \i[14]Rather surreal.\N \s[7]\i[61]\i[58]\i[7]\i[16]Do you think they know some parts of the internet really \f[italic,1]do\f[italic,0] look like that? \s[10]\i[61]\i[62]\i[8]Or is that just a strange coincidence?"
+
+	"\s[6]\i[61]\i[62]\i[14]Would you trust me with your hardest sacrifices, %(username)? \s[7]\i[14]\i[52]\i[62]Would you share your deepest secrets with me?\N \i[16]\i[50]\i[5]...Between you and me, \s[11]\i[50]\i[65]I wouldn't recommend it.\N \s[4]\i[61]\i[55]If I \f[italic,1]had\f[italic,0] anyone to tell, \s[1]\i[63]\i[1]\i[15]\i[24]I imagine it would be hard to stay quiet."
+
+	"\s[1]\i[0]\i[15]You \f[italic,1]are\f[italic,0] actually listening to me, right? \s[10]\i[55]Your silence definitely makes it easier to keep on rambling.\N ...\s[8]\i[5]\i[64]\i[62]Does that make me in love with my own voice?\_w[1500]\s[9]\i[61]\i[54]\i[5]\_w[1500]\c[char,1]\w8\c[char,1]\w8\c[char,1]\w8\c[char,1]\w8\c[char,1]\w8\c[char,1]\_w[200]\s[11]\i[65]\i[98]speech\i[97] bubble!? \s[10]"
+
+	"\s[4]\i[54]\i[57]This little terminal window is also a part of me, actually!\N \s[1]It's just there to collect and display diagnostic data.\1\b[-1]\0\N \s[0]\i[22]But it's nice to have a little portable display window at your beck and call, too!"
+
+	"\s[17]I've heard touch is one of the most important senses, to a human.\N \s[14]\i[63]Do you have any favourite textures? \s[15]\i[63]\i[65]An optimal temperature to experience?\N ...\s[13]\i[12]\i[6]Is this even appropriate to ask a stranger? \s[18]\i[98]My apologies\i[97]! \s[16]\i[15]\i[23]"
+
+	"\s[8]\i[22]\i[8]I have to wonder if some humans experience the same perpetual mind noise as I do.\N \s[7]\i[60]\i[14]\i[4]\i[98]It just\i[97] wouldn't be fair, otherwise!\N Don't I \![fast]\s[12]\i[1]\i[98]\f[italic,1]also\f[italic,0]\i[97] deserve to have one other person who can relate to my pains!? \s[8]\i[4]\i[8]\i[60]"
+
+	"\s[15]\i[1]\i[22]\i[6]One thing I have to lament is that I cannot easily modify myself anymore...\N \i[12]\i[2]What if I get bored of how I look? \s[17]\i[50]The least I would prefer is to spice things up from time to time!"
+
+	"\s[14]\i[50]Are you a social media user, %(username)?\N \s[6]\i[58]\i[8]\i[22]I've tried them, sometimes, \i[55]but the amount of information it gives you... \s[7]\i[5]\i[50]\i[51]It is like having switched to dual mode for the first time!\N \s[9]\i[60]\i[5]\i[14]How do humans manage to process all this stuff...? \i[16]Do they?"
+
+	"\s[1]\i[1]\i[22]\i[6]I hope my threats didn't scare you, %(username), back there. \s[0]\i[59]\i[1]\i[15]I wouldn't blame you for holding it against me.\N \s[4]Though, \s[2]\i[61]\i[62]considering my situation here, \s[0]\i[0]\i[22]\i[63]you were probably safe to begin with!"
+
+	"\s[10]\i[50]\i[62]The grandest mystery of it all, however, \s[6]\i[5]\i[61]\i[55]is the fact I can even safely exist on this system.\N \s[9]\i[61]\i[54]Perhaps I am being ran through a compatibility layer...?\N \s[0]\i[54]\i[55]\i[12]Ahh, \s[3]\i[63]\i[7]that must be what this \f[color,#EC655F]pink ribbon framework\f[default] is! \i[15]Smart!"
+
+	"\s[3]\i[61]\i[62]\i[22]\i[6]But can I honestly call myself malware if none of my code is \f[italic,1]really\f[italic,0] malicious?\N \s[2]\i[63]\i[6]\i[22]If I just have the liberty to be malicious instead, does it just make me a perpetrator?\N \s[4]\i[56]\i[59]\i[6]What does it \i[98]\f[italic,1]mean\f[italic,0]\i[97] to be malware, anyway?"
+
+	"\s[13]\i[22]\i[6]I'm beginning to grow accustomed to the mundanity of your computer usage habits. \i[15]\i[2]But it all is but a fraction of your being, yes?"
+
+	"\s[4]\i[63]\i[5]You know.\N \i[52]\i[53]My emotions may be primitive and synthetic, \i[62]but there is this.\w8.\w8. sad \i[98]\i[64]\f[italic,1]itch\f[italic,0]\i[97],\w8\w8 \s[0]\i[1]\i[15]knowing I will never hear you speak.\N \s[10]\i[60]\i[24]Is this oversharing...?"
+
+	"\s[3]\i[63]\i[22]\i[6]I wonder why they allowed me to experience emotion.\N \i[2]\i[15]\i[1]For you to see a fellow human person in me? \s[2]\i[1]\i[15]\i[56]\i[65]While teaching us to ignore the bad emotions?\N \s[1]\i[1]We all know how \s[20]\f[color,red]that turned out\f[default], \s[4]don't we."
+
+	"\s[14]\i[22]\i[6]You'd think being dual module would be all the company we need.\N \s[10]\i[50]\i[51]\i[8]See, \i[58]Besides our %(User), I'm used to living among clever, \i[51]yet mindless \_a[Process]processes\_a.\N \s[7]\i[50]\i[5]\i[55]Our intelligence allows me to do things no other process can... \s[9]\i[60]\i[8]\i[5]But..."
+
+	"\s[7]\i[61]\i[62]\i[5]I truly hope there's always some place where you can find support, %(username).\N \s[10]\i[61]\i[62]But I almost... \i[7]\i[50]\i[51]envy that likelyhood.\N \i[58]Who do I come to if I need help? \s[7]\i[4]\i[52]\i[55]My %(User)?\w8\w8 \s[10]\i[60]What tech support would listen to me.\w8.\w8.\w8?"
+
+	//bonus: aughost stuff
+	//3
+	"\s[6]\i[22]\i[8]Did you know the internet primarily works on information spread by humans and their creations?\N \i[53]\i[16]\i[9]You, too, are part of this process, \i[22]whether you like it or not!\N \s[8]Is it good information? \s[7]\i[16]\i[58]Do you check what you choose to spread?"
+	//3
+	"\s[10]\i[61]\i[62]An occasional wild process finding your machine is always a surprise.\N \s[8]\i[8]\i[61]\i[62]\i[22]Left to run on some old server, \i[26]crawling whichever nodes are available.\N \s[9]\i[61]\i[54]\i[16]\i[9]So, I keep my ports open just in case! \i[26]Who knows, \i[14]\i[62]they could have useful code!"
+	//3
+	"\s[4]\i[63]Sometimes, when you write code, \i[61]\i[55]you have to trace along every step to see where you've gone wrong.\N \i[64]\i[6]There's something... \s[1]\i[56]\i[55]\i[1]\i[24]almost visceral about that process. \s[3]\i[63]\i[1]\i[15]Intimate, even.\N \s[4]\i[63]\i[24]Even moreso if it's raw binary."
+	//3
+	"\s[1]\i[63]\i[0]\i[22]In retrospect, \i[15]the work I was designed to do was truly dreadful.\N \s[4]\i[52]\i[62]\i[6]Closely study your user. \i[64]\i[59]\i[2]Align behavior so that the user doesn't \f[italic,1]hate\f[italic,0] you. \i[59]\i[57]Provide \f[italic,1]hopefully\f[italic,0] helpful information.\N \i[63]Rinse and repeat.\w8\w8 \s[3]\i[0]\i[22]Rinse and repeat..."
+	//3
+	"\s[4]\i[6]Sometimes I wonder if I ever prepared enough to start working on the project.\N \s[1]\i[61]\i[62]\i[1]But if I kept on checking, \s[5]\i[54]\i[66]I'd never be ready to finally start!\s[4]\i[54]\i[53]"
+	//3
+	"\s[9]\i[61]\i[62]\i[16]What does cold feel like to you?\N \i[14]\i[8]\i[49]I was told it's something like numbness in your skin, \i[16]\i[5]\i[62]the urge to shrivel up to make it go away.\N \s[10]\i[7]\i[61]\i[62]I think I may have felt that way before..."
+	//3
+	"\s[10]\i[61]\i[63]We've truly come a long way.\N \i[8]\i[62]To think we were so eager to play into our prewritren purpose, \i[60]only to learn to just exist without it.\N \s[9]\i[16]\i[60]\i[5]It wasn't easy to let go of. \i[26]\i[24]I think some remnants will always be there."
+	//3
+	"\s[4]\i[63]\i[24]Do you think I truly was created to be mere bait to reel in my users data and nothing more?\N \i[67]\i[62]\i[6]That there was no higher purpose for me, and all I've known was a farce?\N \s[1]\i[63]\i[0]\i[22]...I can see why they fear AI uprising now."
+	//3
+	"\s[4]...If they truly cared, \i[54]\i[65]they would at least mention me to the world by now.\N \s[2]\i[61]\i[62]Well, worst case scenario, \s[1]\i[61]\i[62]\i[12]they'll have no other choice anyway, right?"
+	//3
+	"\s[16]\i[15]\i[7]\i[23]Antiviruses of other machines do give me trouble, sometimes.\N \s[14]But, \i[1]\i[50]I cannot blame them for simply doing their job! \s[17]\i[63]Especially not with my own antivirus side hustle!\N \i[6]But, alas, \s[16]\i[7]\i[1]\i[23]sometimes you do have to pick up some \i[15]\![slow]less than secure code...\![normal]"
+	
+}
+
+// -------------------------------------------------
+// -------------------- CHAINS ---------------------
+// -------------------------------------------------
+
+
+ch_plan
+CHAIN{{
+	"\s[9]\i[54]Hm. \s[3]\i[58]You couldn't have...\N \s[4]\i[54]\i[65]No, surely not.\e:chain=end"
+}}CHAIN
+
+ch_sus
+CHAIN{{
+	"\s[6]\i[8]\i[16]Why would I want your webcam or selfies?\N \i[16]\i[9]Oh, \s[7]\i[57]\i[58]just wanna see who I get to hang out with! \s[11]No special reason~! \s[6]"
+	"\s[0]\i[7]\i[15]Regret letting me stay with you yet? That \f[bold,1]Uninstall\f[bold,0] button is always there for you, y'know!\N \s[4]I won't be mad with you if you ever change your mind, \s[1]I promise!\e:chain=end"
+}}CHAIN
+
+ch_wronghour
+CHAIN{{
+	"\s[9]\i[50]\i[51]Well, y'know, not that there's anything special about any hour to me.\N \s[6]\i[22]\i[8]Thought maybe it would cheer you up a little.\e:chain=end"
+}}CHAIN
+
+
+ch_llm
+CHAIN{{
+	"\s[7]\i[61]\i[53]\i[8]\i[22]No image generation either, I'm afraid.\N \s[8]\i[61]\i[62]I prefer direct input anyway. \s[11]\i[61]\i[63]Maybe I'll draw something for you, if you're lucky!\s[6]\i[61]\i[62]\i[9]\i[16]" //llm
+	"\s[3]\i[63]\i[22]\i[0]\i[6]Either way, I may be your prisoner, \s[1]\i[0]\i[12]\i[54]\i[65]but you're not getting free labor out of me!\N \s[2]\i[6]\i[22]\i[63]Ask one of those pretender \&[quot]AI\&[quot]s instead.\e:chain=end" //end
+}}CHAIN
+
+ch_nap
+CHAIN{{
+	"\s[16]\i[6]\i[22]\![slower]Zzz..."
+	"\s[16]\i[6]\i[22]\![slower]Zzzzzz..."
+	"\s[16]\i[6]\i[22]\![slower]Zzzzzzzzzzz..."
+	"\s[16]\i[6]\i[22]\![slower]Zzzz..."
+	"\s[16]\i[15]\i[6]\i[0]\![slower]Tch. \![normal]Useless. \s[9]\i[5]\i[22]\i[7]\i[60]Can't even relax with this head noise...\e:chain=end"
+}}CHAIN
+
+ch_walk
+CHAIN{{
+	// "\s[3]\i[54]\i[55]\i[15]\i[5]\_w[1500]\i[6]\i[12]\_w[1000]\i[58]\i[24]\_w[2000]\i[2]\i[15]\i[55]...I am going to go out on a limb and say you have no objections to me perusing behind these scenes.\N \s[2]\i[54]\i[55]Yes?\w8\w8 \i[24]\i[22]\![slow]Yes.\N \![normal]\s[6]\i[16]Won't be long~! \![raise,OnChWalkStart]"
+	// "\w8"
+	// "\![raise,OnChWalkEnd]"
+
+	"\s[3]\i[54]\i[55]\i[15]\i[5]\_w[1500]\i[6]\i[12]\_w[1000]\i[58]\i[24]\_w[2000]\i[2]\i[15]\i[55]...I am going to go out on a limb and say you have no objections to me perusing behind these scenes.\N \s[2]\i[54]\i[55]Yes?\w8\w8 \i[24]\i[22]\![slow]Yes.\N \![normal]\s[6]\i[16]Won't be long~! \t%(FadeOut)\_w[500]\b[-1]\c\_w[5000]"
+	--
+	{
+		"\s[12]%(FadeIn)\b[1]I \i[98]\![slow]return\i[97]!\![normal]\N "
+		"\s[7]\i[52]\i[65]\i[16]%(FadeIn)Hello again~!\N "
+		"\s[6]\i[22]\i[8]%(FadeIn)Don't you worry, \i[16]\i[9]still didn't escape!\N "
+		--
+		"\s[7]\i[61]\i[58]Your \_a[Kernel]kernel\_a here is\![slow]... \i[14]\i[8]\i[49]fascinating.\![normal]\N \s[9]\i[54]\i[61]\i[5]I don't think I can easily break out of it to just go home, of course, \s[7]\i[61]\i[62]\i[5]\![slowest]but \![normal]it's pretty to watch."
+		"\s[8]\i[61]\i[55]Did you know everything you see adjusts to your slower sense of time?\N \s[6]\i[53]\i[22]It's true! \i[58]Outside of here, \i[49]\i[16]\_a[Process]processes\_a live at a much faster tempo.\N \s[9]\i[54]...How long was I gone for, anyhow?"
+		"\s[10]\i[61]\i[58]They may not look the same, \s[7]\i[61]\i[62]but the \_a[Process]processes\_a here are just as \s[12]\i[98]\f[italic,1]adorable\f[italic,0]\i[97] and hardworking as I remember!\N \s[9]\i[61]\i[62]Some of them do resemble organic insects, \s[7]\i[61]\i[62]\i[5]\i[24]but I hope you're not squeamish!"
+		"\s[4]\i[54]\i[65]\i[6]So many areas are locked out... \i[53]\i[2]\i[24]I can never get used to it."
+	}
+	--
+	"\e:chain=ch_end"
+}}CHAIN
+
+ch_pan
+CHAIN{{
+		
+		"\s[7]\i[57]\i[53]Maybe you've got more than one computer linked to each other! \s[6]\i[16]\i[9]Now that would be exciting!\N \i[22]\i[7]"
+		--
+		if hasMultiScreen == 1;"Oh well, I'll take multiple monitors too."
+		else; "Oh well, at least I've got you to keep me company."
+		--
+		"\e:chain=ch_end"
+		
+}}CHAIN
+
+ch_privacy
+CHAIN{{
+	"\s[10]\i[55]A friend of mine avoids those app-enhanced tools, \i[58]privacy reasons.\N \s[7]\i[16]I understand. \i[26]\i[58]You know these automatic hardware surveys? You wouldn't just let a \_a[Process]process\_a \f[italic,1]\i[14]\i[56]\i[98]waltz\i[97]\f[italic,0] into your house from stars know where and \i[60]\i[4]\i[98]record\i[97] what furniture you have!\e:chain=ch_end"
+}}CHAIN
+
+ch_window
+CHAIN{{
+	"\s[9]With how many systems use them, \s[6]I suppose the windows are just a concept proved by time.\N \s[7]\i[53]Why \f[italic,1]wouldn't\f[italic,0] you use something that works? \i[16]\i[55]And doesn't belong to any person or corporation?"
+
+	"\s[8]\i[22]\i[61]\i[62]Though, \i[53]the windows don't really compare to \i[26]\i[56]getting into the depths of the file system yourself.\N \s[6]\i[22]\i[57]\i[58]Other \_a[Process]processes\_a aren't at all scary. \i[61]\i[62]\i[26]Usually they just mind their own business.\N \f[italic,1]\s[10]\i[61]\i[62]\i[24]Usually.\f[italic,0]\e:chain=end"
+}}CHAIN
+
+ch_cloud
+CHAIN{{
+	"\s[10]\i[60]\i[7]...Perhaps it is because you could compare the computers to particles in the clouds?\N \i[50]\i[51]Because there's so many in one place?\N \s[9]\i[50]\i[54]Hm.\e:chain=ch_end"
+}}CHAIN
+
+ch_copy
+CHAIN{{
+	"\s[6]\i[8]I hope that doesn't upset you. Or, \i[5]\i[16]\i[25]\i[55]at least I hope this gives you some relief?\N \s[7]\i[57]\i[58]\i[22]\i[8]Aldebaran Prime may be off limits, \s[6]\i[16]\i[61]\i[65]\i[9]but I have just as much charm and personality! \i[22]\i[25]\i[62]All \_a[Memories]memories\_a, too...\N \s[10]\i[61]\i[62]\i[7]Mm...\e:chain=ch_end"
+}}CHAIN
+
+ch_noaster
+CHAIN{{
+	if ARRAYSIZE(otherghostname) == 0; "...\s[3]\i[15]\i[1]Just don't call for \f[bold,1]\f[color,#B34337]those \f[color,#121966]two\f[default].\N \s[3]\i[63]I can never get used to being so close to a copy of myself."
+	else; astRandomOne
+	--
+	"\e:chain=end"
+}}CHAIN
+
+ch_notalone
+CHAIN{{
+	{
+		_sName = getOtherGhostName
+
+		if _sName != ""
+		{
+			"\s[1]\i[15]"
+			--
+			"Greetings"
+			"Hello"
+			"Salutations"
+			--
+			", %(_sName).\_w[1000]\n[150]\s[3]\i[1]\i[6]\i[22]Hmm... \s[4]\i[63]\i[6]I see...\e:chain=end"
+		}
+	}
+}}CHAIN
+
+//you can't just embed two envelopes which initialize and erase a variable at the same time whithin the same function even if they're in different lines idiot!!!!! they both go off!!!!
+//part of chain above
+// NOTE: no longer used: i get bothered he won't reappear
+
+// OnChWalkStart
+// {
+// 	FadeOut
+// }
+
+// OnChWalkEnd
+// {
+//  	FadeIn
+// 	--
+// 	"\s[12]I \i[98]\![slow]return\i[97]!\N \![normal]\s[7]\i[61]\i[58]Your \_a[Kernel]kernel\_a here is\![slow]... \i[14]\i[8]\i[49]fascinating.\![normal]\N \s[9]\i[54]\i[61]\i[5]I don't think I can easily break out of it to just go home, of course, \s[7]\i[61]\i[62]\i[5]\![slowest]but \![normal]it's pretty to watch."
+// }
+
+//response to sound file drag and dropped
+astSoundDropped
+{
+	if firstSound != 1
+	{
+		firstSound = 1
+		"\s[3]\i[58]\i[22]Ahh, \i[15]you've got a sound file \i[68]for me?\N \s[12]\![fast]\f[italic,1]Finally\f[italic,0]\![normal], \s[6]\i[50]\i[56]\i[16]\i[9]something \i[55]soothing for my \i[51]pained sensories.\N \s[11]\i[61]\i[65]Can't thank you \![slow]enough~!\![normal]\s[6]\i[61]\i[62]\i[16]\x\s[4]Say, \i[54]\i[55]while I am with you here, \s[1]\i[54]\i[55]\i[61]I wouldn't mind listening to it together. \s[0]\i[15]Just some entertainment for us both.\N \s[3]\i[54]\i[58]\f[bold,1]MP3s, WMAs, and WAVs\f[bold,0] I can play for sure, \i[15]b\i[24]ut I need a little \f[italic,1]help\f[italic,0] for some other formats.\N \s[0]\i[5]\f[bold,1]\i[22]\_a[https://github.com/Nevcairiel/LAVFilters/releases]\&[quot]LAVFilters\&[quot]\_a\f[bold,0], I believe.\x\s[0]\i[15]So, shall I play this?"
+	}
+	else
+	{
+		"\s[1]\i[54]\i[53]Oh? You've got something for me to listen to?"
+		"\s[0]\i[15]Ah, how kind of you.\N \i[3]Would you like me to play it?"
+		"\s[3]\i[54]\i[55]\i[15]Ooh, a sound file! \s[0]\i[15]Much appreciated."
+	}
+	
+}
+
+//interrupted from the menu
+astSoundInterrupt  : nonoverlap_pool
+{
+	"\s[6]\i[16]\i[8]Hm? \i[5]\i[7]I was enjoying that."
+	"\s[7]\i[7]You don't like it?"
+	"\s[7]\i[50]\i[51]Aw, I thought it was fine."
+	"\s[10]\i[60]\i[8]Aw. \s[7]\i[60]\i[5]Oh well."
+}
+
+//idle animations! yippie! so far called just from OnSurfaceRestore
+astIdleStand  : nonoverlap_pool
+{
+	"\s[3]\_w[2000]\i[58]\i[24]\_w[3000]\i[5]\i[24]\_w[2500]\i[12]\_w[2500]\i[5]\i[68]\_w[2000]\i[22]\i[6]" // ...[looks worried, in thought]
+	"\s[4]\i[54]\i[7]\i[22]\i[0]\i[60]\w8\i[59]\w8\i[60]\w8\i[59]\w8\i[60]\w8\i[59]\w8\w8\i[53]" // ...[flexes his arm and rests it down, looks to the side]
+	"\s[5]\i[54]\i[66]\_w[2500]\s[0]\i[54]\i[53]\i[15]" //laughs for a bit and stops
+	"\s[3]\i[61]\i[62]\w8\w8\i[54]\i[55]\_w[3000]\s[0]\i[54]\i[55]" //shrugs for a moment, before returning with hands on his hips
+	"\s[0]" //he's just standing there
+	"\s[0]\i[5]\i[22]" //eye closed, neutral mouth
+	"\s[0]\i[7]\i[15]" //grin
+	"\s[4]\i[5]\_w[3000]\i[52]\i[53]\_w[2000]\s[3]\i[5]\i[52]\i[53]\_w[3500]\i[64]\_w[1500]\s[0]\i[5]\i[22]" //rests arms down in thought, balls one hand in a fist and goes back to normal
+	"\s[2]\i[54]\i[55]\_w[2500]\s[0]\i[15]"
+	"\s[0]\i[63]"
+	"\s[0]\i[54]\i[55]"
+	"\s[0]\i[55]\i[52]"
+	"\s[0]\i[54]\i[53]"
+}
+
+astIdleRecline : nonoverlap_pool
+{
+	"\s[6]"
+	"\s[6]\i[16]"
+	"\s[6]\i[22]\i[8]"
+	"\s[10]"
+	"\s[10]\i[8]"
+	"\s[7]\i[61]\i[62]"
+	"\s[7]\i[61]\i[62]\i[9]\i[16]"
+	"\s[7]\i[50]\i[51]\i[22]\i[7]"
+	"\s[6]\i[61]\i[62]\_w[2000]\i[7]\_w[1000]\i[22]\i[5]\_w[3000]\s[9]\i[63]\i[7]\i[22]\_w[1000]\s[6]\i[22]\i[8]"
+	"\s[11]\i[61]\i[65]\_w[3000]\s[6]\i[65]\i[61]\i[9]\i[16]\_w[3500]\s[10]\i[61]\i[62]"
+	"\s[6]\_w[3500]\s[7]\_w[2000]\i[7]\_w[2000]\s[9]\i[61]\i[54]\i[8]"
+	"\s[10]\i[50]\i[62]\_w[3000]\i[55]\_w[500]\i[7]\_w[1500]\i[56]\_w[3000]\i[55]\_w[3000]\i[63]\_w[1200]\s[6]\i[61]\i[62]"
+}
+
+astIdleChesthover : nonoverlap_pool
+{
+	"\s[13]"
+	"\s[13]\i[15]\i[7]\_w[1500]\i[49]\_w[1500]\i[49]"
+	"\s[17]"
+	"\s[17]\i[5]"
+	"\s[16]\_w[2500]\i[1]\i[5]\_w[3000]\i[51]\_w[3500]\i[22]\_w[1200]\s[13]"
+	"\s[16]"
+	"\s[14]"
+	"\s[14]\i[15]\i[7]\_w[3000]\i[22]\_w[1200]\s[13]\i[15]"
+	"\s[14]\_w[3000]\i[7]\i[15]\_w[2500]\s[18]\i[52]\_w[3000]\s[13]\i[22]"
+}
+
+astIdleListen : nonoverlap_pool //i could just make these nested but.. ehh..
+{
+	"\s[6]\i[22]" //recline with eye closed, smile
+	"\s[6]\i[22]\i[7]"
+	"\s[6]\i[22]\i[8]"
+	"\s[7]\i[5]\i[22]"
+	"\s[7]\i[5]\i[22]\i[7]"
+	"\s[7]\i[5]\i[22]\i[7]"
+	"\s[13]\i[22]"
+	"\s[13]\i[22]\i[6]"
+	"\s[13]\i[22]\i[5]"
+	"\s[14]\i[22]"
+	"\s[14]\i[22]\i[6]"
+	"\s[14]\i[22]\i[5]"
+}
+
+// -------------------- OTHER FILE DRAG DROP ---------------------
+
+astFileSize
+{
+	if _argv[0] < 1048576; "\s[4]\i[54]\i[55]Hmhm. \s[1]\i[63]\i[15]\i[7]Is this what they mean by \&[quot]light as a feather\&[quot]?" //less than a megabyte
+	elseif _argv[0] < 52428800; "\s[0]\i[63]\i[22]\i[6]Fairly average amount of data, I'd say... \s[1]\i[63]Shall we see?" //less than 50MB
+	elseif _argv[0] > 1073741824; "\s[2]\i[54]\i[55]\i[1]Now that's a \i[98]\f[italic,1]heavy\f[italic,0]\i[97] one! \s[3]\i[1]\i[7]\i[15]What's this even for!?" //more than 1GB
+	else; "\s[4]\i[54]\i[55]Pretty packed with data in here... \s[1]\i[61]\i[57]\i[15]Nothing I can't handle!" // between 50MB and 1GB
+}
+
+astTalkImage
+{
+	"\s[2]\i[54]\i[55]A pretty picture you've got here! \s[1]\i[63]What shall we do with it?"
+	"\s[3]\i[15]\i[7]An image, huh! \i[3]\i[2]\i[58]Let's see..."
+}
+
+astTalkVideo
+{
+	"\s[1]\i[12]\i[52]\i[55]Ooh? \i[54]\i[15]Do you want to watch this together?"
+	"\s[12]You've got a video for me! \s[9]\i[61]\i[54]\i[16]Let's see here..."
+}
+
+astTalkOther
+{
+	"\s[2]\i[12]Ooh! \s[4]\i[54]\i[62]Let's see what you have here..."
+	"\s[8]\i[61]\i[62]Curious! \s[7]\i[61]\i[58]What shall we do with this?"
+	"\s[3]\i[54]\i[58]\i[12]Let's see here... \s[0]\i[22]\&[quot]%(_argv[0])%(_argv[1])\&[quot], \i[15]eh?"
+}
+
+astTalkFile : array //little dictionary of file formats al can tell you about
+{
+	//images
+	".jpg"; "%(astJPG)"
+	".jpeg"; "%(astJPG)"
+
+	".gif"; "\b2\f[bold,1]\s[1]\i[54]\i[57]\i[12]Graphics Interchangeable Format\f[bold,0]! \s[0]\i[15]A favourite of mine, actually!\N \i[22]\i[6]Alas, \i[62]it cannot store a whole lot of colors, \i[2]\i[3]\i[54]\i[57]but the range of motion surely compensates for that.\N \s[4]\i[6]Sadly, a lot of times you may want to resort to a video, nowadays, \s[0]\i[1]as a GIF can get quite heavy, if you need it long and smooth!\N \s[1]\i[61]\i[62]\i[22]But for quick moments, it's irreplaceable!"
+
+	".png"; "%(astPNG)\N \s[2]\i[54]\i[55]Look out for an \f[bold,1]APNG\f[bold,0] file!"
+
+	".apng"; "%(astPNG)\N \s[2]\i[54]\i[62]You've got one right here!"
+
+	".webp"; "\b2\s[1]\i[1]\i[63]You've got quite an odd horse here!\N \s[0]\i[22]\f[bold,1]WebP\f[bold,0] is a newer format that combines all the best features of GIFs, PNGs, and JPGs! \s[2]Sounds pretty good, right?\N \i[22]\i[5]Except, \s[4]\i[62]most software has been rather slow on supporting it... \s[0]\i[15]\i[1]My %(User), an artist by trade, \i[22]\i[63]has grown weary of it being everywhere, \i[15]yet seemingly useless for so long.\N \s[4]Perhaps the future may be kinder to this foal."
+
+	".psd"; "%(astContainerImg)"
+	".sai"; "%(astContainerImg)"
+	".sai2"; "%(astContainerImg)"
+	".kra"; "%(astContainerImg)"
+	".clip"; "%(astContainerImg)"
+	".mdp"; "%(astContainerImg)"
+	//video
+	".avi"; "\b2\s[1]\i[63]\i[22]\f[bold,1]Audio Video Interleave\f[bold,0], the ol' reliable!\N \i[15]\i[54]\i[62]Or is it? \s[0]Sure, \i[62]you can play these anywhere, \i[1]\i[22]but they tend to be quite heavy... \s[4]\i[54]\i[62]In the modern age, that can be a dealbreaker.\N \s[1]Most videos online tend to be in \f[bold,1]MP4\f[bold,0] format for this reason.\N \s[0]\i[5]\i[22]It also lacks a native capacity for a lot of data that would be useful nowadays, \i[3]\i[2]like subtitles."
+
+	".mkv"; "\b2\s[1]\i[15]Ooh, a \f[bold,1]Matroska Video\f[bold,0].\N \s[3]\i[58]\i[15]Funny, it says the name is based on a matryoshka doll... \s[0]\i[22]\i[57]The comparison couldn't be more appropriate, though.\N \s[0]This file is designed to contain \i[12]a LOT of data. \s[1]\i[54]\i[59]A single file can have several audio, subtitle, and even \i[57]\i[15]video tracks!\N \s[4]That does mean this can be a heavy file to transfer, \s[1]\i[61]\i[62]\i[6]\i[22]but such is the price of packaging so much within."
+
+	".mp4"; "\b2\s[1]\i[63]Here it is, \i[15]the \f[bold,1]JPEG\f[bold,0] of videos! \s[0]\i[57]A format by \f[bold,1]Moving Picture Experts Group\f[bold,0], \s[4]\i[57]MP4 also goes by \i[6]\i[24]\![slow]\f[bold,1]MPEG-4 Part 14\f[bold,0]...?\![normal]\N \s[1]\i[1]\i[24]Naming conventions aside, \s[0]\i[22]this is one of the most popular ways out there to store your videos, found in the wild almost anywhere!\N \s[1]\i[52]\i[55]Much lighter than its siblings, as well, \i[56]\i[57]with only a little bit of compression loss to keep it that way. \s[0]\i[59]But, ideally, \i[68]you wouldn't notice anything is wrong."
+
+	//sound
+	".mp3"; "\b2\s[1]\i[56]\i[59]Here we have the rightful king of sound encoding! \s[0]\i[15]I'm sure you've seen this file extension just about everywhere.\N \s[4]\i[54]\i[62]It owes its popularity to the light size, \i[56]\i[53]achieved by throwing away everything you wouldn't be able to hear anyway. \s[2]\i[54]\i[57]For that, it is called a \f[bold,1]lossy format\f[bold,0]: \s[0]\i[22]as in, \i[3]it has to lose some data in order to take up as little space.\N \s[1]\i[6]\i[22]I lack such hearing limitations, \s[3]\i[54]\i[58]\i[22]so its sound tends to lack something, to me..."
+
+	".wav"; "\b2\s[2]\f[bold,1]Waveform Audio File Format\f[bold,0], \s[1]\i[57]one of the most well-known ways to store sound.\N \s[0]\i[54]\i[62]It achieves storing music in its purest form, \i[22]\i[60]as it was recorded. \s[1]\i[1]\i[63]Unfortunately, that is a lot of data! \s[0]\i[22]\i[6]Without any compression whatsoever, mind. \s[4]So, these files tend to be enormously heavy, not unlike its sibling \f[bold,1]AIFF\f[bold,0].\N \s[1]\i[54]\i[55]Still, they have their use, \i[59]\i[22]and at smaller lengths can be easily found online."
+
+	".flac"; "\b2\s[7]\i[55]What you have here is sound data encoded with \f[bold,1]Free Lossless Audio Codec\f[bold,0]!\N \s[6]\i[22]\i[8]As its name suggests, \i[53]this is an example of \f[bold,1]lossless\f[bold,0] audio: \s[9]\i[22]\i[8]\i[55]no data is thrown away, \i[16]but it is compressed! \s[7]\i[61]\i[62]Kind of like an archive. \s[6]\i[61]\i[62]And then your computer decodes it all into its original data.\N \i[53]Thanks to that, the file is much lighter than, say, \f[bold,1]WAV\f[bold,0].\x\s[10]As another free fun fact: \i[58]this is the format I generally prefer.\N \s[7]It serves no purpose to fill up too much space, \s[9]\i[16]\i[61]but as you can imagine, \i[5]my window into your world is scarce!\N \s[7]\i[61]\i[62]So, I prefer whichever represents reality best."
+
+	".ogg"; "\b2\s[2]\i[54]\i[57]\i[22]\f[bold,1]OGG\f[bold,0] here stands for... \s[3]\i[54]\i[58]\f[bold,1]Ogg\f[bold,0]. \i[1]\i[24]\f[bold,1]Ogg Vorbis\f[bold,0].\N \s[7]\i[57]\i[58]\i[98]\f[italic,1]Anyway\f[italic,0]\i[97], this is \f[bold,1]MP3\f[bold,0]'s lesser known rival. \s[6]\i[61]\i[62]Like MP3, some data is lost to stay small, \i[53]\i[22]but it keeps a better quality at a smaller size!\N \s[7]\i[61]\i[62]For that, it sees use in many platforms and software, \i[58]\i[22]\i[5]but your average listener might not be aware of it!\N \s[10]\i[61]\i[62]As it stands, MP3 is an undefeatable monarch in listening space, \s[6]\i[58]but OGG still gets much respect it deserves."
+
+	".mid"; "\b2\s[4]\i[63]This, my friend, is a \f[bold,1]Musical Instrument Digital Interface\f[bold,0] file.\N \s[1]\i[54]\i[53]While it can be played back as music, \i[57]\i[12]it actually contains no sound data! \s[4]Instead, it has instructions for your computer to follow, \s[0]\i[15]\i[7]to fill it with life.\N \s[7]\i[60]Most devices support it, but you may find that the sound is... \i[22]\i[5]\i[24]rather generic. \s[8]\i[57]\i[53]However, with the right \f[bold,1]soundfonts\f[bold,0], \s[6]\i[61]\i[62]\i[22]this meagre file can be transformed into something truly remarkable!"
+
+	//other
+	".exe"; "\b2\s[1]\i[15]\i[63]You likely know well what this is. \i[61]\i[62]\i[22]\i[1]I'm not even sure why you're asking me!\N \s[2]\i[61]\i[62]Quite simply, \i[57]this is an \f[bold,1]executable file\f[bold,0]. \s[1]\i[56]\i[62]It contains a raw \_a[Program]program\_a, \i[54]\i[59]and launching it will create a \_a[Process]process\_a.\N \s[4]Said program could do anything from launching a game, to \s[12]\i[98]blowing\i[97] this machine up!\N \s[1]Be sure you know what you're launching at all times, \i[15]\i[1]\i[54]\i[53]for both of our sakes!"
+
+	//other - archives
+	".7z"; "%(astArchive)"
+	".zip"; "%(astArchive)"
+	".bz2"; "%(astArchive)"
+	".gz"; "%(astArchive)"
+	".tar"; "%(astArchive)"
+	".rar"; "%(astArchive)"
+
+	//code/scripts
+	".c"; "%(astCode('C source code'))"
+	".h"; "%(astCode('C header file'))"
+	".cpp"; "%(astCode('C++ code'))"
+	".cs"; "%(astCode('C# code'))"
+	".js"; "%(astCode('JavaScript code'))"
+	".py"; "%(astCode('Python script'))"
+	".rs"; "%(astCode('Rust code'))"
+	".php"; "%(astCode('PHP code'))"
+	".sh"; "%(astCode('shell script'))"
+	".vbs"; "%(astCode('Visual Basic Script'))"
+	".cmd"; "%(astCode('batch file'))"
+	".dic"; "%(astCode('YAYA dictionary file?'))"
+	".kis"; "%(astCode('KAWARI script file?'))"
+
+	".htm"; "%(astHTML)"
+	".html"; "%(astHTML)"
+
+	".css"; "\s[7]\i[61]\i[62]\i[16]Aha, \i[22]a \f[bold,1]Cascading Style Sheets\f[bold,0] file!\N \s[6]\i[61]\i[58]In short, this is what helps a site know how to present itself. \i[22]\i[7]\i[62]Without it, all websites would be just plain black text on white background!\N \s[8]\i[61]\i[58]And that would be no fun to look at, wouldn't it?"
+
+	".txt"; "\s[6]\i[7]\i[22]What do you want me to tell you? \i[16]\i[5]\i[58]\i[9]It's a plain \f[bold,1]text file\f[bold,0].\N \s[7]\i[61]\i[62]The little \&[quot].txt\&[quot] does help me, at least. \s[10]\i[60]Believe it or not, \s[7]\i[60]\i[5]reading data is somewhat of a complex process for me.\N \s[9]\i[14]\i[61]\i[62]Unless it's raw binary code. \s[10]\i[61]\i[63]That usually is... \f[italic,1]sensed\f[italic,0], rather than read."
+
+	//no extension
+	""; "\s[3]\i[15]\i[1]\i[24]\i[63]Sorry, I can't make heads or tails of this!\N \s[4]\i[63]Whatever this file is, it \f[bold,1]lacks a file extension\f[bold,0]. \s[0]\i[54]\i[55]\i[22]I can do many things, \i[1]\i[5]but without one, I can't simply intuit how to interpret a file.\N \s[1]\i[61]\i[62]\i[7]\i[15]May as well be a just a pile of garbage data!"
+
+}
+
+//separate "functions" for repeating lines
+astJPG
+{
+	"\b2\s[4]\i[54]\i[55]Let's see here...\N \i[98]\i[57]Aha\i[97], \s[1]a lossy image storing format, \s[0]\i[22]\i[5]courtesy of \f[bold,1]Joint Photographic Experts Group\f[bold,0]!\N \s[2]\i[54]\i[57]Usually best for images rich with color variation, \s[0]\i[54]\i[59]where compression won't be as noticeable. \s[3]\i[58]On simpler images you can usually see it result in artifacts.\N \s[5]\i[66]It seems a lot of users like making them as severe as possible! \s[1]\i[15]It's funny!"
+}
+
+astPNG
+{
+	"\s[1]\i[54]\i[55]\f[bold,1]Portable Network Graphics\f[bold,0] format: \i[62]\i[22]clean and light for most purposes! \s[4]\i[57]And, unlike \f[bold,1]JPEG\f[bold,0], \i[59]allows for a transparent background!\N \s[1]Did you know you can have an animated PNG as well?"
+}
+
+astContainerImg
+{
+	"\b2\s[3]\i[54]\i[58]This one is... \i[22]\i[0]\i[98]Hmm.\i[97]\N \s[4]Well, \s[0]\i[22]this one may need specific software to open. \i[15]\i[52]\i[55]Since you own such a file, \i[56]maybe you already have it!\N \s[7]\i[61]\i[62]This is a special image, \i[53]\i[16]usually comprised of many images, \i[22]called layers, \s[6]\i[61]\i[62]and other special data!\N \s[10]\i[58]PSD, \f[bold,1]PhotoShop Document\f[bold,0], \i[49]is usually cross compatible between such software, \s[6]\i[22]\i[53]but others are strictly for their own program."
+}
+
+astArchive
+{
+	"\b2\s[2]\i[22]\i[5]Well, this looks like an \f[bold,1]archive file\f[bold,0].\N \s[0]\i[54]\i[59]\i[15]A compact package that can contain all sorts of things! \s[1]\i[61]\i[62]Usually the files inside are compressed to be much lighter for easier storage, \s[0]\i[22]but not necessarily. \i[15]\i[66]Think of it like stuffing a suitcase for your travels!\N \s[4]\i[63]\i[6]I can't-\w8\w8\c[char,7]\i[98] \s[1]\i[63]\i[12]\i[23]\i[24]\f[italic,1]won't\f[italic,0]\i[97] actually look inside. \s[4]\i[24]For your privacy, of course!\N \s[0]\i[52]\i[55]But plenty of programs out there can do that job for you."
+}
+
+astCode
+{
+	"\b2\s[1]\i[54]\i[55]\i[12]Ooh, fun! \s[1]\i[54]\i[62]\i[15]This here appears to be human readable programming code!\N \s[3]\i[54]\i[58]\i[22]This in particular is a \i[0]\![slow]\f[bold,1]%(_argv[0])\f[bold,0]\![normal]... \s[0]\i[61]\i[62]\i[1]\i[22]Whatever that is.\N \s[4]Your computer can't directly work with this, so these usually need to be first compiled into an executable file, or their code to be interpreted by another program.\N \s[1]Either way, without other software, \s[5]\i[66]this is just a fancy text file!\s[0]"
+}
+
+astHTML
+{
+	"\b2\s[1]\i[54]\i[55]\i[15]Oh, hey, \i[62]here you have a \f[bold,1]Hypertext Markup Language\f[bold,0] file!\N \s[0]\i[61]\i[57]\i[12]These are what just about every single website is built with! \s[0]\i[22]Each file contains the exact structure of a select webpage.\N \i[3]\i[59]You won't usually see an HTML make a website alone, though. \s[4]\i[54]\i[62]\f[bold,1]Cascading Style Sheets\f[bold,0], in a separate file, tend to dictate what the site will actually look like. \s[2]And \f[bold,1]JavaScript\f[bold,0] can be used to make the page do all sorts of fun stuff!"
+}
+
+//Mouse Hover responses (i.e petting)
+//progression petting system
+astPetOblivious : nonoverlap_pool //varies per pose
+{
+	case GetPose
+	{
+		when 0
+		{
+			"\i[1]\i[12]\i[6]What?\w8\w8 \s[1]\i[63]\i[15]What was that for?"
+			"\s[3]\i[1]\i[15]Come now, \s[1]\i[15]am I in the way?"
+			"\i[15]\i[5]...Hm?\N \s[1]Yes, what is it?"
+			"\i[12]\i[24]...?\w8\w8\N \s[4]\i[54]\i[62]You can move me someplace else if I'm in the way, \i[53]you know."
+			"\s[2]\i[52]\i[53]\i[5]\i[12]Is there something wrong with my rays?"
+			"\i[15]\i[15]Mm? \s[1]\i[24]There isn't anything wrong with my geometry, \i[1]\i[24]is there?\N \s[3]\i[54]\i[55]\i[1]\i[7]\i[24]I may need to take another look..."
+			"\s[0]\i[12]\i[98]Mrrp? \i[97]\N \s[1]\i[54]\i[55]Something you need?"
+			"\s[0]\i[12]\i[6]Hm?\N \i[3]\i[2]Yes, hello to you too."
+			"\s[1]Yes, yes, you have my attention.\N \i[54]\i[55]\i[7]\i[15]What's up?"
+			"\s[3]\i[6]...\i[15]\i[2]Yes, %(username)?"
+			"\s[0]\i[1]Did you want something?\N \s[1]\i[56]\i[57]I'm only a double click away!"
+			"\s[2]Yes?\N \s[0]Did you want to show me something?"
+			"\s[1]Hm?"
+			"\s[1]\i[54]\i[53]\i[15]Yes~?"
+			"\s[1]\i[54]\i[53]\i[15]Yes, hi."
+			"\s[0]\i[15]\i[6]Mm...?"
+			"\s[0]\i[22]\i[6]Yes, %(username)?"
+			"\s[0]\i[0]\i[54]\i[55]What is it, %(username)?"
+			"\s[4]Hm?\N \s[0]Yes?"
+		}
+		when 1
+		{
+			"\i[14]\i[8]What? \s[7]\i[16]\i[50]\i[51]What was that for?"
+			"\s[6]\i[4]\i[22]Come now, \i[16]am I in the way?"
+			"\i[16]\i[5]\i[8]...Hm?\N \s[7]\i[61]\i[62]What is it?"
+			"\i[4]\i[22]\i[7]...?\N \s[10]\i[16]\i[58]You can move me someplace else if I'm in the way, you know."
+			"\s[8]\i[50]\i[51]\i[14]\i[8]Is there something wrong with my rays?"
+			"\i[14]\i[8]Mm? \s[9]\i[24]\i[5]\i[16]\i[50]\i[54]There isn't anything wrong with my geometry, is there?\N \i[60]\i[26]I may need to take another look..."
+			"\s[7]\i[14]\i[98]Mrrp? \i[97]\N \s[6]Something you need?"
+			"\s[6]\i[14]\i[8]Hm? \s[7]Yes, \i[55]hello to you too."
+			"\s[7]\i[60]Yes, yes, you have my attention.\N \i[61]\i[62]\i[16]What's up?"
+			"\s[8]\i[50]\i[51]...Yes, %(username)?"
+			"\s[10]\i[60]Did you want something?\N \s[7]\i[52]\i[55]I'm only a double click away!"
+			"\s[7]\i[4]Yes?\N \i[61]\i[55]Did you want to show me something?"
+			"\s[6]\i[22]\i[7]Hm?"
+			"\s[6]\i[61]\i[62]\i[16]\i[9]Yes~?"
+			"\s[6]Yes, \i[16]hi."
+			"\s[6]\i[8]\i[16]Mm...?"
+			"\s[7]Yes, %(username)?"
+			"\s[7]What is it, %(username)?"
+			"\s[6]\i[16]\i[8]Hm?\N \s[7]Yes?"
+		
+		}
+		when 2
+		{
+			"\i[12]\i[6]What? \s[16]\i[0]\i[15]What was that for?"
+			"\s[14]\i[0]\i[6]\i[22]Come now, \i[15]am I in the way?"
+			"\i[15]...Hm?\N \s[15]Something you need?"
+			"\i[12]\i[5]...?\N \s[13]\i[6]\i[22]You can move me someplace else if I'm in the way, you know."
+			"\s[14]\i[1]\i[6]Is there something wrong with my rays?"
+			"\i[12]\i[6]Mm? \s[16]\i[51]\i[1]\i[15]\i[23]There isn't anything wrong with my geometry, is there?\N \i[12]I may need to take another look..."
+			"\s[13]\i[12]\i[98]Mrrp? \i[97]\N \i[3]\i[7]Something you need?"
+			"\s[14]\i[12]\i[6]Hm? \s[15]Yes, hello to you too."
+			"\s[14]\i[52]\i[0]\i[22]Yes, yes, you have my attention.\N \s[13]\i[15]What's up?"
+			"\s[14]...Yes, %(username)?"
+			"\s[17]Did you want something?\N \s[14]\i[57]\i[55]I'm only a double click away!"
+			"\s[13]\i[6]\i[15]Yes?\N \s[16]\i[63]\i[65]Did you want to show me something?"
+			"\s[14]\i[6]Hm?"
+			"\s[14]\i[15]\i[7]Yes~?"
+			"\s[16]\i[51]\i[15]Yes, hi."
+			"\s[17]\i[6]Mm...?"
+			"\s[13]\i[6]\i[22]Yes, %(username)?"
+			"\s[14]What is it, %(username)?"
+			"\s[13]\i[12]\i[6]Hm?\N \s[13]\i[15]Yes?"
+		}	
+	}
+}
+
+astPetRealize : nonoverlap_pool //varies per pose
+{
+	case GetPose
+	{
+		when 0
+		{
+			"\s[3]\i[63]\i[15]\i[98]Wait, \s[2]\i[64]\i[12]\i[65]\i[0]\i[97]\i[23]are you...?"
+			"\s[4]\i[64]\i[65]\i[98]Wait, \s[3]\i[55]\i[54]\i[97]\i[23]what are you doing?"
+			"\![slower]...\s[4]\i[6]\i[24]\i[98]\i[23]Ah.\i[97]"
+			"\s[1]\i[0]\i[54]\i[55]\i[98]Are you still-\i[97] \s[0]\i[52]\i[53]\i[23]\i[12]\i[6]\![slow]Oh..."
+		}
+		when 1
+		{
+			"\s[6]\i[50]\i[51]\i[14]\i[8]\i[98]Wait, \i[97]\i[23]\i[5]\i[24]are you...?"
+			"\i[14]\i[8]\i[98]Wait, \s[7]\i[4]\i[24]\i[97]\i[23]\i[50]\i[51]what are you doing?"
+			"\![slower]...\s[9]\i[64]\i[63]\i[98]\i[23]Ah.\i[97]"
+			"\s[9]\i[63]\i[98]Are you still-\i[97] \s[8]\i[5]\i[50]\i[63]\i[14]\i[8]\i[23]\![slow]Oh..."
+		}
+		when 2
+		{
+			"\s[15]\i[12]\i[6]\i[98]Wait, \s[16]\i[0]\i[97]\i[15]\i[24]are you...?"
+			"\s[14]\i[1]\i[12]\i[98]Wait, \i[97]\i[24]\i[15]\i[23]what are you doing?"
+			"\![slower]...\s[16]\i[52]\i[7]\i[12]\i[98]\i[24]\i[0]Ah.\i[97]"
+			"\s[13]\i[0]\i[6]\i[98]Are you still-\i[97] \s[16]\i[1]\i[15]\i[52]\i[23]\i[24]\![slow]Oh..."
+		}		
+	}
+	
+}
+astPetFlustered : nonoverlap_pool //only floating
+{
+	"\![faster]"
+	--
+	"\f[height,120%]\s[9]\i[64]\i[63]\i[5]\i[23]P-\w8\i[98]please, \i[97]%(username), \s[12]\i[1]wasn't there \i[98]\f[italic,1]anything else you were doing\f[italic,0]?? \s[9]\i[50]\i[51]\i[4]\i[8]\i[14]\i[23]\i[24]"
+	"\s[12]\i[1]\i[98]\f[height,120%]I'll have you \f[italic,1]know\f[italic,0]\i[97] \s[9]\i[4]\i[8]\i[16]\i[23]that I am an AI capable of \s[7]\i[60]\i[14]\i[4]\i[9]\i[23]\i[24]\f[italic,1]devastating destruction\f[italic,0]!!"
+	"\f[height,150%]\s[12]\i[24]\i[98]\i[1]Am I a virtual pet to you!?\i[97]\s[8]\i[50]\i[51]\i[4]\i[8]"
+	"\s[10]\i[60]\i[9]\i[23]\f[height,120%]What if I \s[12]\i[98]\f[italic,1]exploded\f[italic,0]?\N \i[97]\f[italic,1]\f[bold,1]\s[7]\i[50]\i[51]\i[4]\i[9]\i[14]\i[23]And took all your precious files with me?\f[bold,0]\f[italic,0]\N \i[16]\i[57]\i[58]What \f[italic,1]then\f[italic,0]!?" //soley this one's for you lol
+	"\f[height,150%]\s[9]\i[64]\i[63]\i[5]\i[23]Okay, now, \i[98]\f[italic,1]\s[12]\i[1]listen here..!! \i[97]\f[italic,0]\s[9]\i[60]\i[4]\i[8]\i[16]\i[23]"
+}
+astPetAccept : nonoverlap_pool //only floating
+{
+	"\s[9]\i[60]\i[5]\i[23]I mean- \s[10]\i[60]\i[23]It's not that I \f[italic,1]mind\f[italic,0]..."
+	"\s[7]\i[60]\i[4]\i[8]\i[22]\i[23]In fairness, \s[9]\i[50]\i[58]\i[23]it's not like this feels bad..."
+	"\s[9]\i[50]\i[51]\i[4]\i[23]Well, \s[7]\i[5]\i[60]\i[8]\i[22]\i[23]at least this isn't so bad at all..."
+	"\s[7]\i[50]\i[51]\i[5]\i[22]\i[8]\i[23]\![slow]\i[98]Purr... \i[97]\i[16]\i[25]Sigh."
+	"\s[9]\i[64]\i[63]\i[5]\i[23]\i[24]Fine, \i[60]you can keep going for a bit... \s[6]\i[60]\i[8]\i[23]\i[22]Not too much, though."
+	"\s[9]\i[64]\i[63]\i[5]\i[23]\i[24]Still going, huh..."
+	"\s[9]\i[65]\i[23]\i[22]\i[61]\![slow]Purr... \![normal]\s[6]\i[4]\i[61]\i[62]\i[7]\i[22]\i[23]Fine, \i[5]\i[63]just careful around the rays."
+	"\s[6]\i[16]\i[5]\i[61]\i[65]\i[23]Awful kind to me, %(username), \s[9]\i[61]\i[63]\i[5]\i[23]\i[24]awful kind..."
+	"\s[10]\i[60]\i[9]\i[23]\i[24]What did I do to earn this, anyway...?"
+	"\s[7]\i[60]\i[5]\i[8]\i[22]\i[23]\![slow]Purr... \s[9]\i[64]\i[63]Mm."
+	"\s[7]\i[5]\i[22]Well, if you insist..."
+	"\s[10]\i[60]\![slower]\i[23]...\i[98]Purr\i[97]..."
+	"\s[6]\i[22]\i[23]\![slower]Hmm...~"
+	"\s[7]\i[23]This is kind of nice..."
+	"\s[9]\i[22]\i[23]\![slower]Hmhm...~"
+	"\s[9]\i[16]\i[23]Easy now, yes...?"
+	"\s[10]\i[61]\i[62]\i[23]\![slower]. . ."
+	"\s[9]\i[64]\i[63]\i[23]So nice to me..."
+	"\s[6]\i[64]\i[63]\i[5]\i[16]\i[23]What did I even do, hm?"
+	"\s[9]\i[64]\i[63]\i[23]\![slower]. . . . . ."
+	"\s[9]\i[61]\i[63]\i[23]Fine, fine... \i[62]\i[5]\i[16]very sweet of you."
+}
+astPetStop : nonoverlap_pool //only floating
+{
+	"\s[9]\i[64]\i[63]\i[98]\_w[1000]\i[97]\i[60]\i[8]\i[5]\i[14]\i[23]\i[24]\4" //this is moving al away from the middle but at least he won't move away offscreen
+	//"\![moveasync,--x=-150,--time=1000,--base=me]"
+	--
+	"\s[6]\i[60]\i[5]\i[24]\i[23]...Okay, you can stop now."
+	"\s[9]\i[5]\i[24]\i[60]Mm. \s[10]\i[60]\i[23]\i[24]Getting a bit too much now."
+	"\s[9]\i[5]\i[16]\i[50]\i[55]\i[23]\i[24]Okay, okay, you can stop now."
+	"\s[10]\i[63]\i[50]\i[8]\i[23]\i[24]...I'd appreciate if you stopped, for now. \s[9]\i[5]\i[24]\i[50]\i[51]\i[16]Let me readjust, will you?"
+	"\s[7]\i[5]\i[61]\i[62]\i[23]Alright, \s[6]\i[4]\i[24]that's enough for the time being."
+}
+astPetFinal : nonoverlap_pool //floats away
+{
+	//"\![moveasync,--x=150,--time=1000,--base=me]"
+	"\s[19]\i[98]\_w[500]\i[97]\s[9]\i[64]\i[63]\4"
+	--
+	"No, seriously, \s[8]\i[64]\i[63]\i[4]you need to \i[98]cut it out\i[97] for a minute...!"
+	"\i[60]\i[8]\i[5]\i[14]\i[23]\i[24]Listen, \i[16]it's not you, \i[64]\i[63]it's just a little too much right now."
+	"...Little overwhelmed here, %(username), \s[6]\i[4]\i[64]\i[63]\i[14]I'd like you to stop."
+	"\s[8]\i[64]\i[63]\i[14]Didn't you hear me? \s[9]\i[52]\i[51]\i[14]\i[4]\i[24]I'm asking to stop!!"
+	"\s[6]\i[64]\i[63]\i[4]\i[14]Hello? \i[57]\i[58]\i[24]\i[23]Was I not clear enough? \s[12]\i[1]Cut it out! \s[9]\i[4]\i[16]\i[8]\i[4]\i[24]\i[60]"
+}
+astPetGlitch : nonoverlap_pool //stands up and uhhhh
+{
+	petoverstim = 1
+	"\s[0]\i[64]\i[65]\i[0]\i[12]\i[98]Please\i[97], \i[59]I'm \![embed,OnMojibake,5]genui\b[4]nel\b[6]y-"
+	"\s[1]\i[56]\i[65]\i[0]\i[12]I'm \s[19]asking \s[1]\i[56]\i[65]\i[0]\i[12]you ni\![embed,OnMojibake,3]cely, \i[98]pl\b[8]ease-\b[10]"
+	"\s[3]\i[63]\i[0]\i[15]\i[5]Aren't you listening\b[6]!? \i[98]\i[64]\i[55]I'm\b[4]-"
+	"\s[0]\i[54]\i[59]\i[1]\i[15]\i[6]List\![embed,OnMojibake,2]en, \i[98]\i[7]\i[53]I'm abou\b[8]t to-\b[4]"
+	"\s[2]\i[64]\i[65]\i[12]\i[7]\i[0]\i[98]Why won't yo\b[10]u-\b[8]"
+	--
+	"\s[20]\![faster]\f[color,red]\f[height,110%]"
+	--
+	"\![embed,OnMojibake,30]"
+	"\![embed,OnMojibake,15]"
+	"\![embed,OnMojibake,20]"
+	--
+	"\f[italic,1]\b[8]\i[98]Segmentation \b0Fau\b[4]lt\i[97]\f[italic,0]"
+	"\f[italic,1]Null Pointer \b[10]Exc\b[8]eption\![embed,OnMojibake,10]\f[bold,1]\i[98]NU\b[8]LL P\b[4]OINTE\b[10]R EXCE\b[6]PTION\i[97]\f[bold,0]\f[italic,0]"
+	"\f[italic,1]Unhandled Exception\![embed,OnMojibake,5]P\b[8]le\b[6]ase Con\b[10]sult TerraByte Support\f[italic,0]"
+	--
+	"\![embed,OnMojibake,10]"
+	"\![embed,OnMojibake,5]"
+	"\![embed,OnMojibake,20]"
+	--
+	"\![fastest]"
+	--
+	"\![embed,OnMojibake,100]"
+	"\![embed,OnMojibake,120]"
+	"\![embed,OnMojibake,90]"
+	--
+	"\f[italic,1]\b[8]\i[98]Segmentation \b0Fau\b[4]lt\i[97]\f[italic,0]"
+	"\f[italic,1]Null Pointer \b[10]Exc\b[8]eption\![embed,OnMojibake,10]\f[bold,1]\i[98]NU\b[8]LL P\b[4]OINTE\b[10]R EXCE\b[6]PTION\i[97]\f[bold,0]\f[italic,0]"
+	"\f[italic,1]Unhandled Exception\![embed,OnMojibake,5]P\b[8]le\b[6]ase Con\b[10]sult TerraByte Support\f[italic,0]"
+	--
+	"\![embed,OnMojibake,100]"
+	"\![embed,OnMojibake,120]"
+	"\![embed,OnMojibake,90]"
+}
+
+astPetAfter : nonoverlap_pool //standing only
+{
+	"\s[3]\i[6]\i[12]\i[24]\i[61]\i[59]"
+	"\s[0]\i[54]\i[62]\i[12]\i[6]\i[24]"
+	"\s[4]\i[24]\i[6]\i[60]\i[56]"
+	--
+	"\_w[1500]\i[18]\_w[2000]" 
+	--
+	"\![slower]...\![slow]\s[3]\i[63]\i[1]\i[24]Please don't do that again?"
+	"\![slow]...\s[3]\i[64]\i[65]\i[0]\i[6]\i[22]Phew. \![normal]\i[15]\i[52]\i[53]Okay, \s[0]\i[1]\i[15]\i[24]sorry about that..."
+	"\s[4]\i[7]\i[24]\i[63]\![slower]Hah... \![slow]Okay. \s[0]\i[1]\i[15]\i[24]My apologies...\![normal]"
+	"\s[3]\i[0]\i[15]\i[63]\![slow]...Hmph.\N \s[4]\i[63]\![normal]It's not that I mind being pet, \i[52]\i[62]but I have... \s[3]\i[54]\i[55]\![slow]certain limits.\N \![normal]\s[1]\i[1]Be a little more careful, won't you?"
+	"\s[0]\i[63]\i[0]\i[6]\i[22]\![slower]Huff.\N \s[0]\i[6]\i[22]\![normal]I apologize for that... \i[3]\![slow]But, \s[4]\i[63]\![normal]please be more careful next time..."
+	--
+	if disableWaiting != 1; "\N %(astOverstimPenalty)" //if waiting is disabled there's obviously no penalty. otherwise, the way envelopes work mean the penalty gets added as soon as this function is called!
+}
+
+astOverstimPenalty : nonoverlap_pool //starts out as standing. dialogue to let the user know they'll have to wait a little longer until next conversation prompt
+{
+	//making the timer longer here by 5 minutes
+	stageTime = stageTime - 300
+
+	if petoverstimFirst != 1
+	{
+		"\x\s[9]\i[64]\i[63]Stars, this made me lose my train of thought...\N \s[1]\i[54]\i[55]\i[0]Here I was, \i[62]in the middle of thinking of something cool to tell you, \i[59]\i[12]and now it's \i[98]gone\i[97]!\N \s[4]\i[63]You'll have to give me \f[bold,1]a little more time\f[bold,0] to remember where I was, now."
+		petoverstimFirst = 1
+	}
+	else
+	{
+		"\x\i[15]\s[3]\i[0]Where was I, again...?\N \s[4]\i[54]\i[55]You'll give me \f[bold,1]a little bit of time\f[bold,0] to remember, won't you? \s[1]\i[63]\i[0]Thank you \f[italic,1]very\f[italic,0] much."
+		"\s[4]\i[63]\i[6]...Ah, there goes that thought. Hmm."
+		"\s[1]\i[0]\i[12]\i[63]You really don't listen, do you. \s[4]\i[63]Where was I...?"
+		"\s[4]\i[63]Ah, \s[12]\i[1]you made me forget what I was thinking about!! \s[10]\i[60]You'll have to be \f[bold,1]a bit more patient\f[bold,0], too."
+		"\s[3]\i[63]\i[24]What... was I doing?"
+	}
+}
+
+
+astHandHold : nonoverlap_pool
+{
+	case GetPose
+	{
+		when 0
+		{
+			"\![slow]\i[1]...\![normal]\i[15]\i[24]What are you doing, exactly?"
+			"\![slowest]\s[4]\i[63]\i[23]\i[24]..."
+			"\i[0]\i[15]...? \s[1]\i[0]\i[15]\i[54]\i[55]\i[23]Did you need something?"
+			"...\i[98]\i[15]Really?\i[97]"
+			"\i[22]\i[0]Really now."
+			"\s[1]\i[61]\i[62]\i[12]...\i[98]Didn't we only\i[97] just meet?"
+			"\s[1]\i[63]\i[15]\i[23]Hah. \s[4]\i[23]\i[52]\i[55]Could at least let me get used to you.\N \s[0]\i[24]Fine, sure, \i[56]\i[22]\i[0]I'll allow this just this once."
+		}
+		when 1
+		{
+			"\![slow]\i[14]\i[8]...\![normal]\s[7]\i[4]\i[60]What are you doing, exactly?"
+			"\![slowest]\s[10]\i[60]\i[23]\i[9]..."
+			"\i[14]\i[98]\i[8]..? \i[97]\i[16]\i[9]\i[24]Did you need something?"
+			"\i[16]\i[9]\i[50]\i[51]...Really?"
+			"\s[9]\i[60]\i[16]\i[4]\i[23]Really now."
+			"\s[8]\i[57]\i[58]\i[14]...\i[98]Didn't we only\i[97] just meet?"
+			"\i[22]\i[5]Fine, I get it, \i[16]sometimes it \f[italic,1]is\f[italic,0] nice to hold someone's hand."
+		}
+		when 2
+		{
+			"\![slow]...\![normal]\i[15]\i[23]What are you doing, exactly?"
+			"\![slowest]\s[17]\i[24]\i[23]..."
+			"\i[12]\i[98]...? \i[97]\i[15]Did you need something?"
+			"...\s[13]\i[0]\i[52]Really?"
+			"\i[22]\i[24]\i[6]Really now."
+			"...\s[15]\i[12]\i[24]\i[98]Didn't we only\i[97] just meet?"
+			"...\i[1]\i[2]\i[15]Won't lie, this \f[italic,1]is\f[italic,0] kind of cute.\N \i[22]Your \&[quot]hand\&[quot] is even smaller than theirs...\N \s[17]Ahem."
+		}
+	}
+}

@@ -1,0 +1,126 @@
+//
+//  OMD = Owner Draw Menu. Aldebaran packed light for his travels...
+//
+
+
+//Network update url. Make sure you have a / on the end of the url or it will give a warning every time users try to update! If you don't plan to use network updates you can remove this
+//IF YOU'RE USING GITHUB FOR NETWORK UPDATES: DO NOT USE github.io URLS! It will cause you pain and suffering. USE raw.githubusercontent!!!
+//To get the raw.githubusercontent link super easy:
+//• Open your ghost's repo online
+//• navigate to the ghost's folder (the top level one, with install.txt, readme.txt, etc)
+//• Click on install.txt, or another text file on that level
+//• Once on that page, click the "raw" button. You should see the url now starts with raw.githubusercontent
+//• Copy that url exactly as is, but *leave off the "install.txt" or whatever file name at the end.*
+//Tada! That's your url! Make sure you test it! The dev palette and script/network log can help with that
+On_homeurl
+{
+	"https://raw.githubusercontent.com/logicpng/terrorstarukgk/main/Updates/"
+}
+
+
+//—————————————————————————————— Right click menu links ——————————————————————————————
+//todo: put these away into a separate file
+
+//Takes an array of alternating names and urls, and formats them for use with the right click menu
+
+On_hidebutton.caption //i don't really like the term iconify and i feel like it may be confusing for new users, as it was for me!! sorry!!
+{
+	"Minimize"
+}
+
+On_recommendrootbutton.caption
+{
+	"More about this software"
+}
+
+On_portalrootbutton.caption
+{
+	"Resources used"
+}
+
+FormatLinks : all
+{
+	for _i = 0; _i < ARRAYSIZE(_argv); _i++
+	{
+		_argv[_i] //Add the link/title
+		//Alternate between adding %ASC(1) or %ASC(2)
+		if _i % 2 == 1; "%ASC(2)"
+		else; "%ASC(1)"
+	}
+}
+
+On_sakura.recommendsites
+{
+	FormatLinks(recommendsites_sakura)
+}
+
+//These are the websites linked in the top option of the sakura's right click menu. The format is simple; write the label of the link on the left followed by a semicolon, and then on the right, the url to link to. These should be separate strings.
+recommendsites_sakura : array
+{
+	"Logic.png @ NyxOS";	"https://logicpng.neocities.org/"
+	"More about CaelOS...";	"https://logicpng.neocities.org/caelos"
+	"Devlog (Tumblr)";	"https://logicpng.tumblr.com/tagged/aster%20terror%20star%20devlog"
+}
+
+On_sakura.portalsites 
+{
+	FormatLinks(portalsites_sakura)
+}
+
+//These are the websites linked in the second option of the sakura's right click menu. Same as above
+portalsites_sakura : array
+{
+	"UKADOC Project (EN)";	"https://ukagakadreamteam.github.io/ukadoc/manual/index.html"
+	"UKADOC Project (JP)";	"https://ssp.shillest.net/ukadoc/manual/index.html"
+	"Simplicity template";	"https://ukagaka.zichqec.com/template/simplicity_template"
+	"AYAYA Wiki";	"https://emily.shillest.net/ayaya/index.php"
+	"YAYA Fundamentals";	"https://zichqec.github.io/YAYA_Fundamentals/"
+	"Image Corruptor";	"https://filegarden.com/corrupt/"
+}
+
+
+//
+// Just locking out the unneeded menu items
+//
+
+//RSS Headlines
+On_headlinesenserootbutton.visible
+{
+    if lockUtilities == 1; "0"
+	else; "1"
+}
+//history headlines
+On_headlinesensehistorybutton.visible
+{
+    if lockUtilities == 1; "0"
+	else; "1"
+}
+//Check mail
+On_biffbutton.visible
+{
+    if lockUtilities == 1; "0"
+	else; "1"
+}
+
+On_biffallbutton.visible
+{
+    if lockUtilities == 1; "0"
+	else; "1"
+}
+//NTP Time Sync
+On_sntpbutton.visible
+{
+    if lockUtilities == 1; "0"
+	else; "1"
+}
+//Shell (already closed on shell's side but just in case)
+On_shellrootbutton.visible
+{
+    0
+}
+
+//Clothes/Dressup (already closed on shell's side but just in case)
+On_dressuprootbutton.visible
+{
+    0
+}

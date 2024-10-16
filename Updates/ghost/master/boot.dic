@@ -1,0 +1,113 @@
+//FIRST BOOT STUFF / INTRO SEQUENCE
+
+//first time boot. initialize variables for the first time, and start the intro sequence
+OnFirstBoot
+{
+	//If you add variables, make sure to initialize them here!
+	//Note - I haven't added anything about username or pronouns here because it's all handled by the SSP prefs
+	stroke = 0
+	petprogress = 0 //for petting progression thing
+	LastTalk = ""
+	//0 - limited glitching, 1 - full glitching. set in settings and in intro sequence (OnUserTerms2)
+	glitchMode = 0 
+	aitalkspeed = "Normal" // ai talk is going to be all random for this ghost, you'll only be able to change the speed of chatter or disable it entierly
+	stage = 0 //(may end up unused...) ol' progression variable. while i'm not wholly set on how it'll work, 0 is intro, 1 will be after you don't delete him after long enough in the intro
+	conversation = "" // for aster interaction
+	talkedConvo = (0,0,0,0,0,0,0,0) //array of conversations you've talked about with aldebaran. one of the two conditions for unlocking following conversations
+	unlockedConvo = (1,0,0,0,0,0,0,0) //array of conversations you have *unlocked*. first one is unlocked to begin with, so it's set to one just in case
+	stageTime = 0 //will be counted up with aitalk timers. one of the two conditions for unlocking following conversations
+	lockUtilities = 1 //locking SSP's menu items in odm.dic
+	disableWaiting = 0 //disabling waiting timer. highly not recommended but may be good for folk unwilling to wait...?
+
+	"\0\s[-1]\1\s[-1]\![raise,OnIntroStart]"
+}
+
+
+//------------------------------------------------------------------------------------------
+//---------------------------------REGULAR BOOT STUFF---------------------------------------
+//------------------------------------------------------------------------------------------
+
+OnInitialize
+{
+	//If you want some variables to reset on boot, put them here. This event will happen even if you add other events like OnGhostChanged
+	//OnInitialize is a NOTIFY event! That means it cannot return scripts. This event is only meant for things like variable changes. See this page on Ukadoc for more info: https://ukagakadreamteam.github.io/ukadoc/manual/spec_shiori3.html
+	
+	//If you add new variables in updates, I recommend initializing them like so:
+	//if !ISVAR("NewVariable"); NewVariable = 0
+	//This means that it will only set the new variable if the user doesn't already have it, so that their variables don't get overwritten
+	petprogress = 0 //for petting progression thing
+	conversation = ""
+	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
+	{
+		LastTalk = ""
+	}
+}
+
+OnBoot
+{
+	_temp = SHIORI3FW.UserBirthday
+	_user_birthday = "%(_temp[1])/%(_temp[2])" //M/D, if you want it D/M you can switch it around
+	_today = "%(month)/%(day)" //Again, switch this around if using D/M
+	
+	//if the intro sequence finished successfully we can proceed with our normal boy
+	if termsAccepted == 1
+	{
+		"\1\s[-1]\0\s0"
+		--
+		if reference6 == "halt"; astBootCrashed
+		elseif fakeVanishBoot == 1; astBootVanished
+		else
+		{
+			astBootTalk
+			--
+			if _user_birthday == _today; "\x\s[7]\i[61]\i[62]\i[22]\i[7]No, no, \i[16]\i[9]of course I didn't forget!\N \s[12]\i[98]\f[height,120%]\![fast]Happy\i[97] birthday, %(username)!\f[default]\![normal]\N \s[6]\i[16]Truly an honor to be opened on such a special day!"
+			elseif _today == "10/9"; "\x\s[10]\i[61]\i[63]...Wasn't there something special about today?\N \i[60]\i[8]Hm.\w8\w8 \i[9]\i[24]The memory escapes me..." //oct 9th is aster's release date, both Aster Assistant Software and in-universe now ig
+		} 
+	}
+	else //if not we should probably start again from the top
+	{
+		OnUserTerms1
+	}
+}
+
+OnClose
+{
+	//"\0Farewell."
+	//"\0Goodbye."
+	if termsAccepted == 1
+	{
+		if reference0 == "system"; astCloseShutdown
+		else; astCloseTalk
+	}
+	--
+	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
+}
+
+OnGhostChanging
+{
+	if reference2 == "Aster™ Assistant Software"; "\s[6]\i[5]\i[50]\i[51]\i[16]\i[24]...Really? \s[4]\i[15]\i[63]Look, nothing against them, but...\N \s[3]\i[54]\i[55]\i[22]\i[24]\i[1]\i[6]Ah, whatever, \s[4]\i[54]\i[62]\i[24]here they come."
+}
+
+OnGhostCalled
+{
+	"%(OnBoot)\N "
+	--
+	if reference2 == "SSP Angel"; "\s[10]\i[60]\i[9]\i[24]Ah, you two... Yes, hello.\w8\w8 Ahem."
+	elseif reference2 == "Aster™ Assistant Software"; "\s[10]\i[60]\i[9]\i[24].\w8.\w8.\w8 (Stars above, these two again...)"
+}
+
+OnOtherGhostBooted
+{
+	if reference2 == "Aster™ Assistant Software"; "\s[10]\i[61]\i[62]\i[24]\![slowest]. . ."
+}
+
+OnDisplayPowerStatus
+{
+	if reference0 == 1; astWelcomeBack
+}
+
+OnSessionUnlock
+{
+	if !BalloonIsOpen; astWelcomeBack
+}
+

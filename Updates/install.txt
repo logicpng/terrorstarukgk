@@ -1,0 +1,7 @@
+charset,UTF-8
+type,ghost
+
+name,Aster™ Terror Star!
+directory,caelOS_aldebaran
+
+balloon0.directory,AsterTooltipC
