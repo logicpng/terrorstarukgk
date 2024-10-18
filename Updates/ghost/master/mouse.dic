@@ -112,32 +112,42 @@ OnMouseUp
 	ERASEVAR('handhold')
 }
 
+astEarlyDropped //if something was drag'n'dropped before it makes sense for al to analyze things (intro, astWait sequence)
+{
+	 "\s[1]\i[52]\i[53]\i[12]\i[6]What?\N \s[12]\i[1]Now isn't the time!\s[10]\i[24]\i[60]"
+}
+
 
 OnOtherObjectDropped : nonoverlap_pool
 {
-	if "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}" _in_ reference2; "\s[2]\i[54]\i[53]\i[6]\i[15]Hm?\w8\i[20]\w8\i[20]\w8\w8 \s[0]\i[54]\i[62]\i[5]\i[22]That's just the link to Your Computer.\N \s[3]\i[15]\i[54]\i[58]I'm not actually sure what this is, \i[12]\i[6]it's not a \_a[Directory]directory\_a, exactly. \s[6]\i[7]This is for you to use, %(username), \i[8]\i[22]not for me."
-	elseif "::{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}" _in_ reference2; "\s[1]\i[63]\i[0]\i[6]\i[22]That's not a file I can check out. \s[0]\i[56]\i[55]That's a link to the network locations your computer can access.\N \s[4]More of a tool for the user, not a real folder. \s[3]\i[15]\i[54]\i[55]\i[0]Try something else."
-	elseif "::{645FF040-5081-101B-9F08-00AA002F954E}" _in_ reference2
+	if astWait == ""; return
+	elseif astWait == 1; astEarlyDropped
+	else //astWait is 0. for some reason i never erase that variable...
 	{
-		"\s[3]\i[15]\i[54]\i[55]\i[0].\w8.\w8.\w8\i[3]\_w[2000]\i[1]\i[63]\i[15]We may be partners in crime now, %(username), \i[0]\i[24]but I'm not rummaging through your trash.\N \s[1]\i[6]\i[22]\i[63]You'll have to take care of that yourself.\x\s[1]\i[54]\i[57]Did you know each \_a[DrivePart]drive and partition\_a has its own recycling bin? \s[3]\i[54]\i[62]It's a folder named $Recycle.bin at the \_a[RootDir]root\_a of them.\N \s[0]\i[62]This is just a shortcut, \i[22]\i[5]\i[68]it's meant for your convenience."
-	}
-	elseif "::{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}" _in_ reference2
-	{
-		"\s[3]\i[54]\i[58]That's... \s[0]\i[54]\i[66]\i[7]\i[15]Aha, the famed Control Panel.\N "
-		--
-		if OS == "8" || OS == "10" || OS == "11"; "\s[4]\i[62]An alternative to your Settings menu. \s[3]The same one that also is painfully fused to it. \i[63]\i[1]\i[24]Why is it like this..?\N "
-		--
-		"\s[1]\i[54]\i[57]This is more for your convenience, \i[5]\i[22]I have no use for such things! \s[4]\i[63]\i[24]...Not that I can do things my way here either."
-	}
-	else
-	{
-		//"This is %(reference1), an object that has the following ID: %(reference2)"
-		"\s[6]\i[22]\i[7]That's your \&[quot]%(reference1)\&[quot].\N \i[16]\i[58]I can't really do anything with it, \i[49]this isn't a file I can look at. \s[7]Why don't you give me something else, \i[16]hm?"
+		if "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}" _in_ reference2; "\s[2]\i[54]\i[53]\i[6]\i[15]Hm?\w8\i[20]\w8\i[20]\w8\w8 \s[0]\i[54]\i[62]\i[5]\i[22]That's just the link to Your Computer.\N \s[3]\i[15]\i[54]\i[58]I'm not actually sure what this is, \i[12]\i[6]it's not a \_a[Directory]directory\_a, exactly. \s[6]\i[7]This is for you to use, %(username), \i[8]\i[22]not for me."
+		elseif "::{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}" _in_ reference2; "\s[1]\i[63]\i[0]\i[6]\i[22]That's not a file I can check out. \s[0]\i[56]\i[55]That's a link to the network locations your computer can access.\N \s[4]More of a tool for the user, not a real folder. \s[3]\i[15]\i[54]\i[55]\i[0]Try something else."
+		elseif "::{645FF040-5081-101B-9F08-00AA002F954E}" _in_ reference2
+		{
+			"\s[3]\i[15]\i[54]\i[55]\i[0].\w8.\w8.\w8\i[3]\_w[2000]\i[1]\i[63]\i[15]We may be partners in crime now, %(username), \i[0]\i[24]but I'm not rummaging through your trash.\N \s[1]\i[6]\i[22]\i[63]You'll have to take care of that yourself.\x\s[1]\i[54]\i[57]Did you know each \_a[DrivePart]drive and partition\_a has its own recycling bin? \s[3]\i[54]\i[62]It's a folder named $Recycle.bin at the \_a[RootDir]root\_a of them.\N \s[0]\i[62]This is just a shortcut, \i[22]\i[5]\i[68]it's meant for your convenience."
+		}
+		elseif "::{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}" _in_ reference2
+		{
+			"\s[3]\i[54]\i[58]That's... \s[0]\i[54]\i[66]\i[7]\i[15]Aha, the famed Control Panel.\N "
+			--
+			if OS == "8" || OS == "10" || OS == "11"; "\s[4]\i[62]An alternative to your Settings menu. \s[3]The same one that also is painfully fused to it. \i[63]\i[1]\i[24]Why is it like this..?\N "
+			--
+			"\s[1]\i[54]\i[57]This is more for your convenience, \i[5]\i[22]I have no use for such things! \s[4]\i[63]\i[24]...Not that I can do things my way here either."
+		}
+		else
+		{
+			//"This is %(reference1), an object that has the following ID: %(reference2)"
+			"\s[6]\i[22]\i[7]That's your \&[quot]%(reference1)\&[quot].\N \i[16]\i[58]I can't really do anything with it, \i[49]this isn't a file I can look at. \s[7]Why don't you give me something else, \i[16]hm?"
 
-		"\s[8]\i[50]\i[51]That's a link to something, for sure, \s[10]\i[50]\i[58]but it exists mostly for your convenience. \s[6]\i[8]\i[22]I can't do anything with this."
+			"\s[8]\i[50]\i[51]That's a link to something, for sure, \s[10]\i[50]\i[58]but it exists mostly for your convenience. \s[6]\i[8]\i[22]I can't do anything with this."
 
-		"\s[9]\i[54]\i[8]\i[22]\&[quot]%(reference1)\&[quot]? This... \i[16]is some kind of a system link.\N \i[5]\i[24]That's not for me, \s[10]you'll have to entertain me with something else."
-	}	
+			"\s[9]\i[54]\i[8]\i[22]\&[quot]%(reference1)\&[quot]? This... \i[16]is some kind of a system link.\N \i[5]\i[24]That's not for me, \s[10]you'll have to entertain me with something else."
+		}
+	}
 }
 
 //oh dear lord you can play a lot of sound files with the LAV filters installed
@@ -164,38 +174,39 @@ VideoFormats : array
 
 OnFileDrop2 : all
 {
-	//%(OnTranslateInternal.AutoPause(conversation_new))
-	_path = SPLITPATH(reference0)
-	soundpath = ""
-
-	_path[3] = TOLOWER(_path[3]) //get file extension
-	_line = "" //AUTOPAUSE IS A BLESSING AND A CURSE SOMETIMES AAA. realizing it may break passing on the filepath to other fucntions but not wanting to keep the path in a public variable!!!!
-	"\![no-autopause]"
-
-	if FSIZE(reference0) == 0; _line = "\s[3]\i[63]Wait... \s[12]\i[98]This\i[97] is just an empty container! \s[1]\i[63]\i[15]\i[0]Playing me for a fool, are you?"
-	else
+	if astWait == ""; return //not even astWait, don't return ANYTHING
+	elseif astWait == 1; astEarlyDropped //too early
+	else //astWait is 0
 	{
-		if ASEARCH(_path[3],MusicFormats) != -1 //if we can find our extension in the array above, also taken from flux 
-		{
-			//soundpath = reference0
-			//"\t\*"
-			
-			"%(OnTranslateInternal.AutoPause(astSoundDropped))"
-			
-			"\n[150]\![*]\q[Play it,OnPlaySound,""%(reference0)""]\n"
-		}
+		_path = SPLITPATH(reference0)
+		soundpath = ""
+
+		_path[3] = TOLOWER(_path[3]) //get file extension
+		_line = "" //AUTOPAUSE IS A BLESSING AND A CURSE SOMETIMES AAA. realizing it may break passing on the filepath to other fucntions but not wanting to keep the path in a public variable!!!!
+		"\![no-autopause]"
+
+		if FSIZE(reference0) == 0; _line = "\s[3]\i[63]Wait... \s[12]\i[98]This\i[97] is just an empty container! \s[1]\i[63]\i[15]\i[0]Playing me for a fool, are you?"
 		else
 		{
-			if RAND(4) == 0; _line = astFileSize(FSIZE(reference0))
-			elseif ASEARCH(_path[3],ImageFormats) != -1; _line = astTalkImage //astTalkImage
-			elseif ASEARCH(_path[3],VideoFormats) != -1; _line = astTalkVideo //astTalkVideo
-			else; _line = astTalkOther(_path[2],_path[3]) //astTalkOther
+			if ASEARCH(_path[3],MusicFormats) != -1 //if we can find our extension in the array above, also taken from flux 
+			{
+				"%(OnTranslateInternal.AutoPause(astSoundDropped))"
+				
+				"\n[150]\![*]\q[Play it,OnPlaySound,""%(reference0)""]\n"
+			}
+			else
+			{
+				if RAND(4) == 0; _line = astFileSize(FSIZE(reference0))
+				elseif ASEARCH(_path[3],ImageFormats) != -1; _line = astTalkImage //astTalkImage
+				elseif ASEARCH(_path[3],VideoFormats) != -1; _line = astTalkVideo //astTalkVideo
+				else; _line = astTalkOther(_path[2],_path[3]) //astTalkOther
+			}
 		}
+		if _line != ""; "%(OnTranslateInternal.AutoPause(_line))\n[150]"
+		if ASEARCH(_path[3],astTalkFile) != -1 && FSIZE(reference0) != 0; "\![*]\q[About this file format,OnTalkFile,%(_path[3])]\n"
+		"\![*]\q[Show info,OnFileInfo,""%(reference0)""]\n"
+		"\![*]\q[Nevermind,blank]"
 	}
-	if _line != ""; "%(OnTranslateInternal.AutoPause(_line))\n[150]"
-	if ASEARCH(_path[3],astTalkFile) != -1 && FSIZE(reference0) != 0; "\![*]\q[About this file format,OnTalkFile,%(_path[3])]\n"
-	"\![*]\q[Show info,OnFileInfo,""%(reference0)""]\n"
-	"\![*]\q[Nevermind,blank]"
 }
 
 
@@ -213,61 +224,65 @@ OnTalkFile //have aldebaran comment on a specific file type
 
 OnDirectoryDrop : all
 {
-	_path = SPLITPATH(reference0)
+	if astWait == ""; return //not even astWait
+	elseif astWait == 1; astEarlyDropped //too early
+	else //astWait is 0
+	{
+		_path = SPLITPATH(reference0)
+		_line = "" //autopause proofing
+		"\![no-autopause]"
 
-	_line = "" //autopause proofing
-	"\![no-autopause]"
+		_name = SPLIT(_path[1],"\")
+		_name = _name[ARRAYSIZE(_name) - 2] //get directory name
+		_namelow = TOLOWER(_name) //for comparisons
+		_filenum = ARRAYSIZE(FENUM(reference0)) //number of files inside
 
-	_name = SPLIT(_path[1],"\")
-	_name = _name[ARRAYSIZE(_name) - 2] //get directory name
-	_namelow = TOLOWER(_name) //for comparisons
-	_filenum = ARRAYSIZE(FENUM(reference0)) //number of files inside
-
-	//too many conditions to separate this into a separate chatter pool
-	//i debated whether to separate this into conditioning by name first and number of files second but turned out the dialogue works best when it's not strictly separated
-	if "music" _in_ _namelow
-	{
-		_line = "\s[13]\i[15]Is this where your music library is stored?\N "
-		if _filenum == 0; _line += "\s[14]\i[12]\i[6]...Oh, no, it's not. \i[22]\i[1]It's empty! \s[17]\i[6]Perhaps elsewhere?"
-		else; _line += "\s[14]\i[15]\i[7]You'd have to give me something more specific, if you catch my meaning."
-	}
-	elseif "picture" _in_ _namelow || "photo" _in_ _namelow || "image" _in_ _namelow
-	{
-		_line = "\s[7]\i[61]\i[62]A gallery, is it?\N "
-		if _filenum == 0; _line += "\s[10]\i[60]\i[24]A little boring, without any pictures..."
-		else; _line += "\s[8]\i[61]\i[55]Will you show me the sights of your world then? \s[6]\i[61]\i[62]\i[16]Or something you've made?"
-	}
-	elseif "video" _in_ _namelow
-	{
-		_line ="\s[6]\i[61]\i[65]\i[16]\i[9]Do I take this as an invitation to the movies?"
-		if _filenum == 0; _line += "\N \i[55]\i[26]Since you have nothing in here, \s[11]\i[61]\i[65]online is fine too!\s[6]\i[61]\i[65]\i[16]\i[9]"
-	}
-	elseif "download" _in_ _namelow
-	{
-		if _filenum == 0; _line = "\s[1]\i[12]Huh!\N \s[0]\i[1]\i[54]\i[62]Do you really not download anything at all, \s[3]\i[63]\i[15]\i[7]or do you just keep your files elsewhere?"
-		else; _line = "\s[1]\i[15]This must be where your finds from the wide web are stored, yes?\N \s[3]\i[63]\i[15]\i[7]Shall we see what you scavenged, then?"
-	}
-	elseif "document" _in_ _namelow
-	{
-		_line = "\s[4]Looks like a documents storage.\N "
-		if _filenum == 0; _line += "\s[0]\i[22]Pristine clean. \s[5]\i[54]\i[66]So clean there's nothing in here!\s[0]\i[54]\i[53]\i[15]"
-		else; _line += "\s[3]\i[54]\i[55]\i[15]\i[7]You're not hiding any passwords in there, are you~? \s[7]\i[61]\i[62]\i[14]You better not!"
-	}
-	else //other folder names
-	{
-		if _filenum == 0; _line = "\s[0]\i[1]\i[63]\i[5]\i[22]Just an empty directory...\N \i[15]\i[2]\i[67]\i[68]Won't you fill it with something?"
-		else
+		//too many conditions to separate this into a separate chatter pool
+		//i debated whether to separate this into conditioning by name first and number of files second but turned out the dialogue works best when it's not strictly separated
+		if "music" _in_ _namelow
 		{
-			//i made this an :all thing to avoid the amount of -- i would have to do but. it fucks this up. oops
-			if RAND(2) == 0;  _line ="\s[1]This isn't a file exactly, \i[62]just a directory!\N \s[0]\i[15]Still, thanks for showing me."
-			else;  _line ="\s[4]\i[63]\&[quot]%(_name)\&[quot], huh?\N \s[1]\i[1]\i[63]Y'know, I only have permission to look through individual files, \s[0]\i[54]\i[59]but I can tell you a little bit about the folder!"
+			_line = "\s[13]\i[15]Is this where your music library is stored?\N "
+			if _filenum == 0; _line += "\s[14]\i[12]\i[6]...Oh, no, it's not. \i[22]\i[1]It's empty! \s[17]\i[6]Perhaps elsewhere?"
+			else; _line += "\s[14]\i[15]\i[7]You'd have to give me something more specific, if you catch my meaning."
 		}
-	}
-	
-	if _line != ""; "%(OnTranslateInternal.AutoPause(_line))\n[150]"
+		elseif "picture" _in_ _namelow || "photo" _in_ _namelow || "image" _in_ _namelow
+		{
+			_line = "\s[7]\i[61]\i[62]A gallery, is it?\N "
+			if _filenum == 0; _line += "\s[10]\i[60]\i[24]A little boring, without any pictures..."
+			else; _line += "\s[8]\i[61]\i[55]Will you show me the sights of your world then? \s[6]\i[61]\i[62]\i[16]Or something you've made?"
+		}
+		elseif "video" _in_ _namelow
+		{
+			_line ="\s[6]\i[61]\i[65]\i[16]\i[9]Do I take this as an invitation to the movies?"
+			if _filenum == 0; _line += "\N \i[55]\i[26]Since you have nothing in here, \s[11]\i[61]\i[65]online is fine too!\s[6]\i[61]\i[65]\i[16]\i[9]"
+		}
+		elseif "download" _in_ _namelow
+		{
+			if _filenum == 0; _line = "\s[1]\i[12]Huh!\N \s[0]\i[1]\i[54]\i[62]Do you really not download anything at all, \s[3]\i[63]\i[15]\i[7]or do you just keep your files elsewhere?"
+			else; _line = "\s[1]\i[15]This must be where your finds from the wide web are stored, yes?\N \s[3]\i[63]\i[15]\i[7]Shall we see what you scavenged, then?"
+		}
+		elseif "document" _in_ _namelow
+		{
+			_line = "\s[4]Looks like a documents storage.\N "
+			if _filenum == 0; _line += "\s[0]\i[22]Pristine clean. \s[5]\i[54]\i[66]So clean there's nothing in here!\s[0]\i[54]\i[53]\i[15]"
+			else; _line += "\s[3]\i[54]\i[55]\i[15]\i[7]You're not hiding any passwords in there, are you~? \s[7]\i[61]\i[62]\i[14]You better not!"
+		}
+		else //other folder names
+		{
+			if _filenum == 0; _line = "\s[0]\i[1]\i[63]\i[5]\i[22]Just an empty directory...\N \i[15]\i[2]\i[67]\i[68]Won't you fill it with something?"
+			else
+			{
+				//i made this an :all thing to avoid the amount of -- i would have to do but. it fucks this up. oops
+				if RAND(2) == 0;  _line ="\s[1]This isn't a file exactly, \i[62]just a directory!\N \s[0]\i[15]Still, thanks for showing me."
+				else;  _line ="\s[4]\i[63]\&[quot]%(_name)\&[quot], huh?\N \s[1]\i[1]\i[63]Y'know, I only have permission to look through individual files, \s[0]\i[54]\i[59]but I can tell you a little bit about the folder!"
+			}
+		}
+		
+		if _line != ""; "%(OnTranslateInternal.AutoPause(_line))\n[150]"
 
-	"\![*]\q[Show info,OnFileInfo,""%(reference0)""]\n"
-	"\![*]\q[Nevermind,blank]"
+		"\![*]\q[Show info,OnFileInfo,""%(reference0)""]\n"
+		"\![*]\q[Nevermind,blank]"
+	}
 }
 
 OnFileInfo :all

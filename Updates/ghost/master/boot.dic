@@ -18,6 +18,7 @@ OnFirstBoot
 	stageTime = 0 //will be counted up with aitalk timers. one of the two conditions for unlocking following conversations
 	lockUtilities = 1 //locking SSP's menu items in odm.dic
 	disableWaiting = 0 //disabling waiting timer. highly not recommended but may be good for folk unwilling to wait...?
+	vanishCount = reference0 //have you uninstalled aldebaran before and how many times, only used for a change in intro dialogue
 
 	"\0\s[-1]\1\s[-1]\![raise,OnIntroStart]"
 }

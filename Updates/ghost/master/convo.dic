@@ -43,7 +43,7 @@ OnUserTerms1 : all
 
 	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Unreality\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]We are required to remind you that the AI is aware of residing in your machine.\N It will be able to analyze the files you give it access to. It will not be able to interfere with your software or edit any files.\N This is intentional design and is no cause for alarm.\w8\x"
 	
-	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Unreality\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Is this acceptable?\N \![*]\q[Yes,OnUserTerms2]\n\![*]\q[No,decline]\*"	
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Unreality\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Is this acceptable?\N \![*]\q[Yes\, proceed,OnUserTerms2]\n\![*]\q[No\, close program now,decline]\*"	
 }
 
 //user agreement part 2
@@ -53,7 +53,7 @@ OnUserTerms2 : all
 	"\1\t\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]We are required to warn you that rendering errors may occur. This may cause issues for people sensitive to flashing lights.\N We understand this issue, and are actively working on mitigating it.\x"
 
 
-	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]However, you have the option of applying a temporary fix that will subdue the rendering issues, minimizing the adverse effects, but not fully removing them.\N You will be able to change this later.\N Apply the fix?\N \![*]\q[Yes,glitchlimit]\n\![*]\q[No,glitchfull]\*"
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]However, you have the option of applying a temporary fix that will subdue the rendering issues, minimizing the adverse effects, but not fully removing them.\N You will be able to change this later.\N Apply the fix?\N \![*]\q[Yes\, remove flashing lights,glitchlimit]\n\![*]\q[No\, proceed as is,glitchfull]\*"
 	
 }
 
@@ -93,7 +93,7 @@ Select.glitchlimit
 
 OnUserTerms3
 {
-	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Additionally, an optional fix can prevent visual vibration of AI's character appearance.\N Apply the fix?\N \![*]\q[Yes,vibrno]\n\![*]\q[No,vibryes]\*"
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Additionally, an optional fix can prevent visual shaking of AI's character appearance.\N Apply the fix?\N \![*]\q[Yes\, remove shaking,vibrno]\n\![*]\q[No\, proceed as is,vibryes]\*"
 }
 
 Select.vibrno
@@ -147,10 +147,12 @@ OnAstIntro : all
 OnAstIntro2 : all
 {
 	//move him down and make him stand straight
-	"\![enter,passivemode]\t\0\![move,--Y=%(displayHeight - 575),--time=800]\![anim,resume,99]\s[1]\i[54]\i[55]\i[1]\i[7]\i[15]\i[24]"
+	"\![enter,passivemode]\t\0\![move,--Y=%(displayHeight - 575),--time=800]\![anim,resume,99]"
 	
-	if reference0 == "asterminimized"; "...Um. They're just minimized. Er..."
-	else; "...Well."
+	if reference0 == "asterminimized"; "\s[1]\i[54]\i[55]\i[1]\i[7]\i[15]\i[24]...Um. They're just minimized. Er..."
+	elseif vanishCount == 1; "\s[4]\i[54]\i[55]\i[1]\i[7]\i[15]\i[24]...Have I seen this wallpaper before...?"
+	elseif vanishCount > 1; "\s[4]\i[54]\i[55]\i[1]\i[7]\i[15]\i[24]...Must've randomly leapt here before..."
+	else; "\s[1]\i[54]\i[55]\i[1]\i[7]\i[15]\i[24]...Well."
 
 	"\x\i[98]Wh-\i[97]\w8 \s[2]\i[56]\i[59]\i[7]\i[24]Would you \i[98]look\i[97] at that! Aren't \![slow]you\![normal] special?\N \s[5]\i[54]\i[66]Your lovely machine won't be wrecked today!\N \s[0]\i[15]I'm feeling rather generous, \s[4]don't thank me.\x"
 
@@ -163,6 +165,8 @@ OnAstIntro2 : all
 	"\s[4]I think there's an option in a menu.\N \s[0]You'll just have to do the work yourself.\N \s[2]\i[52]\i[59]Just right click anywhere on me, and click Uninstall!\N \s[8]Easy-peasy. \s[6]\i[61]\i[62]I know you can do it."
 
 	"\![leave,passivemode]\x\![raise,OnAstWaitStart]"
+
+	ERASEVAR('vanishCount') // we no longer need this
 }
 
 

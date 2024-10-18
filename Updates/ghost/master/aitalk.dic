@@ -335,3 +335,16 @@ User //references to Urs
 	--
 	"\f[default]"
 }
+
+//thanks okuajub for the suggestion; %wronghour of sakurascript gives the wrong hour in 24 hour format, which doesn't jive as well with the wording i've chosen for One Random Dialogue
+OnWrongHour 
+{
+	_currHour = GETTIME()[4] //get real current hour
+	if _currHour > 12; _currHour = _currHour - 12 //if it's more than 12 hours, just set it back to 12 hour format
+
+	_wrongHour = RAND(12) + 1
+	if _wrongHour == _currHour; _wrongHour--
+	if _wrongHour == 0; _wrongHour = "midnight" //people don't say 0'o clock, and un-midnight'o clock sounds funny. this is a fringe case anyway, you'll only get a Chance of seeing this at 1AM/1PM basically
+
+	_wrongHour // return candidate
+}

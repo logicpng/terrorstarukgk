@@ -264,12 +264,7 @@ username
 //\![raise,OnTestLine]
 OnTestLine : all
 { 
-		// _partOne = OUTPUTNUM('astRandomOne')
-		// _partTwo = OUTPUTNUM('astRandomTwo')
 
-		// _chance =  ((_partOne + _partTwo) / _partOne) + 1
-
-		// "%(_chance)"
 }
 
 //returns which set of surfaces aldebaran is currently in. needed for when we should keep a response to an event within the same position set, such as being petted

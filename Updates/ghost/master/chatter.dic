@@ -239,7 +239,7 @@ astRandomOne : nonoverlap_pool
 
 	"\s[13]\i[52]\i[7]\i[15]...Maybe you have any selfies?...\e:chain=ch_sus"
 
-	"\s[12]Wouldn't you know it, \s[6]\i[61]\i[62]it's my favourite time of day!\N ...\s[10]\i[51]\i[50]Un-%wronghour o' clock.\e:chain=ch_wronghour"
+	"\s[12]Wouldn't you know it, \s[6]\i[61]\i[62]it's my favourite time of day!\N ...\s[10]\i[51]\i[50]Un-\![embed,OnWrongHour] o' clock.\e:chain=ch_wronghour"
 
 	"\s[2]\i[64]\i[62]Something is very wrong with your permission system for me!\N \s[0]\i[54]\i[55]\i[6]\i[22]I'm an adult AI, \i[59]I should be able to look at whichever files I please.\N \s[6]\i[16]\i[9]...I guess that means you have to share them with me yourself, hm?"
 

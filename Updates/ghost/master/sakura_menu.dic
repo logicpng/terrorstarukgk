@@ -28,7 +28,7 @@ OnSakuraMenu : all
 	//edit to the code also keeps the greeting used this time, so that it's kept between pages
 	
 	//if the user already has more than page one's conversation subject, set menu to page 2 And unlock movement back and fourth
-	if unlockedConvo[4] == 1; OnPromptPageTwo
+	if unlockedConvo[5] == 1; OnPromptPageTwo
 	else; OnPromptPageOne
 	//note: a page can fit 7 lines. 3 of them are reserved for Talk to me and Say that again, making space for 4 prompts at a time, assuming the greeting will be 2 lines at most.
 }
@@ -75,13 +75,14 @@ OnPromptPageOne : all
 		"\n\![*]\q[Where are you from?,whereareyoufrom]"
 		if talkedConvo[2] != 1; " \f[sup,1]NEW\f[sup,0]"
 	}  //2 : 10-20 minutes after why are you here
-	
-	if talkedConvo[0] == 1 && CheckAster == 1
-	{
-		"\n\![*]\q[About Aster™ Assistant Software,aboutaster]"
-		if talkedConvo[3] != 1; " \f[sup,1]BONUS\f[sup,0]"
-	}  //3 (opt) : unlocks if aster asssistant software is present in the ghost folder AND after first dialogue ends
 
+	if unlockedConvo[4] == 1
+	{
+		"\n\![*]\q[About CaelOS,aboutcaelos]"
+		if talkedConvo[4] != 1; " \f[sup,1]NEW\f[sup,0]"
+
+	} //4 : 10-20 minutes after "where are you from"
+	
 	"\n[150]\![*]\q[Say something,OnAiTalk]"
 	if LastTalk != ""; "\n\![*]\q[What did you say earlier?,OnLastTalk]"
 	""
@@ -104,16 +105,9 @@ OnPromptPageTwo : all
 	"\b2\_q"
 	if SHIORI3FW.Eventid != "OnMouseDoubleClick"; menuHeader
 
-	if unlockedConvo[4] == 1
-	{
-		"\![*]\q[About CaelOS,aboutcaelos]"
-		if talkedConvo[4] != 1; " \f[sup,1]NEW\f[sup,0]"
-
-	} //4 : 10-20 minutes after "where are you from"
-
 	if unlockedConvo[5] == 1
 	{
-		"\n\![*]\q[About your user,aboutyouruser]"
+		"\![*]\q[About your user,aboutyouruser]"
 		if talkedConvo[5] != 1; " \f[sup,1]NEW\f[sup,0]"
 	}  //5 : 10-20 minutes after who are you is talked about?
 
@@ -128,6 +122,12 @@ OnPromptPageTwo : all
 		"\n\![*]\q[What are you\, really?,aboutyourproject]"
 		if talkedConvo[7] != 1; " \f[sup,1]NEW\f[sup,0]"
 	}  //7 : 10-30 minutes after about TB
+
+	if talkedConvo[7] == 1 && CheckAster == 1 //moving this as a bonus epilogue thing
+	{
+		"\n\![*]\q[About Aster™ Assistant Software,aboutaster]"
+		if talkedConvo[3] != 1; " \f[sup,1]BONUS\f[sup,0]"
+	}  //3 (opt) : unlocks if aster asssistant software is present in the ghost folder AND after first dialogue ends
 
 	//After Conversations
 	if talkedConvo[7] == 1; "\n\n\f[align,center][ Thank you for playing.\ ]\n\f[align,left]"

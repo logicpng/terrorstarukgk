@@ -2,32 +2,21 @@ Content Warnings:
 ! Unreality - No 4th wall, meta themes.
 ! Photosensitivity - Character often vibrates in place, and has glitchy effects. You will be given the option to enable them or not when running for the first time, and can always switch them on or off later.
 
+Main "story" is over when "Thanks for playing!" shows up in the menu.
+
 -----------------------------------------------------------------
 
-This is the beta release of Aster Terror Star! Thank you for volunteering to help me test it in advance!
+--Attempt 54--
 
-What is done:
+Result: SUCCESS
 
-- The core "story", including random dialogue, longer monologues, and mechanisms to unlock more dialogues over time.
-- Basic music playback through drag-n-drop
-- Responses to some unusual files (such as My Computer or Recycling Bin shortcuts)
-- Main menu, with options to disable waiting if you wish to go through the story faster for testing purposes (but it would be welcome if you could test if the waiting times need tweaking)
-- Optional interaction with Aster Assistant Software at specific points
-- Responses to being petted
-- Responses to being uninstalled
+Okay, I think this is the closest to what I need! Offloading some unnecessary features has helped immensely with being able to actually pass on necessary instructions.
 
-What isn't done:
+Once this reaches the target node, it should hook into a USC vulnerability to start spreading itself all over the network to execute the search. Exciting!
 
-- Responses to all other kinds of files being dragged-n-dropped
-- Dialogue for some "meta" events, like installing other ghosts and items
-- Responses to being clicked on places besides shoulders
-- Some other minor stuff to expand on the experience
+I just hope they won't be too upset with me for going that far... This will be worth the effort, I know it.
 
-I am looking for feedback on the quality of dialogue, flow of the "story", and any potential errors that can cause issues for end users who are not familiar with SSP.
-
-Please remember that I am not a native English speaker, so the dialogue may have awkward turns of speech. Please let me know of better options if necessary!
-
-If anything goes off the rails or if there are any grammatical and spelling errors that need to be fixed, please let me know!
+-TS 
 
 -----------------------------------------------------------------
 
