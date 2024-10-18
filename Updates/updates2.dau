@@ -1,11 +1,11 @@
-ghost/master/aitalk.dic518c42afd596057ce1f5ec3d25f465edsize=10657date=2024-10-16T18:09:10charset=windows-1251
+ghost/master/aitalk.dic8f31ccc1322244161b14fec00447ec1esize=11341date=2024-10-19T05:40:13charset=windows-1251
 ghost/master/al_icon.ico66e451fa674a52cf5a8bc61e96fc6167size=133570date=2024-02-07T07:39:34
-ghost/master/boot.dicc345c1d18a070793758f21f0b69b2fdasize=4918date=2024-10-08T16:11:21
-ghost/master/chatter.dic2a857828e567e46cb5a66381dec50d39size=82574date=2024-10-16T17:54:43
+ghost/master/boot.dic43a4e468ec94ccbb92a6be483b5301besize=5046date=2024-10-19T06:37:21
+ghost/master/chatter.dic35763da11dc57488c466bedf639f5f22size=82585date=2024-10-19T05:40:22
 ghost/master/commu.dica22fee481348a071945dd204ba30efd7size=12071date=2024-10-08T10:31:57
-ghost/master/convo.dice8966a2176e30b49249b2290a7c49eb9size=44276date=2024-10-08T15:07:06
+ghost/master/convo.dic4c455fa1dea63254b18855fc4c671b03size=44688date=2024-10-19T06:43:36
 ghost/master/descript.txt60c59c491675e554b2c14f14aae5779dsize=507date=2024-02-07T07:40:36
-ghost/master/emerg.dicc7cb6eacd3262003fef909c382a6fefesize=351date=2023-04-15T05:45:50
+ghost/master/emerg.dicaa9128375e3f22d18aa45325fb29557csize=496date=2024-10-19T06:16:14
 ghost/master/img/abst.clip1c448f060fe3889a465ec44793569eebsize=405517date=2024-09-07T08:01:52
 ghost/master/img/abst0.pngce116e6f1ec5a3a259c1ea6f32caff24size=48925date=2024-09-07T07:52:40
 ghost/master/img/abst1.pngcca7814c84d444a4c8196edda6642be0size=50616date=2024-09-07T07:58:44
@@ -18,13 +18,13 @@ ghost/master/img/cabst3.jpgc501c39fac8f491f6c652c2e81f6262esize=65377date=202
 ghost/master/img/logo.png88e1c45879f12394658f089fa955b591size=47492date=2024-09-07T12:05:50
 ghost/master/img/sep.clip7ba41fc5be168a565ca03d45c13931e3size=213129date=2024-02-06T17:13:57
 ghost/master/img/sep.png0154407200aaafda84f556c07dc29322size=292date=2024-02-06T10:14:45
-ghost/master/img/site.png71c23074a0407cf1eef3383434f8acd1size=45639date=2024-03-10T09:58:19
+ghost/master/img/site.png0fc5a14d3c6eb96a7087f02b03f2254fsize=32162date=2024-10-19T07:29:22
 ghost/master/kero_menu.dic8ed124c0eb6bfb7cb570eb4bf9f99314size=1089date=2023-05-07T06:47:14
 ghost/master/meta.dicff06c8f12d5723875d772eccb394e2b2size=18422date=2024-10-16T07:16:41
-ghost/master/mouse.dicd3b09351cf2b8645e7ccafea0ea7ca68size=17040date=2024-10-16T05:01:06
+ghost/master/mouse.dicea0663e3ff28f330a1b775d86f92cdbcsize=17676date=2024-10-19T06:37:16
 ghost/master/odm.diceb151a5c438bdb72e84c98fa733703f6size=3876date=2024-10-16T19:02:55
-ghost/master/other.dic55a90a5c310828f27376d47a386723a3size=9432date=2024-10-16T17:57:58
-ghost/master/sakura_menu.dice3d192ca5df65579a9f464e49da920e4size=12763date=2024-10-03T20:21:24
+ghost/master/other.dicb8c730491390d41d704011b82962b836size=9269date=2024-10-19T06:20:49
+ghost/master/sakura_menu.dicd406a4494e8c7edb0a4cfcfe13558f95size=12803date=2024-10-19T06:59:47
 ghost/master/sounds/boot.mp3481f89f4f7ee1b4e3f1901deab407105size=770382date=2023-12-13T16:30:21
 ghost/master/sounds/jingle doodle 2.mp39fc0fd08961acffb67e29049133793a0size=347950date=2024-04-28T11:24:37
 ghost/master/sounds/sosumi.mp3b97dcc3f876f227c337b2b60e1241385size=9403date=2023-12-13T16:41:32
@@ -39,7 +39,7 @@ ghost/master/yaya_base/shiori3.dicac4750d7081a6607ac1c26184677020asize=55020d
 ghost/master/yaya_base/shiori3_old.dic1de0d38014757a17a7476394986076easize=54852date=2023-11-10T14:54:21
 ghost/master/yaya_emerg.txt9e43b4696366a536ecc69e45d80e392csize=607date=2023-04-15T05:44:19
 install.txt2cf0afdf2b49bf679f60c9f41f517968size=119date=2024-09-30T06:25:17
-readme.txtc35e3587ac69c2afaac1e555d48d0019size=2441date=2024-09-29T20:08:44
+readme.txt2cde14a108d0f089579e2a54e16133bcsize=1568date=2024-10-19T05:51:09
 shell/master/__surface0.png09811d88b3ac2484ccf4b4372e07583fsize=74573date=2023-11-06T19:13:39
 shell/master/descript.txtcb6ed9349865520b561e4dde10d4969fsize=912date=2024-06-25T17:28:24
 shell/master/glitchcol.png4bef70360b4ed2852d51dcfbe6afe057size=7392date=2024-10-04T11:03:10
@@ -49,6 +49,7 @@ shell/master/handcol_h.png444c92926829506d210cf797793aee80size=3417date=2024-
 shell/master/menu_background.pnga7b44da402c3a6e19dabca173f8ef847size=3858date=2024-06-25T17:23:10
 shell/master/menu_foreground.png74951b20faec9cf7e1ff0444376cfd68size=5091date=2024-06-25T17:20:20
 shell/master/menu_sidebar.png6411490b0e95a64659f67c48bd13d546size=17871date=2024-06-25T17:19:11
+shell/master/surface0.apngb94f012a18f8e5133fd93feb30d60499size=495412date=2024-10-19T07:14:24
 shell/master/surface1000.pngb7e7a86425fecf8cd2ccc6c410a15da4size=45264date=2024-05-01T07:02:38
 shell/master/surface1001.png3b9547db6e448bae215e045505145d8esize=21163date=2024-06-16T11:20:40
 shell/master/surface1002.png831719904cb60fc08e5eff3fdfb83cf8size=21479date=2024-06-16T10:33:08
