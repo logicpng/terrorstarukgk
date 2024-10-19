@@ -44,7 +44,9 @@ OnCommunicate
         if "whoareyou" _in_ reference1 //for example, Assistant Software sent script that has \![whoareyou] in it. these tags need to be distinct not to get mistriggered
         {
             res_reference0 = "Aster" //addressing Aster Assistant Software, Aster being their sakura name. our sakura name is Aster(?)
-            conversation_new = "\s[2]\i[52]\i[53]\i[6]\i[12]\i[98]Ah- \i[97]\s[3]\i[54]\i[55]\i[6]well. I'll... \i[1]\i[15]\i[24]\i[98]\![fast]get back to you two on that.\![normal]" //the new dialogue string
+            conversation_new = "\s[2]\i[52]\i[53]\i[6]\i[12]\i[98]Ah- \i[97]\s[3]\i[54]\i[55]\i[6]well. "
+            if talkedConvo[3] == 0 && talkedConvo[0] == 1; conversation_new += "I'll... \i[1]\i[15]\i[24]\i[98]\![fast]get back to you on that, %(username).\![normal]" //the new dialogue string
+            else; conversation_new += "\i[1]\i[15]\i[24]\i[98]\![fast]Nevermind all that!\![normal]"
             
             "\![whoareyou]\w8\w8" //adding onto the output sting with the tag
         }

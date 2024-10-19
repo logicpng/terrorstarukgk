@@ -2,9 +2,9 @@ charset,windows-1251
 file,ghost/master/aitalk.dic8f31ccc1322244161b14fec00447ec1esize=11341date=2024-10-19T05:40:13
 file,ghost/master/al_icon.ico66e451fa674a52cf5a8bc61e96fc6167size=133570date=2024-02-07T07:39:34
 file,ghost/master/boot.dic43a4e468ec94ccbb92a6be483b5301besize=5046date=2024-10-19T06:37:21
-file,ghost/master/chatter.dic35763da11dc57488c466bedf639f5f22size=82585date=2024-10-19T05:40:22
-file,ghost/master/commu.dica22fee481348a071945dd204ba30efd7size=12071date=2024-10-08T10:31:57
-file,ghost/master/convo.dic4c455fa1dea63254b18855fc4c671b03size=44688date=2024-10-19T06:43:36
+file,ghost/master/chatter.dic8649ccc0cfd75c64f4ed1c158cee2f3csize=82670date=2024-10-19T14:42:23
+file,ghost/master/commu.dic1580681ee661da9991665839004e162csize=12265date=2024-10-19T14:15:41
+file,ghost/master/convo.dicb6a2ce86e4c98a567c0635f5504997fesize=44700date=2024-10-19T14:33:52
 file,ghost/master/descript.txt60c59c491675e554b2c14f14aae5779dsize=507date=2024-02-07T07:40:36
 file,ghost/master/emerg.dicaa9128375e3f22d18aa45325fb29557csize=496date=2024-10-19T06:16:14
 file,ghost/master/img/abst.clip1c448f060fe3889a465ec44793569eebsize=405517date=2024-09-07T08:01:52
@@ -23,7 +23,7 @@ file,ghost/master/img/site.png0fc5a14d3c6eb96a7087f02b03f2254fsize=32162date=
 file,ghost/master/meta.dicff06c8f12d5723875d772eccb394e2b2size=18422date=2024-10-16T07:16:41
 file,ghost/master/mouse.dicea0663e3ff28f330a1b775d86f92cdbcsize=17676date=2024-10-19T06:37:16
 file,ghost/master/odm.diceb151a5c438bdb72e84c98fa733703f6size=3876date=2024-10-16T19:02:55
-file,ghost/master/other.dicb8c730491390d41d704011b82962b836size=9269date=2024-10-19T06:20:49
+file,ghost/master/other.dicb8c730491390d41d704011b82962b836size=9269date=2024-10-19T14:36:26
 file,ghost/master/sakura_menu.dicd406a4494e8c7edb0a4cfcfe13558f95size=12803date=2024-10-19T06:59:47
 file,ghost/master/sounds/boot.mp3481f89f4f7ee1b4e3f1901deab407105size=770382date=2023-12-13T16:30:21
 file,ghost/master/sounds/jingle doodle 2.mp39fc0fd08961acffb67e29049133793a0size=347950date=2024-04-28T11:24:37

@@ -43,7 +43,7 @@ OnUserTerms1 : all
 
 	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Unreality\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]We are required to remind you that the AI is aware of residing in your machine.\N It will be able to analyze the files you give it access to. It will not be able to interfere with your software or edit any files.\N This is intentional design and is no cause for alarm.\w8\x"
 	
-	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Unreality\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Is this acceptable?\N \![*]\q[Yes\, proceed,OnUserTerms2]\n\![*]\q[No\, close program now,decline]\*"	
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Unreality\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Is this acceptable?\N \![*]\q[Yes\, proceed,OnUserTerms2]\n\![*]\q[No\, close program now,decline]\*"	
 }
 
 //user agreement part 2
@@ -53,7 +53,7 @@ OnUserTerms2 : all
 	"\1\t\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]We are required to warn you that rendering errors may occur. This may cause issues for people sensitive to flashing lights.\N We understand this issue, and are actively working on mitigating it.\x"
 
 
-	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]However, you have the option of applying a temporary fix that will subdue the rendering issues, minimizing the adverse effects, but not fully removing them.\N You will be able to change this later.\N Apply the fix?\N \![*]\q[Yes\, remove flashing lights,glitchlimit]\n\![*]\q[No\, proceed as is,glitchfull]\*"
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]However, you have the option of applying a temporary fix that will subdue the rendering issues, minimizing the adverse effects, but not fully removing them.\N You will be able to change this later.\N Apply the fix?\N \![*]\q[Yes\, remove flashing lights,glitchlimit]\n\![*]\q[No\, proceed as is,glitchfull]\*"
 	
 }
 
@@ -93,7 +93,7 @@ Select.glitchlimit
 
 OnUserTerms3
 {
-	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Additionally, an optional fix can prevent visual shaking of AI's character appearance.\N Apply the fix?\N \![*]\q[Yes\, remove shaking,vibrno]\n\![*]\q[No\, proceed as is,vibryes]\*"
+	"\1\_q\_l[,-33]\f[name,RobotoCondensed.ttf]\f[height,17]\f[bold,0]\f[color,#34166C]Content warning\_m[58] Flashing Lights\f[default]\_l[0,0]\_q\![set,balloonwait,0.6]Additionally, an optional fix can prevent visual shaking of AI's character appearance.\N Apply the fix?\N \![*]\q[Yes\, remove shaking,vibrno]\n\![*]\q[No\, proceed as is,vibryes]\*"
 }
 
 Select.vibrno

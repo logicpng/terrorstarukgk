@@ -1089,7 +1089,7 @@ astPetAfter : nonoverlap_pool //standing only
 	"\s[3]\i[0]\i[15]\i[63]\![slow]...Hmph.\N \s[4]\i[63]\![normal]It's not that I mind being pet, \i[52]\i[62]but I have... \s[3]\i[54]\i[55]\![slow]certain limits.\N \![normal]\s[1]\i[1]Be a little more careful, won't you?"
 	"\s[0]\i[63]\i[0]\i[6]\i[22]\![slower]Huff.\N \s[0]\i[6]\i[22]\![normal]I apologize for that... \i[3]\![slow]But, \s[4]\i[63]\![normal]please be more careful next time..."
 	--
-	if disableWaiting != 1; "\N %(astOverstimPenalty)" //if waiting is disabled there's obviously no penalty. otherwise, the way envelopes work mean the penalty gets added as soon as this function is called!
+	if disableWaiting != 1 || unlockedConvo[7] == 0; "\N %(astOverstimPenalty)" //if waiting is disabled there's obviously no penalty. likewise if the final conversation has been spoken already. otherwise, the way envelopes work mean the penalty gets added as soon as this function is called!
 }
 
 astOverstimPenalty : nonoverlap_pool //starts out as standing. dialogue to let the user know they'll have to wait a little longer until next conversation prompt
