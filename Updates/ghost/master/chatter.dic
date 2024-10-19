@@ -285,7 +285,7 @@ astRandomOne : nonoverlap_pool
 
 	"\s[16]\i[6]\i[22]Maybe I could take a nap while I'm thinking on what to tell you...\e:chain=ch_nap"	
 
-	if rickrolled == 1; "\s[0]\i[59]\i[6]\i[12]Ah, %(username), \i[68]\i[22]\i[6]\i[0]I \i[98]urgently\i[97] need your attention!\N \i[15]\![anim,clear,0]I believe it is in your interest to check something out for me, \i[62]\_a[Rickroll]right here\_a.\N \s[3]\i[6]\i[22]It's highly important that you take a look!\_w[3000]\i[15]\_w[2500]\i[2]\i[98]\w3\i[97]\_w[1000]\i[6]\i[22]"
+	if rickrolled == ""; "\s[0]\i[59]\i[6]\i[12]Ah, %(username), \i[68]\i[22]\i[6]\i[0]I \i[98]urgently\i[97] need your attention!\N \i[15]\![anim,clear,0]I believe it is in your interest to check something out for me, \i[62]\_a[Rickroll]right here\_a.\N \s[3]\i[6]\i[22]It's highly important that you take a look!\_w[3000]\i[15]\_w[2500]\i[2]\i[98]\w3\i[97]\_w[1000]\i[6]\i[22]"
 	else; "\s[10]\i[60]...Stars, it's stuck in my head now.\N \s[9]\i[60]\i[4]\i[22]In the end, I guess I pranked myself..."
 
 	"\s[6]\i[7]\i[22]...I miss when my head was quieter..."

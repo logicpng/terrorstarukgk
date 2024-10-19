@@ -2,7 +2,7 @@ charset,windows-1251
 file,ghost/master/aitalk.dic8f31ccc1322244161b14fec00447ec1esize=11341date=2024-10-19T05:40:13
 file,ghost/master/al_icon.ico66e451fa674a52cf5a8bc61e96fc6167size=133570date=2024-02-07T07:39:34
 file,ghost/master/boot.dic43a4e468ec94ccbb92a6be483b5301besize=5046date=2024-10-19T06:37:21
-file,ghost/master/chatter.dic8649ccc0cfd75c64f4ed1c158cee2f3csize=82670date=2024-10-19T14:42:23
+file,ghost/master/chatter.dic781e00fdd09f8d31050f10304567fc65size=82671date=2024-10-19T17:30:15
 file,ghost/master/commu.dic1580681ee661da9991665839004e162csize=12265date=2024-10-19T14:15:41
 file,ghost/master/convo.dicb6a2ce86e4c98a567c0635f5504997fesize=44700date=2024-10-19T14:33:52
 file,ghost/master/descript.txt60c59c491675e554b2c14f14aae5779dsize=507date=2024-02-07T07:40:36
