@@ -324,40 +324,76 @@ OnVanishFakeout
 }
 
 checkDisableVanish
-{
-	_path = '..\..\..\..\data\profile\app.dat'
-
-	void FOPEN( _path , 'r' ) //open the file that stores ssp options
-	_line = ""
-
-	while "DisableVanish," !_in_ _line && "__system_written_flag_do_not_remove__," !_in_ _line //either find disablevanish or the final flag in the file
+{	
+	//turns out i forgot people can have their ghosts in subfolders
+	//or not in ssp entierly
+	
+	if RE_SEARCH(SHIORI3FW.Path,'ghost(.*)caelOS_aldebaran') == 1 //matches the usual ghost path, including subfolders
 	{
-		_line = FREAD ( _path )
+		_ssppath = ERASE(SHIORI3FW.Path,STRSTR(SHIORI3FW.Path,'ghost',0),STRLEN(SHIORI3FW.Path)) //erase everything up to the first occurence of 'ghost' in the path. ideally this should get where ssp is located
+		if 'ssp.exe' _in_ FENUM(_ssppath) //is ssp present in the folder we just obtained?
+		{
+			_path = "%(_ssppath)data\profile\app.dat" //if yes we go into the settings and look for a DisableVanish in there
+			_line = ""
+			
+			if FOPEN( _path , 'r' ) == 1 //open the file that stores ssp options. importantly it shouldn't proceed if it doesn't find such a file
+			{
+				while "DisableVanish," !_in_ _line && "__system_written_flag_do_not_remove__," !_in_ _line //either find disablevanish or the final flag in the file
+				{
+					_line = FREAD ( _path )
+				}
+				FCLOSE( _path ) //close the file, extremely important
+			}
+			else
+			{
+				-1
+				return //end the function immediately if opening file fails
+			}
+
+			if _line == "DisableVanish,1"; 1 //the uninstallation is disabled entierly
+			elseif _line == "DisableVanish,2"; 2 //uninstallation sequence goes through as normal but doesn't actually delete anything
+			else; 0
+		}
+		else
+		{
+			-1 //end the function immediately if ssp executable isn't found, ghost folder likely separate from ssp installation
+		}
 	}
-	FCLOSE( _path ) //close the file, extremely important
-	
-	
-	if _line == "DisableVanish,1"; 1 //the uninstallation is disabled entierly
-	elseif _line == "DisableVanish,2"; 2 //uninstallation sequence goes through as normal but doesn't actually delete anything
-	else; 0
 }
 
 checkDevMode //i know i can like. edit the function above so that it can check for either or but i don't want to break anything in the process. this doesn't affect anything gameplay, i just want to disable some keys in other.dic
 {
-	_path = '..\..\..\..\data\profile\app.dat'
 
-	void FOPEN( _path , 'r' ) //open the file that stores ssp options
-	_line = ""
-
-	while "devFuncEnable," !_in_ _line && "__system_written_flag_do_not_remove__," !_in_ _line 
+	if RE_SEARCH(SHIORI3FW.Path,'ghost(.*)caelOS_aldebaran') == 1 //matches the usual ghost path, including subfolders
 	{
-		_line = FREAD ( _path )
+		_ssppath = ERASE(SHIORI3FW.Path,STRSTR(SHIORI3FW.Path,'ghost',0),STRLEN(SHIORI3FW.Path)) //erase everything up to the first occurence of 'ghost' in the path. ideally this should get where ssp is located
+		if 'ssp.exe' _in_ FENUM(_ssppath) 
+		{
+			_path = "%(_ssppath)data\profile\app.dat"
+			_line = ""
+			
+			if FOPEN( _path , 'r' ) == 1 //open the file that stores ssp options. importantly it shouldn't proceed if it doesn't find such a file
+			{
+				while "devFuncEnable," !_in_ _line && "__system_written_flag_do_not_remove__," !_in_ _line //either find disablevanish or the final flag in the file
+				{
+					_line = FREAD ( _path )
+				}
+				FCLOSE( _path ) //close the file, extremely important
+			}
+			else
+			{
+				-1
+				return //end the function immediately if opening file fails
+			}
+
+			if _line == "devFuncEnable,1"; 1 //dev functions are turned on
+			else; 0
+		}
+		else
+		{
+			-1 //end the function immediately if ssp executable isn't found, ghost folder likely separate from ssp installation
+		}
 	}
-	FCLOSE( _path ) //close the file, extremely important
-	
-	
-	if _line == "devFuncEnable,1"; 1 //dev functions are turned on
-	else; 0
 }
 
 
