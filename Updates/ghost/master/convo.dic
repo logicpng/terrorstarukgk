@@ -365,7 +365,7 @@ Select.whereareyoufrom : all
 {
 	"\![bind,Notif,New,0]"
 
-	if talkedConvo[2] == 0; "\s[0]\i[1]Obviously, \i[22]\i[24]\i[57]I am not about to doxx my %(User), now.\N \s[1]\i[54]\i[55]No, no,\w8\w8 \i[56]\i[15]instead I would like to answer some questions you may have!"
+	if talkedConvo[2] == 0; "\s[0]\i[1]\i[22]\i[24]\i[57]I am not about to doxx my %(User), now, obviously.\N \s[1]\i[54]\i[55]No, no,\w8\w8 \i[56]\i[15]instead I would like to answer some questions you may have!"
 	else; "\s[1]\i[63]Still mystified by my origins?\N \i[0]\i[22]And no, \i[54]\i[57]\i[15]I'm still not telling you where my %(User) lives! \s[0]\i[63]\i[6]\i[22]But, I can't say I blame you!"
 	
 	"\N \s[4]\i[54]\i[55]After all.\w8.\w8.\w8 \s[2]\i[1]\i[63]have \![slow]\f[italic,1]you\f[italic,0]\![normal] ever heard of such a thing as Aster™ Assistant Software?\x"

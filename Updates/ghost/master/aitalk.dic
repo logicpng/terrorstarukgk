@@ -57,7 +57,7 @@ OnUnlockConvo
 
 	if unlockedConvo[1] != 1 //why are you here //is the second topic unlocked yet?
 	{
-		if talkedConvo[0] == 1 && stageTime >= 900 //if not, did we talk about the first topic, and did 15 minutes pass?
+		if talkedConvo[0] == 1 && stageTime >= 1800 //if not, did we talk about the first topic, and did 15 minutes pass?
 		{
 			unlockedConvo[1] = 1 //if so, unlock second topic
 			LastTalk += "\![bind,Notif,New,1]" //and add binding the dressup for the thing that will be said soon
@@ -65,7 +65,7 @@ OnUnlockConvo
 	}
 	elseif unlockedConvo[2] != 1 //where are you from //and then proceed with checking the same with third topic and so on
 	{
-		if talkedConvo[1] == 1 && stageTime >= 900
+		if talkedConvo[1] == 1 && stageTime >= 1800
 		{
 			unlockedConvo[2] = 1
 			LastTalk += "\![bind,Notif,New,1]"
@@ -73,7 +73,7 @@ OnUnlockConvo
 	}
 	elseif unlockedConvo[4] != 1 //About CaelOS. 3 is optional and unlocked through a different check so it's skipped
 	{
-		if talkedConvo[2] == 1 && stageTime >= 900;
+		if talkedConvo[2] == 1 && stageTime >= 1800
 		{
 			unlockedConvo[4] = 1
 			LastTalk += "\![bind,Notif,New,1]"
@@ -81,7 +81,7 @@ OnUnlockConvo
 	}
 	elseif unlockedConvo[5] != 1 //About your user
 	{
-		if talkedConvo[4] == 1 && stageTime >= 900
+		if talkedConvo[4] == 1 && stageTime >= 1800
 		{
 			unlockedConvo[5] = 1
 			LastTalk += "\![bind,Notif,New,1]"
@@ -89,7 +89,7 @@ OnUnlockConvo
 	}
 	elseif unlockedConvo[6] != 1 //About Terrabyte
 	{
-		if talkedConvo[5] == 1 && stageTime >= 900
+		if talkedConvo[5] == 1 && stageTime >= 1800
 		{
 			unlockedConvo[6] = 1
 			LastTalk += "\![bind,Notif,New,1]"
@@ -97,7 +97,7 @@ OnUnlockConvo
 	}
 	elseif unlockedConvo[7] != 1 //About your project
 	{
-		if talkedConvo[6] == 1 && stageTime >= 900
+		if talkedConvo[6] == 1 && stageTime >= 1800
 		{
 			unlockedConvo[7] = 1
 			LastTalk += "\![bind,Notif,New,1]"
