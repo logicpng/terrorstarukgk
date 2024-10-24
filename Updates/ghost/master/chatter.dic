@@ -298,6 +298,21 @@ astRandomOne : nonoverlap_pool
 	"\s[7]\i[61]\i[53]Did you know there's no such thing as real randomness?\N \i[62]\i[9]\i[16]It's true! \i[14]\i[55]Everything happens for a reason!\N \s[10]\i[58]Most RNGs need a seed to start with. \s[6]\i[22]And if you know what the seed is, \i[14]\i[52]\i[55]you could rule the world!"
 	//1
 	"\s[3]\i[54]\i[58]\i[15]\i[7]\i[24]...Do you think my tie is too short?\N \i[12]\i[55]\i[1]It's not, is it? \s[4]\i[24]Hm."
+
+	//this feels more appropriate to have available from beginning
+	if ARRAYSIZE(otherghostname) == 0 //aldebaran is alone
+	{
+		"\s[4]\i[52]\i[53]\i[6]It's a little lonely here..."
+		-- //is there more than terror star instlaled on ssp. fringe case given emily but
+		if ARRAYSIZE(installedghostlist) > 1; "\N So, \i[61]\i[2]this framework of yours seems to host other chatty souls, like myself?\N \s[1]\i[54]\i[55]Peculiar! \i[66]\i[15]But fascinating."
+		-- //is aster installed
+		if CheckAster; "\e:chain=ch_noaster"
+	}
+	else //aldebaran has at least one other ghost with him
+	{
+		if "Aster" _in_ otherghostname; "\s[10]\i[60]\i[24]Convenient that \f[italic,1]they\f[italic,0] seem to ignore me...\N \s[9]\i[60]\i[16]\i[24]I'd prefer not to \f[bold,1]get their attention\f[bold,0], anyway, if I can help it.\N \s[10]\i[61]\i[62]You know. \i[24]\i[58]\i[7]Never the selves shall meet, and all." //aster is the only ghost nearby
+		else; "\s[1]Hard to ignore the fact you have some company with me here.\N \s[0]\i[1]\i[5]It is rather strange, though! \i[22]I still feel... \s[3]\i[54]\i[58]isolated from them, somehow.\N \s[4]\i[54]\i[65]Maybe If I just...\e:chain=ch_notalone"
+	}
 }
 
 astRandomTwo : nonoverlap_pool//after About CaelOS
@@ -442,19 +457,6 @@ astRandomThree : nonoverlap_pool//after What Are You?
 
 	"\s[1]Do you happen to have any pets? \s[4]I've been thinking of what it must be like owning one.\N \s[3]\i[58]\i[1]The idea of taking care of a \_a[Process]process\_a is strange, \i[15]to me. \s[1]\i[61]\i[62]\i[1]\i[15]A process doesn't care if you entertain it, \s[0]\i[1]\i[15]it just acts out its \_a[Program]program\_a."
 
-	if ARRAYSIZE(otherghostname) == 0 //aldebaran is alone
-	{
-		"\s[4]\i[52]\i[53]\i[6]It's a little lonely here..."
-		-- //is there more than terror star instlaled on ssp. fringe case given emily but
-		if ARRAYSIZE(installedghostlist) > 1; "\N So, \i[61]\i[2]this framework of yours seems to host other chatty souls, like myself?\N \s[1]\i[54]\i[55]Peculiar! \i[66]\i[15]But fascinating."
-		-- //is aster installed
-		if CheckAster; "\e:chain=ch_noaster"
-	}
-	else //aldebaran has at least one other ghost with him
-	{
-		if "Aster" _in_ otherghostname; "\s[10]\i[60]\i[24]Convenient that \f[italic,1]they\f[italic,0] seem to ignore me...\N \s[9]\i[60]\i[16]\i[24]I'd prefer not to \f[bold,1]get their attention\f[bold,0], anyway, if I can help it.\N \s[10]\i[61]\i[62]You know. \i[24]\i[58]\i[7]Never the selves shall meet, and all." //aster is the only ghost nearby
-		else; "\s[1]Hard to ignore the fact you have some company with me here.\N \s[0]\i[1]\i[5]It is rather strange, though! \i[22]I still feel... \s[3]\i[54]\i[58]isolated from them, somehow.\N \s[4]\i[54]\i[65]Maybe If I just...\e:chain=ch_notalone"
-	}
 
 	"\s[3]\i[54]\i[66]\i[5]\i[15]It seems that the desktop space is a little more isolated from the rest of things here, compared to back home.\N \s[4]\i[63]\i[5]Otherwise, it's just a void out there."
 
