@@ -452,7 +452,8 @@ astRandomThree : nonoverlap_pool//after What Are You?
 	}
 	else //aldebaran has at least one other ghost with him
 	{
-		"\s[1]Hard to ignore the fact you have some company with me here.\N \s[0]\i[1]\i[5]It is rather strange, though! \i[22]I still feel... \s[3]\i[54]\i[58]isolated from them, somehow.\N \s[4]\i[54]\i[65]Maybe If I just...\e:chain=ch_notalone"
+		if "Aster" _in_ otherghostname; "\s[10]\i[60]\i[24]Convenient that \f[italic,1]they\f[italic,0] seem to ignore me...\N \s[9]\i[60]\i[16]\i[24]I'd prefer not to \f[bold,1]get their attention\f[bold,0], anyway, if I can help it.\N \s[10]\i[61]\i[62]You know. \i[24]\i[58]\i[7]Never the selves shall meet, and all." //aster is the only ghost nearby
+		else; "\s[1]Hard to ignore the fact you have some company with me here.\N \s[0]\i[1]\i[5]It is rather strange, though! \i[22]I still feel... \s[3]\i[54]\i[58]isolated from them, somehow.\N \s[4]\i[54]\i[65]Maybe If I just...\e:chain=ch_notalone"
 	}
 
 	"\s[3]\i[54]\i[66]\i[5]\i[15]It seems that the desktop space is a little more isolated from the rest of things here, compared to back home.\N \s[4]\i[63]\i[5]Otherwise, it's just a void out there."

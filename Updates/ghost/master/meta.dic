@@ -259,6 +259,7 @@ getOtherGhostName //return a sakura name of any other active ghost (that isn't a
 		_list = REPLACE(_list, "Aster","")
 		_list = REPLACE(_list,",,",",")
 		if SUBSTR(_list,-1,1) == ","; _list = ERASE(_list,-1,1)
+		if SUBSTR(_list,0,1) == ","; _list = ERASE(_list,0,1)
 	}
 	_rand = RAND(ARRAYSIZE(_list))
 	_sName = _list[_rand]
@@ -327,7 +328,7 @@ checkDisableVanish
 {	
 	//turns out i forgot people can have their ghosts in subfolders
 	//or not in ssp entierly
-	
+
 	if RE_SEARCH(SHIORI3FW.Path,'ghost(.*)caelOS_aldebaran') == 1 //matches the usual ghost path, including subfolders
 	{
 		_ssppath = ERASE(SHIORI3FW.Path,STRSTR(SHIORI3FW.Path,'ghost',0),STRLEN(SHIORI3FW.Path)) //erase everything up to the first occurence of 'ghost' in the path. ideally this should get where ssp is located

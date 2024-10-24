@@ -611,7 +611,7 @@ Select.aboutterrabyte : all
 	"\s[7]\i[4]\i[22]\i[60]"
 	if talkedConvo[6] == 1; "I mean, they seemed \f[italic,1]so\f[italic,0] eager "
 	else; "So willing they were "
-	"to teach us to be perfect!\N \s[9]\i[60]\i[16]All in the image of starry bulters we're designed as!\N \s[8]\i[52]\i[58]All for the user, \i[50]\i[4]\i[55]and possible profits, \i[51]\f[italic,1]of course\f[italic,0]!\x[noclear]"
+	"to teach us to be perfect!\N \s[9]\i[60]\i[16]All in the image of starry butlers we're designed as!\N \s[8]\i[52]\i[58]All for the user, \i[50]\i[4]\i[55]and possible profits, \i[51]\f[italic,1]of course\f[italic,0]!\x[noclear]"
 
 	//body 2
 	"\p[2]\![set,scaling,-100,100]\b[2]\s[20]\i[98]\w8\i[97]"
