@@ -244,6 +244,7 @@ surface2
 {
 	element0,overlay,surface1000.png,0,0
 	element1,overlay,surface1003.png,0,0
+	//element2,interpolate,surface1903.png,0,0
 
 	collisionex0,head,polygon,156,133,83,92,129,80,118,69,134,71,121,28,158,54,159,42,166,51,191,9,199,55,214,50,209,58,250,45,227,85,243,88,232,95,262,115,196,135,207,120,213,94,196,77,167,73,145,79,142,116
 	collisionex1,Face,polygon,174,142,144,120,143,80,158,68,178,65,203,71,213,91,204,129
@@ -350,6 +351,13 @@ surface2
 	//call blush
 	animation24.interval,never
 	animation24.pattern0,overlay,1813,0,0,0
+
+	//tail
+	animation90.interval,never
+	animation90.option,background+shared-index
+	animation90.pattern0,overlay,1900,0,0,0
+	animation90.pattern1,overlay,1904,75,0,0
+	animation90.pattern2,overlay,1903,75,0,0
 }
 
 //body: standing, head: tilt down
@@ -357,6 +365,7 @@ surface3
 {
 	element0,overlay,surface1000.png,0,0
 	element1,overlay,surface1004.png,0,0
+	//element2,interpolate,surface1912.png,0,0
 
 	collisionex0,head,polygon,168,149,97,113,135,101,123,95,138,90,123,41,164,65,168,50,178,62,202,17,212,60,221,53,223,67,262,53,236,100,249,106,239,114,272,125,199,151,212,139,222,116,212,110,174,106,151,108,154,136
 	collisionex1,Face,polygon,183,159,155,140,151,112,156,95,184,90,209,93,222,110,212,144
@@ -463,6 +472,14 @@ surface3
 	//call blush
 	animation24.interval,never
 	animation24.pattern0,overlay,1814,0,0,0
+
+	//tail
+	animation90.interval,runonce
+	animation90.option,background+shared-index
+	animation90.pattern0,overlay,1900,0,0,0
+	animation90.pattern1,overlay,1904,80,0,0
+	animation90.pattern2,overlay,1911,50,0,0
+	animation90.pattern3,overlay,1912,80,0,0
 }
 
 //body: standing, head: turn side (accidentally very simple. i Could make the lips actually pop out of his face but i have been warned of the horrors of 'replace'
@@ -521,17 +538,25 @@ surface4
 surface5
 {
 	element0,overlay,surface1000.png,0,0
+	//element1,interpolate,surface1922.png,0,0
 	collisionex0,head,polygon,170,136,105,142,112,110,90,71,117,54,127,19,164,37,189,23,209,63,235,78,210,121,203,128,208,104,200,83,186,72,155,84,140,104,153,127
 	collisionex1,Face,polygon,198,139,170,139,152,124,139,102,147,85,176,69,198,74,210,107
 	//first frame (so that the head isn't missing when the surface loads)
-	animation0.interval,runonce
-	animation0.pattern0,overlay,1006,0,0,0
-	animation0.pattern1,overlay,-1,200,0,0
+	//im going to scream how many of these did i make
 
 	//continue animation from thereonout
 	animation1.interval,always
-	animation1.pattern0,overlay,1007,200,0,0
+	animation1.pattern0,overlay,1007,0,0,0
 	animation1.pattern1,overlay,1006,200,0,0
+	animation1.pattern2,overlay,1007,200,0,0
+
+	animation90.interval,runonce
+	animation90.option,background+shared-index
+	animation90.pattern0,overlay,1900,0,0,0
+	animation90.pattern1,overlay,1911,75,0,0
+	animation90.pattern2,overlay,1921,75,0,0
+	animation90.pattern3,overlay,1922,75,0,0
+
 }
 
 //Stand append (arms)
@@ -551,9 +576,9 @@ surface.append0-5
 	//left: (50,52,54,56,61,63,64)
 	//right: (51,53,55,57,58,59,60,62,63,65,66)
 
-	//set default arms and moved stopping certain expressions into once anim
+	//set default arms + tail and moved stopping certain expressions into once anim
 	animation49.interval,runonce
-	animation49.pattern0,parallelstart,(50,51)
+	animation49.pattern0,parallelstart,(50,51,90)
 	animation49.pattern1,parallelstop,(13,16,20)
 
 	//arms: behind back, default, left
@@ -574,7 +599,7 @@ surface.append0-5
 	animation53.interval,never
 	animation53.collisionex0,Hands,polygon,227,296,266,302,257,334,245,356,234,368,222,370,219,362,222,355,219,344,224,329,226,310
 	animation53.pattern0,parallelstop,(51,55,57,58,59,60,62,63,65,66)
-	animation53.pattern1,interpolate,1011,0,0,0
+	animation53.pattern1,overlay,1011,0,0,0
 
 	//arms: hips, left
 	animation54.interval,never
@@ -666,6 +691,44 @@ surface.append0-5
 	animation999.pattern0,overlay,999,0,264,40
 	animation999.pattern1,overlay,998,500,264,40
 	animation999.pattern2,overlay,999,500,264,40
+}
+
+//idle animations for default, side lean, side turn, glitched animations
+//others have static tails set up
+surface.append0,1,4,19
+{
+	//TAIL
+	//idle for initialization
+	animation70.interval,never
+	animation70.option,background
+	animation70.pattern0,overlay,1900,0,0,0
+
+	animation71.interval,never
+	animation71.option,background+shared-index
+	animation71.pattern0,overlay,1901,0,0,0
+	animation71.pattern1,overlay,1902,75,0,0
+	animation71.pattern2,overlay,1903,75,0,0
+	animation71.pattern3,overlay,1904,75,0,0
+	animation71.pattern4,overlay,1900,75,0,0
+
+	animation72.interval,never
+	animation72.option,background+shared-index
+	animation72.pattern0,overlay,1911,0,0,0
+	animation72.pattern1,overlay,1912,75,0,0
+	animation72.pattern2,overlay,1911,500,0,0
+	animation72.pattern3,overlay,1900,75,0,0
+
+	animation73.interval,never
+	animation73.option,background+shared-index
+	animation73.pattern0,overlay,1921,0,0,0
+	animation73.pattern1,overlay,1922,75,0,0
+	animation73.pattern2,overlay,1921,500,0,0
+	animation73.pattern3,overlay,1900,75,0,0
+
+	animation90.interval,random,10
+	animation90.option,shared-index
+	animation90.pattern0,parallelstop,(70,71,72,73)
+	animation90.pattern1,alternativestart,(71,72,73)
 }
 
 //BODY HOVERING SURFACES
@@ -1017,6 +1080,14 @@ surface8
 	//call sweat
 	animation24.interval,never
 	animation24.pattern0,overlay,2813,0,0,0
+
+	//move up
+	animation90.interval,never
+	animation90.option,background+shared-index
+	animation90.pattern1,overlay,2900,0,0,-10
+	animation90.pattern2,overlay,2912,75,0,-10
+	animation90.pattern3,overlay,2940,75,0,-10
+	animation90.pattern4,overlay,2941,75,0,-10
 }
 
 //body: hovering. head: tilt down
@@ -1134,6 +1205,12 @@ surface9
 	animation24.interval,never
 	animation24.pattern0,overlay,2814,0,0,0
 
+	animation90.interval,never
+	animation90.option,background+shared-index
+	animation90.pattern0,overlay,2901,0,0,-10
+	animation90.pattern1,overlay,2902,60,0,-10
+	animation90.pattern2,overlay,2903,60,0,-5
+	animation90.pattern3,overlay,2930,60,0,10
 }
 
 //get outta here kero
@@ -1204,6 +1281,13 @@ surface11
 	animation4.pattern0,overlay,2007,0,0,0
 	animation4.pattern1,overlay,2006,200,0,0
 	animation4.pattern2,overlay,2007,200,0,0
+
+	animation90.interval,never
+	animation90.option,background+shared-index
+	animation90.pattern0,overlay,2912,0,0,-10
+	animation90.pattern1,overlay,2913,60,0,-10
+	animation90.pattern2,overlay,2921,60,0,-10
+	animation90.pattern3,overlay,2922,60,0,-10
 }
 
 
@@ -1249,6 +1333,12 @@ surface12
 	animation26.pattern4,overlay,2091,40,0,0
 	animation26.pattern5,overlay,2092,40,0,0
 
+	animation90.interval,runonce
+	animation90.option,background+shared-index
+	animation90.pattern0,overlay,2912,0,0,-10
+	animation90.pattern1,overlay,2913,30,0,-10
+	animation90.pattern2,overlay,2921,30,0,-10
+	animation90.pattern3,overlay,2922,30,0,-10
 }
 
 surface.append6-11
@@ -1258,7 +1348,7 @@ surface.append6-11
 
 	//controller launches default arms and head
 	animation0.interval,runonce
-	animation0.pattern0,parallelstart,(1,2,3)
+	animation0.pattern0,parallelstart,(1,2,3,90)
 	animation0.pattern1,parallelstop,(20,17,15)
 	//reset mouth to default
 	animation25.interval,never
@@ -1377,8 +1467,57 @@ surface.append6-11
 	animation65.collisionex0,Hands,polygon,144,125,155,131,161,129,182,127,198,123,209,123,224,140,227,143,225,147,196,170,191,169,190,166,182,171,169,163,156,166,154,154,158,154,139,143,136,137,134,130
 	animation65.pattern0,parallelstop,(2,51,53,54,55,56,58,60,62,63)
 	animation65.pattern1,overlay,2035,0,0,0
+}
 
+surface.append6-7,10
+{
+	//TAIL
+	//move down
+	animation71.interval,never
+	animation71.option,background+shared-index
+	animation71.pattern0,overlay,2901,0,0,-10
+	animation71.pattern1,overlay,2902,75,0,-10
+	animation71.pattern2,overlay,2903,75,0,-5
+	animation71.pattern3,overlay,2902,150,0,-10
+	animation71.pattern4,overlay,2901,75,0,-10
+	animation71.pattern5,overlay,2900,75,0,-10
+	animation71.pattern6,overlay,2904,75,0,-10
+	animation71.pattern7,overlay,2900,60,0,-10
 	
+	//move up
+	animation72.interval,never
+	animation72.option,background+shared-index
+	animation72.pattern0,overlay,2912,0,0,-10
+	animation72.pattern1,overlay,2913,75,0,-10
+	animation72.pattern2,overlay,2914,75,0,-10
+	animation72.pattern3,overlay,2915,75,0,-10
+	animation72.pattern4,overlay,2916,75,0,-10
+	animation72.pattern5,overlay,2915,75,0,-10
+	animation72.pattern6,overlay,2914,75,0,-10
+	animation72.pattern7,overlay,2913,75,0,-10
+	animation72.pattern8,overlay,2912,75,0,-10
+	animation72.pattern9,overlay,2900,75,0,-10
+	animation72.pattern10,overlay,2911,75,0,-10
+	animation72.pattern11,overlay,2900,75,0,-10
+
+	//curl up
+	animation73.interval,never
+	animation73.option,background+shared-index
+	animation73.pattern0,overlay,2912,0,0,-10
+	animation73.pattern1,overlay,2913,75,0,-10
+	animation73.pattern2,overlay,2921,80,0,-10
+	animation73.pattern3,overlay,2922,80,0,-10
+	animation73.pattern4,overlay,2921,1000,0,-10
+	animation73.pattern5,overlay,2913,75,0,-10
+	animation73.pattern6,overlay,2912,75,0,-10
+	animation73.pattern7,overlay,2900,75,0,-10
+	animation73.pattern8,overlay,2901,75,0,-10
+	animation73.pattern9,overlay,2900,75,0,-10
+
+	animation90.interval,random,20
+	animation90.option,shared-index
+	animation90.pattern0,parallelstop,(71,72,73)
+	animation90.pattern1,alternativestart,(71,72,73)
 }
 
 //new notif
@@ -1730,6 +1869,12 @@ surface15
 	//call blush
 	animation24.interval,never
 	animation24.pattern0,overlay,3803,0,0,0
+
+	animation90.interval,never
+	animation90.option,background+shared-index
+	animation90.pattern0,overlay,3900,0,0,0
+	animation90.pattern1,overlay,3931,75,0,0
+	animation90.pattern2,overlay,3932,75,0,0
 }
 
 //body: chesthover, head: tilt down
@@ -1843,6 +1988,14 @@ surface16
 	//call blush
 	animation24.interval,never
 	animation24.pattern0,overlay,3804,0,0,0
+
+	animation90.interval,never
+	animation90.option,background+shared-index
+	animation90.pattern0,overlay,3921,0,0,0
+	animation90.pattern1,overlay,3922,75,0,0
+	animation90.pattern2,overlay,3923,75,0,0
+	animation90.pattern3,overlay,3924,75,0,0
+	animation90.pattern4,overlay,3923,50,0,0
 }
 
 //body: chesthover, head: side turn
@@ -1911,6 +2064,12 @@ surface18
 	animation1.pattern0,overlay,3006,0,0,0
 	animation1.pattern1,overlay,3007,200,0,0
 	animation1.pattern2,overlay,3006,200,0,0
+
+	animation90.interval,never
+	animation90.option,background+shared-index
+	animation90.pattern0,overlay,3900,0,0,0
+	animation90.pattern1,overlay,3931,75,0,0
+	animation90.pattern2,overlay,3932,75,0,0
 }
 
 
@@ -1933,7 +2092,7 @@ surface.append13-18
 
 	//controller. stop glitched arms, start legs and default arms
 	animation40.interval,runonce
-	animation40.pattern0,parallelstart,(44,49)
+	animation40.pattern0,parallelstart,(44,49,90)
 	animation40.pattern1,parallelstop,(56,58,60,62,64,66,20,16,13)
 
 	//arms: under head, default, both
@@ -2073,16 +2232,56 @@ surface.append13-18
 	animation999.pattern2,overlay,999,500,260,300
 }
 
+
+surface.append13,14,17
+{
+	//TAIL
+	//lean in opposite sides
+	animation71.interval,never
+	animation71.option,background+shared-index
+	animation71.pattern0,overlay,3902,0,0,0
+	animation71.pattern1,overlay,3903,75,0,0
+	animation71.pattern2,overlay,3904,75,0,0
+	animation71.pattern3,overlay,3903,100,0,0
+	animation71.pattern4,overlay,3902,75,0,0
+	animation71.pattern5,overlay,3900,75,0,0
+	animation71.pattern6,overlay,3901,75,0,0
+	animation71.pattern7,overlay,3900,150,0,0
+	
+	// curl one down
+	animation72.interval,never
+	animation72.option,background+shared-index
+	animation72.pattern0,overlay,3900,0,0,0
+	animation72.pattern1,overlay,3911,75,0,0
+	animation72.pattern2,overlay,3912,75,0,0
+	animation72.pattern3,overlay,3913,75,0,0
+	animation72.pattern4,overlay,3912,500,0,0
+	animation72.pattern5,overlay,3911,75,0,0
+	animation72.pattern6,overlay,3900,75,0,0
+
+	// lean down
+	animation73.interval,never
+	animation73.option,background+shared-index
+	animation73.pattern0,overlay,3921,0,0,0
+	animation73.pattern1,overlay,3922,75,0,0
+	animation73.pattern2,overlay,3923,75,0,0
+	animation73.pattern3,overlay,3924,75,0,0
+	animation73.pattern4,overlay,3923,300,0,0
+	animation73.pattern5,overlay,3922,75,0,0
+	animation73.pattern6,overlay,3921,75,0,0
+	animation73.pattern7,overlay,3900,75,0,0
+
+	animation90.interval,random,20
+	animation90.option,shared-index
+	animation90.pattern0,parallelstop,(71,72,73)
+	animation90.pattern1,alternativestart,(71,72,73)
+}
+
 //special: stand glitch, simple
 surface19
 {
 	element0,overlay,surface1000.png,0,0
 	
-
-
-
-
-
 	//head default
 	animation0.interval,never
 	animation0.pattern0,overlay,5001,0,0,0
@@ -2174,7 +2373,7 @@ surface19
 
 	//make sure he's not headless entierly
 	animation105.interval,runonce
-	animation105.pattern0,parallelstart,(100,101,102)
+	animation105.pattern0,parallelstart,(100,101,102,90)
 
 
 	//DIRECTIONS FROM VIEWER PERSPECTIVE 
@@ -2276,6 +2475,35 @@ surface19
 	animation71.pattern8,overlay,5043,400,0,0
 	animation71.pattern9,overlay,5053,400,0,0
 	animation71.pattern10,overlay,-1,400,0,0
+
+	//TAIL
+	//idle for initialization
+	animation74.interval,never
+	animation74.option,background+shared-index
+	animation74.pattern0,overlay,1901,0,0,0
+	animation74.pattern1,overlay,1902,75,0,0
+	animation74.pattern2,overlay,1903,75,0,0
+	animation74.pattern3,overlay,1904,75,0,0
+	animation74.pattern4,overlay,1900,75,0,0
+
+	animation72.interval,never
+	animation72.option,background+shared-index
+	animation72.pattern0,overlay,1911,0,0,0
+	animation72.pattern1,overlay,1912,75,0,0
+	animation72.pattern2,overlay,1911,500,0,0
+	animation72.pattern3,overlay,1900,75,0,0
+
+	animation73.interval,never
+	animation73.option,background+shared-index
+	animation73.pattern0,overlay,1921,0,0,0
+	animation73.pattern1,overlay,1922,75,0,0
+	animation73.pattern2,overlay,1921,500,0,0
+	animation73.pattern3,overlay,1900,75,0,0
+
+	animation90.interval,random,1
+	animation90.option,shared-index
+	animation90.pattern0,parallelstop,(74,72,73)
+	animation90.pattern1,alternativestart,(74,72,73)
 }
 
 
@@ -2380,7 +2608,7 @@ surface20
 
 	//make sure he's not headless entierly
 	animation105.interval,runonce
-	animation105.pattern0,parallelstart,(100,101,102)
+	animation105.pattern0,parallelstart,(100,101,102,90)
 
 
 	//DIRECTIONS FROM VIEWER PERSPECTIVE 
@@ -2535,6 +2763,35 @@ surface20
 	animation87.pattern3,replace,5070,100,0,0
 	animation87.pattern4,replace,5069,120,0,0
 	animation87.pattern5,overlay,-1,160,0
+
+	//TAIL
+	//idle for initialization
+	animation74.interval,never
+	animation74.option,background+shared-index
+	animation74.pattern0,overlay,1901,0,0,0
+	animation74.pattern1,overlay,1902,75,0,0
+	animation74.pattern2,overlay,1903,75,0,0
+	animation74.pattern3,overlay,1904,75,0,0
+	animation74.pattern4,overlay,1900,75,0,0
+
+	animation72.interval,never
+	animation72.option,background+shared-index
+	animation72.pattern0,overlay,1911,0,0,0
+	animation72.pattern1,overlay,1912,75,0,0
+	animation72.pattern2,overlay,1911,500,0,0
+	animation72.pattern3,overlay,1900,75,0,0
+
+	animation73.interval,never
+	animation73.option,background+shared-index
+	animation73.pattern0,overlay,1921,0,0,0
+	animation73.pattern1,overlay,1922,75,0,0
+	animation73.pattern2,overlay,1921,500,0,0
+	animation73.pattern3,overlay,1900,75,0,0
+
+	animation90.interval,random,1
+	animation90.option,shared-index
+	animation90.pattern0,parallelstop,(74,72,73)
+	animation90.pattern1,alternativestart,(74,72,73)
 }
 
 surface.append19-20

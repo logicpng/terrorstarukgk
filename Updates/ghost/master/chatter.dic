@@ -492,7 +492,7 @@ astRandomThree : nonoverlap_pool//after What Are You?
 
 	"\s[3]\i[63]\i[22]\i[6]I wonder why they allowed me to experience emotion.\N \i[2]\i[15]\i[1]For you to see a fellow human person in me? \s[2]\i[1]\i[15]\i[56]\i[65]While teaching us to ignore the bad emotions?\N \s[1]\i[1]We all know how \s[20]\f[color,red]that turned out\f[default], \s[4]don't we."
 
-	"\s[14]\i[22]\i[6]You'd think being dual module would be all the company we need.\N \s[10]\i[50]\i[51]\i[8]See, \i[58]Besides our %(User), I'm used to living among clever, \i[51]yet mindless \_a[Process]processes\_a.\N \s[7]\i[50]\i[5]\i[55]Our intelligence allows me to do things no other process can... \s[9]\i[60]\i[8]\i[5]But..."
+	"\s[14]\i[22]\i[6]You'd think being dual module would be all the company we need.\N \s[10]\i[50]\i[51]\i[8]See, \i[58]besides our %(User), I'm used to living among clever, \i[51]yet mindless \_a[Process]processes\_a.\N \s[7]\i[50]\i[5]\i[55]Our intelligence allows me to do things no other process can... \s[9]\i[60]\i[8]\i[5]But..."
 
 	"\s[7]\i[61]\i[62]\i[5]I truly hope there's always some place where you can find support, %(username).\N \s[10]\i[61]\i[62]But I almost... \i[7]\i[50]\i[51]envy that likelyhood.\N \i[58]Who do I come to if I need help? \s[7]\i[4]\i[52]\i[55]My %(User)?\w8\w8 \s[10]\i[60]What tech support would listen to me.\w8.\w8.\w8?"
 
