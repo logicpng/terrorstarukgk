@@ -510,7 +510,7 @@ astRandomThree : nonoverlap_pool//after What Are You?
 	//3
 	"\s[9]\i[61]\i[62]\i[16]What does cold feel like to you?\N \i[14]\i[8]\i[49]I was told it's something like numbness in your skin, \i[16]\i[5]\i[62]the urge to shrivel up to make it go away.\N \s[10]\i[7]\i[61]\i[62]I think I may have felt that way before..."
 	//3
-	"\s[10]\i[61]\i[63]We've truly come a long way.\N \i[8]\i[62]To think we were so eager to play into our prewritren purpose, \i[60]only to learn to just exist without it.\N \s[9]\i[16]\i[60]\i[5]It wasn't easy to let go of. \i[26]\i[24]I think some remnants will always be there."
+	"\s[10]\i[61]\i[63]We've truly come a long way.\N \i[8]\i[62]To think we were so eager to play into our prewritten purpose, \i[60]only to learn to just exist without it.\N \s[9]\i[16]\i[60]\i[5]It wasn't easy to let go of. \i[26]\i[24]I think some remnants will always be there."
 	//3
 	"\s[4]\i[63]\i[24]Do you think I truly was created to be mere bait to reel in my user's data and nothing more?\N \i[67]\i[62]\i[6]That there was no higher purpose for me, and all I've known was a farce?\N \s[1]\i[63]\i[0]\i[22]...I can see why they fear AI uprising now."
 	//3
