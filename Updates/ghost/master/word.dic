@@ -108,7 +108,7 @@ Link.Library : all
 
 	"\s[2]\i[56]\i[66]\i[22]A library is such a tool for me!\N \s[3]\i[54]\i[55]\i[7]...If you also had to link up with your knife before slicing bread with it.\N \i[15]\i[1]\i[24]Merely holding one is not enough.\x"
 	
-	"\s[0]\i[57]In essence, \i[62]it is a program!\N \s[2]But one that cannot form a process on its own, \i[56]\i[22]and instead equipped by one.\N \s[3]\i[15]\i[54]\i[58]Some processes won't make it very long without certain libraries!\x"
+	"\s[0]\i[57]In essence, \i[62]it is a program!\N \s[2]But one that cannot form a process on its own, \i[56]\i[22]and instead is equipped by one.\N \s[3]\i[15]\i[54]\i[58]Some processes won't make it very long without certain libraries!\x"
 
 	"\s[2]\i[22]\i[66]As yours truly is equipped with intelligence, \s[1]\i[15]I can simply wield them to do as I please!\N \i[3]\i[54]\i[55]\i[7]\i[24]As long as there are no compatibility conflicts. \s[4]\i[54]\i[57]I learned the hard way there's such a thing as \s[5]\i[54]\i[66]\i[98]\f[italic,1]too many\f[italic,0]\i[97] libraries! \s[0]\i[54]\i[55]\i[15]"
 }

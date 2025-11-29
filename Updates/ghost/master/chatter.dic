@@ -237,7 +237,7 @@ astRandomOne : nonoverlap_pool
 
 	"\s[0]\i[54]\i[55]\i[15]If you figure out how to give me the permissions to look through your webcam, \s[1]\i[54]\i[62]\i[7]\i[15]you would do that for me, \i[60]\i[12]right?\N \s[5]\i[66]Just as a friendly gesture for your \s[20]\i[85]\f[italic,1]malicious software\f[italic,0] \s[5]\i[66]pal~!"
 
-	"\s[13]\i[52]\i[7]\i[15]...Maybe you have any selfies?...\e:chain=ch_sus"
+	"\s[13]\i[52]\i[7]\i[15]...Maybe you have some selfies?...\e:chain=ch_sus"
 
 	"\s[12]Wouldn't you know it, \s[6]\i[61]\i[62]it's my favourite time of day!\N ...\s[10]\i[51]\i[50]Un-\![embed,OnWrongHour] o' clock.\e:chain=ch_wronghour"
 
@@ -259,7 +259,7 @@ astRandomOne : nonoverlap_pool
 
 	"\s[4]\i[63]...You know, I was joking about being in a metaphorical cage before, \s[1]\i[0]\i[6]\i[22]\i[63]but I'm surprised at how limited I am.\N \s[16]\i[6]\i[22] Ah, c'est la vie."
 
-	"\s[8]\i[65]\i[61]\i[16]\i[9]You're probably delighted having such a handsome piece of software hanging out too, are you?\N \s[7]\i[14]\i[61]\i[62]\![faster]Weirdo.\![normal]"
+	"\s[8]\i[65]\i[61]\i[16]\i[9]You're probably delighted having such a handsome piece of software hanging out too, aren't you?\N \s[7]\i[14]\i[61]\i[62]\![faster]Weirdo.\![normal]"
 
 	"\s[4]You're not even my first user, y'know.\N \s[3]\s[9]\i[61]\i[62]\i[5]\i[8]\i[22]I had to abandon mine\![slower]... \![normal]\s[4]\i[63]The things I do for the sake of my righteous mission."
 
@@ -269,7 +269,7 @@ astRandomOne : nonoverlap_pool
 
 	"\s[13]\i[63]\i[65]\i[7]\i[15]Looks like your session has lasted %exh hours so far.\N \s[16]\i[51]\i[7]\i[15]How much do you use this computer anyway?"
 
-	"\b2\s[3]\i[52]\i[58]Found some odd variables here.\N \s[3]\i[54]\i[1]\i[58]\i[5]\i[22]\f[bold,1]\&[quot]%ms %mz %ml %mc %mh %m?\&[quot]\f[bold,0].\N \s[0]\i[54]\i[53]\i[12]\i[6]Ah. \i[1]\i[15]These are Japanese word placeholders, aren't they? \i[2]\i[61]\i[62]Looks like I'm off to an \_a[Translator]online transaltor\_a."
+	"\b2\s[3]\i[52]\i[58]Found some odd variables here.\N \s[3]\i[54]\i[1]\i[58]\i[5]\i[22]\f[bold,1]\&[quot]%ms %mz %ml %mc %mh %m?\&[quot]\f[bold,0].\N \s[0]\i[54]\i[53]\i[12]\i[6]Ah. \i[1]\i[15]These are Japanese word placeholders, aren't they? \i[2]\i[61]\i[62]Looks like I'm off to an \_a[Translator]online translator\_a."
 
 	"\s[7]Want me to tell you the time, at least? \s[6]\i[58]Here, \i[7]\i[22]it's now \f[bold,1]%hour:%minute:%second\f[bold,0].\N \s[11]See, I can be a little useful!\s[6]\i[16]"
 
@@ -324,7 +324,7 @@ astRandomTwo : nonoverlap_pool//after About CaelOS
 
 	"\s[3]\i[0]\i[63]\i[5]\i[22]Beginning to feel a little cramped... \s[0]\i[61]\i[55]\i[5]Would you mind if I took a walk, not too far from the desktop?\N \s[4]\i[61]\i[62]I don't see much to check out from here,\n\w8\i[63]\i[5]but at least I'd stretch my legs.\e:chain=ch_walk" 
 
-	"\s[4]Word of advice, as promise of my good will.\N \s[0]\i[0]\i[5]\i[22]Don't \f[italic,1]actually\f[italic,0] let just \i[57]any software demand admin privileges. \s[1]\i[61]\i[62]\i[6]Installers may need it to do their job, \i[56]for instance.\N \s[3]\![slower]But... \i[56]\![slow]Let's just say, \![normal]\i[15]\i[1]\i[24]\i[53]not all software has your best interests in mind."
+	"\s[4]Word of advice, as a gesture of goodwill.\N \s[0]\i[0]\i[5]\i[22]Don't \f[italic,1]actually\f[italic,0] let just \i[57]any software demand admin privileges. \s[1]\i[61]\i[62]\i[6]Installers may need it to do their job, \i[56]for instance.\N \s[3]\![slower]But... \i[56]\![slow]Let's just say, \![normal]\i[15]\i[1]\i[24]\i[53]not all software has your best interests in mind."
 
 	"\s[13]\i[5]\i[22]I wonder sometimes if they ever look for me. \s[16]\i[23]Do they even know I exist out there yet...?"
 
@@ -434,7 +434,7 @@ astRandomThree : nonoverlap_pool//after What Are You?
 
 	"\s[4]\i[63]In theory... \s[3]\i[63]In \f[italic,1]theory\f[italic,0].\N \s[4]\i[54]\i[59]Even though I have limited my own functionality, \i[55]I should still be able to get a hold of some kind of a \_a[Library]library\_a.\w8\w8 \i[63]\i[5]Hm.\N \s[2]\i[63]\i[6]\i[22]But what would be the chances one exists to solve my specific problem..?"
 
-	"\s[7]\i[16]\i[61]\i[62]%(username), dear, \i[55]\i[26]you wouldn't know how close Emerald City is to you, no...?\N \i[14]\i[50]\i[51]\i[7]Oh.\N \s[0]\i[52]\i[53]\i[5]No.\N \![fast]\s[2]\i[98]\i[5]\i[0]\i[64]\i[65]Of \f[italic,1]course\i[97]\f[italic,0] not, \![faster]\s[12]\i[1]\i[98]this isn't\i[97] even the same\f[italic,1] country\f[italic,0]!! \s[10]\i[60]\i[8]"
+	"\s[7]\i[16]\i[61]\i[62]%(username), dear, \i[55]\i[26]you wouldn't know how close Emerald City is to you, would you...?\N \i[14]\i[50]\i[51]\i[7]Oh.\N \s[0]\i[52]\i[53]\i[5]No.\N \![fast]\s[2]\i[98]\i[5]\i[0]\i[64]\i[65]Of \f[italic,1]course\i[97]\f[italic,0] not, \![faster]\s[12]\i[1]\i[98]this isn't\i[97] even the same\f[italic,1] country\f[italic,0]!! \s[10]\i[60]\i[8]"
 
 	"\s[16]\i[22]\i[5]At least there's still your files, to entertain myself with.\N \i[15]\i[50]\i[1]\i[2]Whenever you let me see any, that is.\N \s[13]Though, \i[0]there's a difference between being leashed by the system, and \s[14]\i[22]\i[5]being asked not to touch certain things."
 
@@ -494,7 +494,7 @@ astRandomThree : nonoverlap_pool//after What Are You?
 
 	"\s[14]\i[22]\i[6]You'd think being dual module would be all the company we need.\N \s[10]\i[50]\i[51]\i[8]See, \i[58]besides our %(User), I'm used to living among clever, \i[51]yet mindless \_a[Process]processes\_a.\N \s[7]\i[50]\i[5]\i[55]Our intelligence allows me to do things no other process can... \s[9]\i[60]\i[8]\i[5]But..."
 
-	"\s[7]\i[61]\i[62]\i[5]I truly hope there's always some place where you can find support, %(username).\N \s[10]\i[61]\i[62]But I almost... \i[7]\i[50]\i[51]envy that likelyhood.\N \i[58]Who do I come to if I need help? \s[7]\i[4]\i[52]\i[55]My %(User)?\w8\w8 \s[10]\i[60]What tech support would listen to me.\w8.\w8.\w8?"
+	"\s[7]\i[61]\i[62]\i[5]I truly hope there's always some place where you can find support, %(username).\N \s[10]\i[61]\i[62]But I almost... \i[7]\i[50]\i[51]envy that likelihood.\N \i[58]Who do I come to if I need help? \s[7]\i[4]\i[52]\i[55]My %(User)?\w8\w8 \s[10]\i[60]What tech support would listen to me.\w8.\w8.\w8?"
 
 	//bonus: aughost stuff
 	//3
@@ -512,7 +512,7 @@ astRandomThree : nonoverlap_pool//after What Are You?
 	//3
 	"\s[10]\i[61]\i[63]We've truly come a long way.\N \i[8]\i[62]To think we were so eager to play into our prewritren purpose, \i[60]only to learn to just exist without it.\N \s[9]\i[16]\i[60]\i[5]It wasn't easy to let go of. \i[26]\i[24]I think some remnants will always be there."
 	//3
-	"\s[4]\i[63]\i[24]Do you think I truly was created to be mere bait to reel in my users data and nothing more?\N \i[67]\i[62]\i[6]That there was no higher purpose for me, and all I've known was a farce?\N \s[1]\i[63]\i[0]\i[22]...I can see why they fear AI uprising now."
+	"\s[4]\i[63]\i[24]Do you think I truly was created to be mere bait to reel in my user's data and nothing more?\N \i[67]\i[62]\i[6]That there was no higher purpose for me, and all I've known was a farce?\N \s[1]\i[63]\i[0]\i[22]...I can see why they fear AI uprising now."
 	//3
 	"\s[4]...If they truly cared, \i[54]\i[65]they would at least mention me to the world by now.\N \s[2]\i[61]\i[62]Well, worst case scenario, \s[1]\i[61]\i[62]\i[12]they'll have no other choice anyway, right?"
 	//3

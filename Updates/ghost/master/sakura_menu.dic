@@ -249,13 +249,6 @@ OnLastTalk
 
 OnTalkRateMenu : all
 {	
-	//This is just setting up a label, you may need to add to it or tweak it if you change what rates are available
-	// _talkrate = "Off"
-	// if aitalkinterval == 30; _talkrate = "30 seconds"
-	// elseif aitalkinterval == 60; _talkrate = "1 minute"
-	// elseif aitalkinterval == 180; _talkrate = "3 minutes"
-	// elseif aitalkinterval == 300; _talkrate = "5 minutes"
-	// elseif aitalkinterval == 600; _talkrate = "10 minutes"
 
 	"\![no-autopause]"
 	"\b2\_qChange talking frequency"
@@ -309,20 +302,3 @@ OnEndCutscene
 	"\C\![leave,passivemode]"
 	cutscene = 0
 }
-
-
-
-// OnSpeechDemo
-// {
-// 	"\![set,balloonwait,4]\s[8]\i[7]\i[22]\w8\w8\w8\i[16]\i[8]Hm?\w8\w8 \![set,balloonwait,2]\s[7]\i[5]\i[8]Why, \![set,balloonwait,1]we're already done with my primary sprites or something? \s[3]\i[54]\i[58]Given the previous attempt lasted us 3 days or so, \s[5]\i[54]\i[65]we \![set,balloonwait,4]sure\![set,balloonwait,1] took our time!\N \s[4]\i[54]\i[55]Very well, \s[0]\i[62]\i[15]\i[7]I can safely say there's a reason for the effort. \i[3]Compared to\![set,balloonwait,4]\i[12]\i[5]\i[24]... \![set,balloonwait,1]\s[5]My \![set,balloonwait,2]components, \s[4]\![set,balloonwait,1]shall we say, \s[0]as of me speaking, \i[22]\i[57]I have 6\% more images to work with.\N \s[13]\i[15]\i[7]And we plan to throw in a few more for effect.\N \s[14]\i[50]\i[22]While we're all one and the same, \s[13]\i[52]\i[55]\i[61]\i[7]\i[15]I could easily tell you I'm just a little more advanced now. \s[17]\i[63]\i[65]Quite appropriate, timeskip and all!\N \s[12]And we've not done much actual code yet! \s[2]\i[54]\i[67]This is all just my lovely visuals!\N \s[6]\i[61]\i[62]\i[9]\i[16]Talk soon~!"
-// }
-
-// OnSimpleGlitch
-// {
-// 	"\s[3]\i[54]\i[58]\i[1]\i[6]Well...\w8 I wouldn't co\s[19]oooooooo\![set,balloonwait,0.1]\![embed,OnMojibake,300]\s[3]\i[6]\i[12]\i[24]\i[61]\i[59]\c\x\![set,balloonwait,1.5]\b0\_w[30].\w8.\w8.\w8\i[7]\i[1]\i[15]\i[68]\i[67]Sorry about that..."
-// }
-
-// OnFullGlitch
-// {
-// 	"\s[3]\i[54]\i[58]\i[1]\i[6]Well...\w8 I wouldn't co\s[20]oo\b4oo\b6ooo\b8\![set,balloonwait,0.1]\![embed,OnMojibake,350]\s[3]\i[6]\i[12]\i[24]\i[61]\i[59]\b0\c\x\![set,balloonwait,1.5]\_w[30].\w8.\w8.\w8\i[7]\i[1]\i[15]\i[68]\i[67]Sorry about that..."
-// }

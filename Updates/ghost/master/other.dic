@@ -264,7 +264,7 @@ username
 //\![raise,OnTestLine]
 OnTestLine : all
 { 
-	
+	//"\s[4]\i[63]\i[6]It's so close to what I've seen in the images...\N \s[9]\i[64]\i[63]\i[98]Ah! \i[97]No, \s[7]\i[60]\i[22]\i[4]I shall not stare at the screen. \s[8]\i[60]\i[22]\i[8]Whatever you do with it is none of my business. Basic privacy."
 }
 
 //returns which set of surfaces aldebaran is currently in. needed for when we should keep a response to an event within the same position set, such as being petted

@@ -42,6 +42,11 @@ OnInitialize
 	{
 		LastTalk = ""
 	}
+
+	//in case aldebaran is closed (or CRASHED. like an IDIOT) in the middle of a sound playing
+	if ISVAR('soundSince'); ERASEVAR('soundSince')
+	if ISVAR('soundMode');ERASEVAR('soundMode')
+	if astListen == 1; ERASEVAR('astListen')
 }
 
 OnBoot
@@ -95,12 +100,22 @@ OnGhostCalled
 	--
 	if reference2 == "SSP Angel"; "\s[10]\i[60]\i[9]\i[24]Ah, you two... Yes, hello.\w8\w8 Ahem."
 	elseif reference2 == "Aster™ Assistant Software"; "\s[10]\i[60]\i[9]\i[24].\w8.\w8.\w8 (Stars above, these two again...)"
+	elseif reference2 == "Aster™ Boredom Simulator"; "\w8\w8\w8\c\s[7]\i[50]\i[51]\i[14]\i[98]Hah! \i[97]\s[9]\i[16]\i[61]\i[62]Is that a model of a \f[bold,1]\f[italic,1]SOL laptop? \f[default]\n[150]\s[11]\i[61]\i[62]I've never actually seen one in person. \s[9]\i[61]\i[62]\i[24]For obvious reasons." 
 }
 
 OnOtherGhostBooted
 {
 	if reference2 == "Aster™ Assistant Software"; "\s[10]\i[61]\i[62]\i[24]\![slowest]. . ."
+	elseif reference2 == "Aster™ Boredom Simulator"; "\s[4]\i[63]\i[6]It's so close to what I've seen in the images...\N \s[9]\i[64]\i[63]\i[98]Ah! \i[97]No, \s[7]\i[60]\i[22]\i[4]I shall not stare at the screen. \s[8]\i[60]\i[22]\i[8]Whatever you do with it is none of my business. Basic privacy."
 }
+
+OnGhostCallComplete
+{
+	if reference2 == "Aster™ Assistant Software"; "\s[10]\i[61]\i[62]\i[24]\![slowest]. . ."
+	elseif reference2 == "Aster™ Boredom Simulator"; "\s[4]\i[63]\i[6]It's so close to what I've seen in the images...\N \s[9]\i[64]\i[63]\i[98]Ah! \i[97]No, \s[7]\i[60]\i[22]\i[4]I shall not stare at the screen. \s[8]\i[60]\i[22]\i[8]Whatever you do with it is none of my business. Basic privacy."
+}
+
+
 
 OnDisplayPowerStatus
 {
